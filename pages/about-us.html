@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>About Us — ICMTA Indian Commerce and Management Teachers Association</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/icmta-2026.css">
+<!-- <link rel="icon" href="../assets/images/ICMTA-logo.png" type="image/png"> -->
+
+<style>
+  /* AIMA-Style Structural Layout Additions */
+  .aima-page-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    margin: 40px auto;
+    max-width: 1200px;
+    padding: 0 20px;
+  }
+  
+  /* Left Sidebar Navigation */
+  .aima-sidebar {
+    flex: 1 1 250px;
+    max-width: 300px;
+  }
+  .aima-sidebar-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    background: #fff;
+  }
+  .aima-sidebar-menu li {
+    border-bottom: 1px solid #e0e0e0;
+  }
+  .aima-sidebar-menu li:last-child {
+    border-bottom: none;
+  }
+  .aima-sidebar-menu a {
+    display: block;
+    padding: 15px 20px;
+    color: #333;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+    transition: all 0.2s ease-in-out;
+    border-left: 4px solid transparent;
+  }
+  .aima-sidebar-menu a:hover, .aima-sidebar-menu a.active {
+    background-color: #f8fafc;
+    color: #1e6c93;
+    border-left-color: #1e6c93;
+  }
+
+  /* Right Main Content Area */
+  .aima-content-area {
+    flex: 3 1 600px;
+    min-width: 0;
+    max-width: 100%;
+  }
+  .aima-content-area h2 {
+    color: #212121;
+    font-size: 28px;
+    border-bottom: 2px solid #1e6c93;
+    padding-bottom: 10px;
+    margin-bottom: 25px;
+    margin-top: 40px;
+  }
+  .aima-content-area h2:first-child {
+    margin-top: 0;
+  }
+  .aima-content-area p {
+    line-height: 1.8;
+    color: #4a4a4a;
+    margin-bottom: 20px;
+  }
+
+  /* Vision & Mission Callout Boxes */
+  .aima-highlight-box {
+    background: #f8fafc;
+    border-left: 5px solid #1e6c93;
+    padding: 25px;
+    margin: 30px 0;
+    border-radius: 0 8px 8px 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  }
+  .aima-highlight-box.mission {
+    border-left-color: #21865b;
+  }
+  .aima-highlight-box h3 {
+    margin-top: 0;
+    color: #333;
+    font-size: 22px;
+    margin-bottom: 15px;
+  }
+  .aima-highlight-box ul {
+    margin: 0 0 0 1.25rem;
+    padding: 0;
+    list-style: disc;
+  }
+  .aima-highlight-box ul li {
+    margin-bottom: 0.6rem;
+    line-height: 1.6;
+  }
+
+  /* Founders & Mentors 3-Column Grid */
+  .founders-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 20px !important;
+    margin-top: 20px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .founder-card {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 22px 18px;
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    height: 100%;
+    box-sizing: border-box;
+  }
+  .founder-card:hover {
+    background: #ffffff;
+    border-color: #b9d2e3;
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+  }
+
+  @media (max-width: 1024px) {
+    .founders-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+  }
+  @media (max-width: 768px) {
+    .aima-page-container {
+      flex-direction: column;
+      gap: 24px;
+      margin: 20px auto;
+      padding: 0 16px;
+    }
+    .aima-sidebar {
+      max-width: 100%;
+      width: 100%;
+    }
+    .aima-content-area {
+      width: 100%;
+    }
+  }
+  @media (max-width: 640px) {
+    .founders-grid {
+      grid-template-columns: 1fr !important;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="icm-watermark" aria-hidden="true"></div>
+
+<div class="icm-utilbar">
+  <div class="icm-utilbar-inner">
+    <span class="icm-ub-left">A non-profit professional platform &middot; Established by academicians</span>
+    <span class="icm-ub-right">
+      <a href="members.html">Members Corner</a>
+      <a href="public-directory.html">Scholars Corner</a>
+      <a href="mailto:secretariat@icmta.in">secretariat@icmta.in</a>
+      <a class="icm-ub-ic" href="#" aria-label="LinkedIn">in</a>
+      <a class="icm-ub-ic" href="#" aria-label="YouTube">&#9654;</a>
+    </span>
+  </div>
+</div>
+
+<header class="header">
+  <div class="header-inner">
+    <a href="../index.html" class="brand">
+      <img src="../assets/images/ICMTA-logo.png" alt="ICMTA Logo" class="brand-logo">
+      <div class="brand-text"></div>
+    </a>
+    <nav class="nav-links">
+      <span class="icm-navitem">
+        <a href="../index.html" class="nav-item">Home</a>
+      </span>
+      <span class="icm-navitem">
+        <a href="about-us.html" class="nav-item active">About <i class="icm-caret">&#9662;</i></a>
+        <div class="icm-dd">
+          <a href="about-us.html#vision-mission">Vision &amp; Mission</a>
+          <a href="about-us.html#founders">Founders &amp; Mentors</a>
+          <a href="initiatives.html">Our Initiatives</a>
+          <a href="about-us.html#code-of-conduct">Code of Conduct</a>
+          <a href="contact.html">Contact Us</a>
+        </div>
+      </span>
+      <span class="icm-navitem">
+        <a href="public-directory.html" class="nav-item">Directory</a>
+      </span>
+      <span class="icm-navitem">
+        <a href="events.html" class="nav-item">Events <i class="icm-caret">&#9662;</i></a>
+        <div class="icm-dd">
+          <a href="events.html#upcoming">Upcoming Events</a>
+          <a href="events.html#past">Past Events &amp; Archives</a>
+        </div>
+      </span>
+      <span class="icm-navitem">
+        <a href="membership.html" class="nav-item">Membership <i class="icm-caret">&#9662;</i></a>
+        <div class="icm-dd">
+          <a href="membership.html#why">Why Join</a>
+          <a href="membership.html#categories">Categories &amp; Fees</a>
+          <a href="membership.html#apply-section">How to Apply</a>
+        </div>
+      </span>
+      <span class="icm-sitesearch">
+        <button class="icm-ss-btn" aria-label="Search the site" onclick="this.parentNode.classList.toggle('icm-open');var i=this.parentNode.querySelector('input');if(this.parentNode.classList.contains('icm-open'))i.focus()">&#8981;</button>
+        <form class="icm-ss-form" action="public-directory.html" method="get">
+          <input type="search" name="q" placeholder="Search the site…" aria-label="Search the site">
+        </form>
+      </span>
+    </nav>
+  </div>
+</header>
+
+<section class="site-hero">
+  <div class="site-hero-inner">
+    <span class="hero-badge">About Our Platform</span>
+    <h1>About ICMTA</h1>
+    <p>A non-profit professional platform built by academicians, for academicians to advance impactful research, inclusive knowledge creation, and educational leadership.</p>
+  </div>
+</section>
+
+<div class="breadcrumb-bar">
+  <div class="breadcrumb-inner">
+    <a href="../index.html">Home</a>
+    <span>&rsaquo;</span>
+    <span style="color:#212121;font-weight:700">About Us</span>
+  </div>
+</div>
+
+<main class="aima-page-container">
+  
+  <!-- Left Sidebar Navigation (AIMA Style) -->
+  <aside class="aima-sidebar">
+    <ul class="aima-sidebar-menu">
+      <li><a href="#welcome" class="active">About Us</a></li>
+      <li><a href="#founders">Our Founders</a></li>
+      <li><a href="#vision-mission">Vision &amp; Mission</a></li>
+      <li><a href="initiatives.html">Our Initiatives</a></li>
+      <li><a href="#code-of-conduct">Code of Conduct</a></li>
+      <li><a href="membership.html">Join Us</a></li>
+      <li><a href="contact.html">Contact Us</a></li>
+    </ul>
+  </aside>
+
+  <!-- Right Main Content -->
+  <article class="aima-content-area">
+    
+    <section id="welcome">
+      <h2>About Us</h2>
+      <p><i>
+        We are delighted to have you join our growing community of Commerce and Management scholars, researchers, and thought leaders who share a common purpose: to advance impactful research, foster inclusive knowledge creation, and redefine management education with integrity and excellence.
+      </i></p>
+      <p>
+        <i>As a member of ICMTA, you are now part of a collaborative network that spans institutions, disciplines, and borders. Whether you are an early-career academic, a seasoned researcher, or an educator shaping the next generation of professionals, ICMTA supports your journey.
+      </i></p>
+    </section>
+
+    <section id="founders">
+      <h2>ICMTA Founders & Mentors</h2>
+      <p><i>
+        Founded by senior academic administrators, former Vice Chancellors, and eminent researchers to build a collaborative bridge for scholarship, research mentoring, and educational innovation.
+       </i> </p>
+      <div class="founders-grid" style="display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:20px; margin-top:20px;">
+        <div class="founder-card">
+          <div class="founder-photo-wrap">
+            <img src="../assets/images/founders/prof-v-bala-mohandas.jpg" alt="Prof. V. Bala Mohandas" class="founder-img">
+          </div>
+          <b>Prof. V. Bala Mohandas</b>
+          <span>Former Vice Chancellor, Acharya Nagarjuna University, Andhra Pradesh.</span>
+        </div>
+        <div class="founder-card">
+          <div class="founder-photo-wrap">
+            <img src="../assets/images/founders/prof-ch-ramaprasada-rao.jpg" alt="Prof. Ch. Ramaprasada Rao" class="founder-img">
+          </div>
+          <b>Prof. Ch. Ramaprasada Rao</b>
+          <span>Retd. Professor, Sri Krishnadevaraya University, Andhra Pradesh.</span>
+        </div>
+        <div class="founder-card">
+          <div class="founder-photo-wrap">
+            <img src="../assets/images/founders/prof-k-venugopal-rao.jpg" alt="Prof. K. Venugopal Rao" class="founder-img">
+          </div>
+          <b>Prof. K. Venugopal Rao</b>
+          <span>Former Vice Chancellor, Himalayan University.</span>
+        </div>
+        <div class="founder-card">
+          <div class="founder-photo-wrap">
+            <img src="../assets/images/founders/prof-nvr-jyoti-kumar.jpg" alt="Prof. NVR Jyoti Kumar" class="founder-img">
+          </div>
+          <b>Prof. NVR Jyoti Kumar</b>
+          <span>Vice Chancellor, Sri Krishnadevaraya University, Andhra Pradesh.</span>
+        </div>
+        <div class="founder-card">
+          <div class="founder-photo-wrap">
+            <img src="../assets/images/founders/dr-inguava-gopinath.jpg" alt="Dr. Inguava Gopinath" class="founder-img">
+          </div>
+          <b>Dr. Inguava Gopinath</b>
+          <span>Former Senior Scientist ISRO, Sriharikota.</span>
+        </div>
+        <div class="founder-card">
+          <div class="founder-photo-wrap">
+            <img src="../assets/images/founders/prof-v-barla.jpg" alt="Prof. V Barla" class="founder-img">
+          </div>
+          <b>Prof. V Barla</b>
+          <span>Advisor IIC, CBIT, Hyderabad.</span>
+        </div>
+        <div class="founder-card">
+          <div class="founder-photo-wrap">
+            <img src="../assets/images/founders/prof-satyanarayana-parayitam.jpg" alt="Prof. Satyanarayana Parayitam" class="founder-img">
+          </div>
+          <b>Prof. Satyanarayana Parayitam</b>
+          <span>Charlton College of Business, University of Massachusetts Dartmouth.</span>
+        </div>
+        <div class="founder-card">
+          <div class="founder-photo-wrap">
+            <img src="../assets/images/founders/prof-himachalam-dasaraju.jpg" alt="Prof. Himachalam Dasaraju" class="founder-img">
+          </div>
+          <b>Prof. Himachalam Dasaraju</b>
+          <span>Rtd. Professor, Sri Venkateshwara University, Tirupathi & Founder member of "Global Association for MSMEs and SDGs Research in Developing Countries".</span>
+        </div>
+        <div class="founder-card">
+          <div class="founder-photo-wrap">
+            <img src="../assets/images/founders/sri-anand-musunur.jpg" alt="Sri Anand Musunur" class="founder-img">
+          </div>
+          <b>Sri Anand Musunur</b>
+          <span>Tata Consultancy Services, USA.</span>
+        </div>
+        <div class="founder-card">
+          <div class="founder-photo-wrap">
+            <img src="../assets/images/founders/prof-n-s-srinivasan.jpg" alt="Prof. N S Srinivasan" class="founder-img">
+          </div>
+          <b>Prof. N S Srinivasan</b>
+          <span>Rtd. Professor<br>Loyola Institute of Business Administration, Chennai</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="vision-mission">
+      <h2>Vision & Mission</h2>
+      
+      <div class="aima-highlight-box">
+        <h3>Our Vision</h3>
+        <p><i>"To be a premier non-profit professional platform that connects and empowers academicians, researchers, and thought leaders in Commerce and Management fostering impactful research, inclusive knowledge creation, and lifelong learning, while inspiring educators to lead with integrity and redefine management education through global academic collaboration for the next generation of professionals."</i></p>
+      </div>
+
+      <div class="aima-highlight-box mission">
+        <h3>Our Mission</h3>
+        <ul>
+          <li><i>To initiate, encourage, and sponsor high quality research in Commerce and Management. To organize annual international conferences, workshops, and seminars that bring together academicians, researchers, and practitioners to address contemporary challenges in business and management.</i></li>
+          <li><i>To provide a platform for lifelong learning, support and develop scholars across all career stages, from doctoral students to senior academicians, through capacity building activities, mentorship programs, and faculty development initiatives.</i></li>
+          <li><i>To collaborate with educational institutions to align Commerce and Management curricula with industry needs, emerging trends, and global standards.</i></li>
+          <li><i>To inspire and equip educators to lead with integrity, fostering ethical practices and values-based management education for the next generation of professionals.</i></li>
+          <li><i>To build a vibrant, inclusive, and supportive community of Commerce and Management scholars that embraces diversity of backgrounds, experiences, and perspectives.</i></li>
+          <li><i>To provide a forum for debate and dialogue between academicians, policymakers, practitioners, and the business community to address pressing issues in commerce, trade, and management.</i></li>
+          <li><i>To advocate for the recognition and advancement of Commerce and Management disciplines within the broader academic and public policy landscape.</i></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="opportunities">
+      <h2>ICMTA Focus Areas</h2>
+      <div class="grid-2" style="margin-top:20px">
+        <div class="feature-card">
+          <!--div class="icon">📘</div-->
+          <h3>Lifelong Learning Opportunities</h3>
+          <p><i>Hands-on workshops, faculty development programs (FDPs), and expert webinars in analytics and modern pedagogy.</i></p>
+        </div>
+        <div class="feature-card">
+          <!--div class="icon">📑</div-->
+          <h3>Research Dissemination</h3>
+          <p><i>National conferences, UGC-CARE / Scopus indexed publication guidance, and working paper series.</i></p>
+        </div>
+        <div class="feature-card">
+          <!--div class="icon">🌍</div-->
+          <h3>Global Academic Collaboration</h3>
+          <p><i>Partnerships with national and international academic bodies and leading industry practitioners.</i></p>
+        </div>
+        <div class="feature-card">
+          <!--div class="icon">⚖️</div-->
+          <h3>Ethical Leadership</h3>
+          <p><i>Curriculum innovation and ethical research mentoring initiatives that bridge academia with practical governance.</i></p>
+        </div>
+      </div>
+    </section>
+
+    <section id="code-of-conduct">
+      <h2>Code of Conduct for Members</h2>
+      <!-- Use local image (docs folder) for code of conduct; fall back to site logo if missing -->
+      <img src="../assets/images/docs/icmt_code_of_conduct.png" alt="ICMTA Code of Conduct" style="max-width:100%; height:auto; margin: 10px 0 20px; border-radius:8px;" onerror="this.onerror=null;this.src='../assets/images/icmt-logo.png'">
+      <h3 style="margin-top:20px; margin-bottom:15px;">Code of conduct for ICMTA members</h3>
+      <ul>
+        <li><i>Only academic content related to commerce and management to be shared.</i></li>
+        <li><i>Forward messages, fake news, unverified information is not allowed in the group.</i></li>
+        <li><i>Member college admission brochures and promotions are strictly banned in the group.</i></li>
+        <li><i>Good morning/evening/night messages are restrained to post.</i></li>
+        <li><i>No reply with congratulations/thank you.</i></li>
+        <li><i>Personal chatting in the group not allowed.</i></li>
+      </ul>
+      <p><i>The new and revised guidelines will be shared and updated here.</i></p>
+    </section>
+
+    <div class="banner-cta" style="margin-top: 40px;">
+      <div class="banner-cta-text">
+        <h3>Connect with ICMTA Faculty</h3>
+        <p>Discover 340+ verified faculty profiles, research areas, and institutional network.</p>
+      </div>
+      <a href="public-directory.html" class="btn-cta">
+        <span>View Member Directory &rarr;</span>
+      </a>
+    </div>
+
+  </article>
+</main>
+
+<footer class="footer">
+  <div class="icm-fgrid">
+    <div class="icm-fcol icm-fcol-brand">
+      <div class="footer-brand">
+        <img src="../assets/images/ICMTA-footer-logo.png" alt="" class="footer-logo" loading="lazy" decoding="async">
+        <div><b>Indian Commerce and Management Teachers Association</b></div>
+      </div>
+      <p class="icm-ftag">Connect &middot; Collaborate &middot; Research &middot; Learn &middot; Contribute</p>
+    </div>
+    <div class="icm-fcol">
+      <h4>Quick links</h4>
+      <a href="public-directory.html">Member Directory</a>
+      <a href="events.html">Events</a>
+      <a href="membership.html#apply-section">Become a Member</a>
+      <a href="resources.html">ICMTA Resources</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="icm-fcol">
+      <h4>Association</h4>
+      <a href="about-us.html">About us</a>
+      <a href="about-us.html#founders">Founders &amp; mentors</a>
+      <a href="initiatives.html">Our initiatives</a>
+      <a href="about-us.html#code-of-conduct">Code of conduct</a>
+    </div>
+    <div class="icm-fcol">
+      <h4>Stay informed</h4>
+      <p class="icm-fnl">Event notices and calls for papers, a few times a year.</p>
+      <form class="icm-fnlform" action="#" method="post">
+        <input type="email" name="email" placeholder="your@institution.ac.in" aria-label="Email address">
+        <button type="submit">Subscribe</button>
+      </form>
+      <div class="icm-fsocial">
+        <a href="#" aria-label="LinkedIn">in</a>
+        <a href="#" aria-label="YouTube">&#9654;</a>
+        <a href="#" aria-label="WhatsApp">&#9990;</a>
+      </div>
+    </div>
+  </div>
+  <div class="icm-fbot">
+    <span>&copy; 2026 ICMTA &middot; icmta.in</span>
+    <span><a href="#">Privacy notice</a> <a href="admin.html">Administrator</a></span>
+    <span>Logo and tagline by Lahari</span>
+  </div>
+</footer>
+</body>
+</html>

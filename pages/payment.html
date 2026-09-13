@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Membership Payment — ICMTA Indian Commerce and Management Teachers Association</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/icmta-2026.css">
+<!-- <link rel="icon" href="../assets/images/ICMTA-logo.png" type="image/png"> -->
+
+<style>
+.payment-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  margin-top: 24px;
+}
+.payment-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 28px;
+  box-shadow: 0 4px 18px rgba(30,108,147,0.06);
+}
+.payment-card h3 {
+  color: #1e6c93;
+  font-size: 18px;
+  font-weight: 800;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #eaf5fb;
+}
+.info-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.info-table td {
+  padding: 10px 0;
+  border-bottom: 1px dashed #f1f5f9;
+  font-size: 14px;
+}
+.info-table td:first-child {
+  color: #64748b;
+  font-weight: 600;
+  width: 40%;
+}
+.info-table td:last-child {
+  color: #0f172a;
+  font-weight: 700;
+}
+@media(max-width: 768px) {
+  .payment-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+<body>
+<div class="icm-watermark" aria-hidden="true"></div>
+
+<div class="icm-utilbar">
+  <div class="icm-utilbar-inner">
+    <span class="icm-ub-left">A non-profit professional platform &middot; Established by academicians</span>
+    <span class="icm-ub-right">
+      <a href="members.html">Members Corner</a>
+      <a href="public-directory.html">Scholars Corner</a>
+      <a href="mailto:secretariat@icmta.in">secretariat@icmta.in</a>
+      <a class="icm-ub-ic" href="#" aria-label="LinkedIn">in</a>
+      <a class="icm-ub-ic" href="#" aria-label="YouTube">&#9654;</a>
+    </span>
+  </div>
+</div>
+
+<header class="header">
+  <div class="header-inner">
+    <a href="../index.html" class="brand">
+      <img src="../assets/images/ICMTA-logo.png" alt="ICMTA Logo" class="brand-logo">
+      <div class="brand-text"></div>
+    </a>
+    <nav class="nav-links">
+      <span class="icm-navitem">
+        <a href="../index.html" class="nav-item">Home</a>
+      </span>
+      <span class="icm-navitem">
+        <a href="about-us.html" class="nav-item">About <i class="icm-caret">&#9662;</i></a>
+        <div class="icm-dd">
+          <a href="about-us.html#vision-mission">Vision &amp; Mission</a>
+          <a href="about-us.html#founders">Founders &amp; Mentors</a>
+          <a href="initiatives.html">Our Initiatives</a>
+          <a href="about-us.html#code-of-conduct">Code of Conduct</a>
+          <a href="contact.html">Contact Us</a>
+        </div>
+      </span>
+      <span class="icm-navitem">
+        <a href="public-directory.html" class="nav-item">Directory</a>
+      </span>
+      <span class="icm-navitem">
+        <a href="events.html" class="nav-item">Events <i class="icm-caret">&#9662;</i></a>
+        <div class="icm-dd">
+          <a href="events.html#upcoming">Upcoming Events</a>
+          <a href="events.html#past">Past Events &amp; Archives</a>
+        </div>
+      </span>
+      <span class="icm-navitem">
+        <a href="membership.html" class="nav-item active">Membership <i class="icm-caret">&#9662;</i></a>
+        <div class="icm-dd">
+          <a href="membership.html#why">Why Join</a>
+          <a href="membership.html#categories">Categories &amp; Fees</a>
+          <a href="membership.html#apply-section">How to Apply</a>
+        </div>
+      </span>
+      <span class="icm-sitesearch">
+        <button class="icm-ss-btn" aria-label="Search the site" onclick="this.parentNode.classList.toggle('icm-open');var i=this.parentNode.querySelector('input');if(this.parentNode.classList.contains('icm-open'))i.focus()">&#8981;</button>
+        <form class="icm-ss-form" action="public-directory.html" method="get">
+          <input type="search" name="q" placeholder="Search the site…" aria-label="Search the site">
+        </form>
+      </span>
+    </nav>
+  </div>
+</header>
+
+<section class="site-hero">
+  <div class="site-hero-inner">
+    <span class="hero-badge">Membership Desk</span>
+    <h1>Membership Fee Payment &amp; Remittance</h1>
+    <p>Complete your official ICMTA membership enrollment through secure online bank transfer or UPI remittance.</p>
+  </div>
+  
+  <div class="hero-wave">
+    <svg viewBox="0 0 1440 120" fill="none" preserveAspectRatio="none">
+      <path d="M0,32L60,42.7C120,53,240,75,360,74.7C480,75,600,53,720,48C840,43,960,53,1080,64C1200,75,1320,85,1380,90.7L1440,96L1440,120L1380,120C1320,120,1200,120,1080,120C960,120,840,120,720,120C600,120,480,120,360,120C240,120,120,120,60,120L0,120Z" fill="#f8fafc"></path>
+    </svg>
+  </div>
+</section>
+
+<div class="breadcrumb-bar">
+  <div class="breadcrumb-inner">
+    <a href="../index.html">Home</a>
+    <span>&rsaquo;</span>
+    <a href="membership.html">Membership</a>
+    <span>&rsaquo;</span>
+    <span style="color:#212121;font-weight:700">Payment</span>
+  </div>
+</div>
+
+<main class="container">
+
+  <div class="section-block">
+    <h2>Membership Fee Schedule</h2>
+    <p>Please refer to your selected membership tier before proceeding with fee remittance:</p>
+
+    <div class="payment-grid">
+      
+      <!-- Fee Details -->
+      <div class="payment-card">
+        <h3>Fee Structure</h3>
+        <table class="info-table">
+          <tr>
+            <td>Life Membership (Faculty)</td>
+            <td>₹ 5,000</td>
+          </tr>
+          <tr>
+            <td>Annual Membership (Faculty)</td>
+            <td>₹ 1,000</td>
+          </tr>
+          <tr>
+            <td>Research Scholar Member</td>
+            <td>₹ 600</td>
+          </tr>
+          <tr>
+            <td>Institutional (University / B-School)</td>
+            <td>₹ 25,000</td>
+          </tr>
+          <tr>
+            <td>Institutional (College / Institute)</td>
+            <td>₹ 12,000</td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- Bank Details -->
+      <div class="payment-card">
+        <h3>Bank Transfer / NEFT / IMPS</h3>
+        <table class="info-table">
+          <tr>
+            <td>Account Name</td>
+            <td>Indian Commerce and Management Teachers Association</td>
+          </tr>
+          <tr>
+            <td>Account Type</td>
+            <td>Current Account</td>
+          </tr>
+          <tr>
+            <td>Bank Name</td>
+            <td>State Bank of India</td>
+          </tr>
+          <tr>
+            <td>UPI / VPA</td>
+            <td>icmta@sbi</td>
+          </tr>
+          <tr>
+            <td>Payment Receipt</td>
+            <td>secretariat@icmta.in</td>
+          </tr>
+        </table>
+      </div>
+
+    </div>
+
+    <div style="margin-top:28px;padding:20px;background:#eaf5fb;border:1px solid #b9d2e3;border-radius:10px">
+      <h4 style="color:#1e6c93;margin-bottom:8px">Important Note on Payment Verification</h4>
+      <p style="font-size:13.5px;color:#334155;line-height:1.6;margin:0">
+        After completing the fee remittance, please ensure you submit your Application Form on the <a href="membership.html#apply-section" style="color:#1e6c93;font-weight:700;text-decoration:underline">Membership Page</a>. The Secretariat desk will verify your transaction reference and issue your official ICMTA Member ID.
+      </p>
+    </div>
+
+    <div style="margin-top:24px;display:flex;gap:14px;flex-wrap:wrap">
+      <a href="membership.html#apply-section" class="btn primary" style="padding:11px 24px">Proceed to Application Form &rarr;</a>
+      <a href="contact.html" class="btn secondary" style="padding:11px 24px">Contact Secretariat</a>
+    </div>
+
+  </div>
+
+</main>
+
+<footer class="footer">
+  <div class="icm-fgrid">
+    <div class="icm-fcol icm-fcol-brand">
+      <div class="footer-brand">
+        <img src="../assets/images/ICMTA-footer-logo.png" alt="" class="footer-logo" loading="lazy" decoding="async">
+        <div><b>Indian Commerce and Management Teachers Association</b></div>
+      </div>
+      <p class="icm-ftag">Connect &middot; Collaborate &middot; Research &middot; Learn &middot; Contribute</p>
+    </div>
+    <div class="icm-fcol">
+      <h4>Quick links</h4>
+      <a href="public-directory.html">Member Directory</a>
+      <a href="events.html">Events</a>
+      <a href="membership.html#apply-section">Become a Member</a>
+      <a href="resources.html">ICMTA Resources</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="icm-fcol">
+      <h4>Association</h4>
+      <a href="about-us.html">About us</a>
+      <a href="about-us.html#founders">Founders &amp; mentors</a>
+      <a href="initiatives.html">Our initiatives</a>
+      <a href="about-us.html#code-of-conduct">Code of conduct</a>
+    </div>
+    <div class="icm-fcol">
+      <h4>Stay informed</h4>
+      <p class="icm-fnl">Event notices and calls for papers, a few times a year.</p>
+      <form class="icm-fnlform" action="#" method="post">
+        <input type="email" name="email" placeholder="your@institution.ac.in" aria-label="Email address">
+        <button type="submit">Subscribe</button>
+      </form>
+      <div class="icm-fsocial">
+        <a href="#" aria-label="LinkedIn">in</a>
+        <a href="#" aria-label="YouTube">&#9654;</a>
+        <a href="#" aria-label="WhatsApp">&#9990;</a>
+      </div>
+    </div>
+  </div>
+  <div class="icm-fbot">
+    <span>&copy; 2026 ICMTA &middot; icmta.in</span>
+    <span><a href="#">Privacy notice</a> <a href="admin.html">Administrator</a></span>
+    <span>Logo and tagline by Lahari</span>
+  </div>
+</footer>
+
+</body>
+</html>
+

@@ -1,0 +1,632 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Events & Conferences — ICMTA Indian Commerce and Management Teachers Association</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/icmta-2026.css">
+<!-- <link rel="icon" href="../assets/images/ICMTA-logo.png" type="image/png"> -->
+
+<style>
+.event-featured-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  box-shadow: 0 4px 20px rgba(30,108,147,0.08);
+  padding: 30px;
+  margin-top: 18px;
+}
+.event-featured-grid {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 32px;
+  align-items: start;
+}
+.event-poster-wrap {
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #cbd5e1;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+  background: #f8fafc;
+}
+.event-poster-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  transition: transform 0.25s ease;
+}
+.event-poster-wrap:hover .event-poster-img {
+  transform: scale(1.02);
+}
+.event-badge {
+  display: inline-block;
+  background: #eaf5fb;
+  color: #1e6c93;
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  padding: 5px 14px;
+  border-radius: 20px;
+  margin-bottom: 12px;
+  border: 1px solid #b9d2e3;
+}
+.event-title {
+  font-size: 22px;
+  font-weight: 800;
+  color: #1e6c93;
+  line-height: 1.38;
+  margin: 0 0 16px 0;
+}
+.event-meta-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 18px;
+  background: #f8fafc;
+  padding: 16px 18px;
+  border-radius: 10px;
+  border: 1px solid #edf2f7;
+  margin-bottom: 18px;
+}
+.event-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.meta-label {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+.meta-val {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #1e293b;
+  line-height: 1.45;
+}
+.event-desc-block p {
+  font-size: 14px;
+  line-height: 1.75;
+  color: #475569;
+  margin-bottom: 12px;
+}
+.event-sub-tables {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin: 22px 0;
+}
+.event-info-panel {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 18px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+}
+.event-info-panel h4 {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: #1e6c93;
+  margin: 0 0 12px 0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #edf2f7;
+}
+.event-info-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.event-info-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 7px 0;
+  font-size: 13px;
+  color: #475569;
+  border-bottom: 1px dashed #f1f5f9;
+}
+.event-info-list li:last-child {
+  border-bottom: none;
+}
+.event-info-list li b {
+  color: #0f172a;
+  font-weight: 700;
+  margin-left: 10px;
+  text-align: right;
+}
+.event-actions {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid #edf2f7;
+}
+.btn-lg {
+  padding: 12px 26px !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  border-radius: 8px !important;
+  text-decoration: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  transition: all 0.2s ease !important;
+}
+
+@media(max-width: 980px) {
+  .event-featured-grid {
+    grid-template-columns: 1fr;
+  }
+  .event-poster-wrap {
+    max-width: 360px;
+    margin: 0 auto 10px;
+  }
+}
+@media(max-width: 640px) {
+  .event-meta-grid {
+    grid-template-columns: 1fr;
+  }
+  .event-sub-tables {
+    grid-template-columns: 1fr;
+  }
+  .event-featured-card {
+    padding: 18px;
+  }
+  .event-title {
+    font-size: 18px;
+  }
+  .event-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  .event-actions a {
+    width: 100%;
+    text-align: center;
+  }
+}
+</style>
+
+</head>
+<body>
+<div class="icm-watermark" aria-hidden="true"></div>
+
+<div class="icm-utilbar">
+  <div class="icm-utilbar-inner">
+    <span class="icm-ub-left">A non-profit professional platform &middot; Established by academicians</span>
+    <span class="icm-ub-right">
+      <a href="members.html">Members Corner</a>
+      <a href="public-directory.html">Scholars Corner</a>
+      <a href="mailto:secretariat@icmta.in">secretariat@icmta.in</a>
+      <a class="icm-ub-ic" href="#" aria-label="LinkedIn">in</a>
+      <a class="icm-ub-ic" href="#" aria-label="YouTube">&#9654;</a>
+    </span>
+  </div>
+</div>
+
+<header class="header">
+  <div class="header-inner">
+    <a href="../index.html" class="brand">
+      <img src="../assets/images/ICMTA-logo.png" alt="ICMTA Logo" class="brand-logo">
+      <div class="brand-text"></div>
+    </a>
+    <nav class="nav-links">
+      <span class="icm-navitem">
+        <a href="../index.html" class="nav-item">Home</a>
+      </span>
+      <span class="icm-navitem">
+        <a href="about-us.html" class="nav-item">About <i class="icm-caret">&#9662;</i></a>
+        <div class="icm-dd">
+          <a href="about-us.html#vision-mission">Vision &amp; Mission</a>
+          <a href="about-us.html#founders">Founders &amp; Mentors</a>
+          <a href="initiatives.html">Our Initiatives</a>
+          <a href="about-us.html#code-of-conduct">Code of Conduct</a>
+          <a href="contact.html">Contact Us</a>
+        </div>
+      </span>
+      <span class="icm-navitem">
+        <a href="public-directory.html" class="nav-item">Directory</a>
+      </span>
+      <span class="icm-navitem">
+        <a href="events.html" class="nav-item active">Events <i class="icm-caret">&#9662;</i></a>
+        <div class="icm-dd">
+          <a href="events.html#upcoming">Upcoming Events</a>
+          <a href="events.html#past">Past Events &amp; Archives</a>
+        </div>
+      </span>
+      <span class="icm-navitem">
+        <a href="membership.html" class="nav-item">Membership <i class="icm-caret">&#9662;</i></a>
+        <div class="icm-dd">
+          <a href="membership.html#why">Why Join</a>
+          <a href="membership.html#categories">Categories &amp; Fees</a>
+          <a href="membership.html#apply-section">How to Apply</a>
+        </div>
+      </span>
+      <span class="icm-sitesearch">
+        <button class="icm-ss-btn" aria-label="Search the site" onclick="this.parentNode.classList.toggle('icm-open');var i=this.parentNode.querySelector('input');if(this.parentNode.classList.contains('icm-open'))i.focus()">&#8981;</button>
+        <form class="icm-ss-form" action="public-directory.html" method="get">
+          <input type="search" name="q" placeholder="Search the site…" aria-label="Search the site">
+        </form>
+      </span>
+    </nav>
+  </div>
+</header>
+
+<section class="site-hero">
+  <div class="site-hero-inner">
+    <span class="hero-badge">Academic Gatherings</span>
+    <h1>Conferences, Seminars & Workshops</h1>
+    <p>Explore upcoming national and international conferences, webinar series, and research methodology summits organized by ICMTA.</p>
+  </div>
+  
+<div class="hero-wave">
+  <svg viewBox="0 0 1440 120" fill="none" preserveAspectRatio="none">
+    <path d="M0,32L60,42.7C120,53,240,75,360,74.7C480,75,600,53,720,48C840,43,960,53,1080,64C1200,75,1320,85,1380,90.7L1440,96L1440,120L1380,120C1320,120,1200,120,1080,120C960,120,840,120,720,120C600,120,480,120,360,120C240,120,120,120,60,120L0,120Z" fill="#f8fafc"></path>
+  </svg>
+</div>
+
+</section>
+
+<div class="breadcrumb-bar">
+  <div class="breadcrumb-inner">
+    <a href="../index.html">Home</a>
+    <span>&rsaquo;</span>
+    <span style="color:#212121;font-weight:700">Events</span>
+  </div>
+</div>
+
+<main class="container">
+  
+  <!-- 1. Featured / Upcoming Events -->
+  <div class="section-block" id="upcoming">
+    <h2>Upcoming Events (2026)</h2>
+
+    <!-- Event 1: Speak to Inspire — The Art of Voice Modulation for Effective Communication -->
+    <div class="event-featured-card">
+      <div class="event-featured-grid">
+        
+        <!-- Left: Official Event Poster -->
+        <div class="event-poster-wrap">
+          <img src="../assets/images/events/voice-modulation-webinar.jpg" alt="Speak to Inspire: The Art of Voice Modulation for Effective Communication" class="event-poster-img">
+        </div>
+
+        <!-- Right: Event Details -->
+        <div class="event-details-wrap">
+          <span class="event-badge">Online Session &bull; Speak to Inspire</span>
+          <h3 class="event-title">“The Art of Voice Modulation for Effective Communication”</h3>
+
+          <div class="event-meta-grid">
+            <div class="event-meta-item">
+              <span class="meta-label">Date</span>
+              <span class="meta-val">12th September 2026 (Saturday)</span>
+            </div>
+            <div class="event-meta-item">
+              <span class="meta-label">Time</span>
+              <span class="meta-val">7:00 PM – 8:00 PM</span>
+            </div>
+            <div class="event-meta-item">
+              <span class="meta-label">Mode</span>
+              <span class="meta-val">Online</span>
+            </div>
+            <div class="event-meta-item">
+              <span class="meta-label">Organized by</span>
+              <span class="meta-val">Indian Commerce and Management Teachers Association (ICMTA)</span>
+            </div>
+            <div class="event-meta-item">
+              <span class="meta-label">Resource Person / Speaker</span>
+              <span class="meta-val">Dr. Prashanth S (Principal, SRN Adarsh College &amp; RJ Rainbow FM, Bengaluru)</span>
+            </div>
+            <div class="event-meta-item">
+              <span class="meta-label">Registration Fee</span>
+              <span class="meta-val">None (Free Registration)</span>
+            </div>
+            <div class="event-meta-item" style="grid-column: 1 / -1;">
+              <span class="meta-label">In association with</span>
+              <span class="meta-val">Bheemi Reddy Institute of Management Science (Adoni - 518301), Sri Ramakrishna Degree College (Nandyal – 518501), Dr. K.V. Subba Reddy Institute of Technology (Kurnool – 518218), Narayana Engineering College (Nellore – 524003) and Global Public Speaking Network (An Initiative of ICMTA)</span>
+            </div>
+          </div>
+
+          <div class="event-desc-block">
+            <p>
+              Dear Sir/Madam, We are delighted to invite you to an enriching online session, <strong>"The Art of Voice Modulation for Effective Communication,"</strong> organized by the Indian Commerce and Management Teachers Association (ICMTA). This session is designed to help you master the skill of voice modulation to enhance your communication and presentation abilities.
+            </p>
+            <p>
+              This session is being conducted in association with Bheemi Reddy Institute of Management Science, Adoni- 518301, Sri Ramakrishna Degree College, Nandyal – 518501, Dr.K.V.Subba Reddy Institute of Technology, Kurnool – 518218, Narayana Engineering College, Nellore – 524003 and Global Public Speaking Network (An Initiative of ICMTA). It’s a wonderful opportunity to learn from an experienced professional and take your communication skills to the next level.
+            </p>
+          </div>
+
+          <!-- Session Info & Registration Details -->
+          <div class="event-sub-tables">
+            <div class="event-info-panel">
+              <h4>Session Highlights</h4>
+              <ul class="event-info-list">
+                <li><span>Speaker:</span> <b>Dr. Prashanth S</b></li>
+                <li><span>Designation:</span> <b>Principal &amp; Radio Jockey</b></li>
+                <li><span>E-Certificate:</span> <b>Issued to all participants</b></li>
+                <li><span>Mode / Platform:</span> <b>Online</b></li>
+              </ul>
+            </div>
+
+            <div class="event-info-panel">
+              <h4>How to Register</h4>
+              <ul class="event-info-list">
+                <li><span>Online Registration:</span> <b><a href="https://forms.gle/uR6vQc3xicUf2gmy7" target="_blank" rel="noopener noreferrer" style="color:var(--navy);text-decoration:underline">Click to Register</a></b></li>
+                <li><span>Coordinator:</span> <b>Dr. Gundupagi Manjunath</b></li>
+                <li><span>Contact Number:</span> <b>+91 96521 68059</b></li>
+                <li><span>Registration Fee:</span> <b>None (Free)</b></li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="event-actions">
+            <a href="https://forms.gle/uR6vQc3xicUf2gmy7" target="_blank" rel="noopener noreferrer" class="btn primary btn-lg">
+              Register Now &rarr;
+            </a>
+            <a href="../assets/images/events/voice-modulation-webinar.jpg" target="_blank" class="btn secondary btn-lg">
+              View Poster
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Event 2: Panel Discussion — Performative Wokeism and Virtue Signalling on Social Media -->
+    <div class="event-featured-card">
+      <div class="event-featured-grid">
+        
+        <!-- Left: Official Event Poster -->
+        <div class="event-poster-wrap">
+          <img src="../assets/images/events/performative-wokeism-panel-discussion.jpg" alt="Panel Discussion: Performative Wokeism and Virtue Signalling on Social Media" class="event-poster-img">
+        </div>
+
+        <!-- Right: Event Details -->
+        <div class="event-details-wrap">
+          <span class="event-badge">Panel Discussion &bull; Online (Zoom)</span>
+          <h3 class="event-title">“Performative Wokeism and Virtue Signalling on Social Media”</h3>
+
+          <div class="event-meta-grid">
+            <div class="event-meta-item">
+              <span class="meta-label">Date</span>
+              <span class="meta-val">19th September 2026</span>
+            </div>
+            <div class="event-meta-item">
+              <span class="meta-label">Time</span>
+              <span class="meta-val">7:00 PM (IST)</span>
+            </div>
+            <div class="event-meta-item">
+              <span class="meta-label">Platform / Mode</span>
+              <span class="meta-val">Zoom &bull; Online</span>
+            </div>
+            <div class="event-meta-item">
+              <span class="meta-label">Registration Fee</span>
+              <span class="meta-val">Zero Registration Fees (Free)</span>
+            </div>
+            <div class="event-meta-item">
+              <span class="meta-label">Organized by</span>
+              <span class="meta-val">Ashoka Institute of Technology and Management, School of Business, Varanasi</span>
+            </div>
+            <div class="event-meta-item">
+              <span class="meta-label">In association with</span>
+              <span class="meta-val">Indian Commerce and Management Teachers Association (ICMTA)</span>
+            </div>
+            <div class="event-meta-item">
+              <span class="meta-label">Patron</span>
+              <span class="meta-val">Prof. K. Venu Gopal Rao (Former VC, Himalayan University, Itanagar)</span>
+            </div>
+            <div class="event-meta-item">
+              <span class="meta-label">Moderator &amp; Convenor</span>
+              <span class="meta-val">Dr. Pallavi Singh (Assistant Professor, AITM, Varanasi)</span>
+            </div>
+          </div>
+
+          <div class="event-desc-block">
+            <p>
+              A national panel discussion organised by <strong>Ashoka Institute of Technology and Management, School of Business, Varanasi</strong>, in association with the <strong>Indian Commerce and Management Teachers Association (ICMTA)</strong> on <em>"Performative Wokeism and Virtue Signalling on Social Media"</em>.
+            </p>
+            <p>
+              Open to Senior Delegates, Faculty Members, Research Scholars, and Students of Management and Commerce. Join prominent academicians and thought leaders as they deliberate on contemporary online discourse and social dynamics.
+            </p>
+          </div>
+
+          <!-- Panelists & Registration Details -->
+          <div class="event-sub-tables">
+            <div class="event-info-panel">
+              <h4>Distinguished Panelists</h4>
+              <ul class="event-info-list">
+                <li><span>Dr. Premendra Sahu:</span> <b>Assoc. Prof., MATS Univ., Raipur</b></li>
+                <li><span>Dr. J. Sneha Jayalakshmi:</span> <b>Asst. Prof., Sanjivani Univ.</b></li>
+                <li><span>Dr. Rajiv Sikroria:</span> <b>Assoc. Prof., Sunbeam Women's College</b></li>
+                <li><span>Dr. Shivam Bhartiya:</span> <b>Asst. Prof., JAIN University</b></li>
+                <li><span>Dr. Roshni Jaiswal:</span> <b>Assoc. Prof., Ashoka Institute</b></li>
+                <li><span>B. Pawni:</span> <b>Research Scholar, St. John College</b></li>
+              </ul>
+            </div>
+
+            <div class="event-info-panel">
+              <h4>Registration &amp; Participation</h4>
+              <ul class="event-info-list">
+                <li><span>Online Registration:</span> <b><a href="https://forms.gle/j9kPkBaCLPKZRR2x9" target="_blank" rel="noopener noreferrer" style="color:var(--navy);text-decoration:underline">Click to Register</a></b></li>
+                <li><span>Registration Fee:</span> <b>Zero (Free)</b></li>
+                <li><span>E-Certificate:</span> <b>Provided to registered participants</b></li>
+                <li><span>Moderator &amp; Convenor:</span> <b>Dr. Pallavi Singh (AITM)</b></li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="event-actions">
+            <a href="https://forms.gle/j9kPkBaCLPKZRR2x9" target="_blank" rel="noopener noreferrer" class="btn primary btn-lg">
+              Register Now &rarr;
+            </a>
+            <a href="../assets/images/events/performative-wokeism-panel-discussion.jpg" target="_blank" class="btn secondary btn-lg">
+              View Poster
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <div class="event-featured-card">
+      <div class="event-featured-grid">
+        
+        <!-- Left: Official Seminar Brochure Cover / Poster -->
+        <div class="event-poster-wrap">
+          <img src="../assets/images/events/siddhartha-seminar-poster.jpg" alt="Two-Day National Seminar Brochure — Siddhartha Academy of Higher Education" class="event-poster-img">
+        </div>
+
+        <!-- Right: Event Details -->
+        <div class="event-details-wrap">
+          <span class="event-badge">Two-Day National Seminar</span>
+          <h3 class="event-title">“Ethical Leadership and Management through the Lens of Bhagavad Gita for Sustainable Development towards Viksit Bharat @ 2047”</h3>
+
+          <div class="event-meta-grid">
+            <div class="event-meta-item">
+              <span class="meta-label">Date</span>
+              <span class="meta-val">3rd &amp; 4th November 2026</span>
+            </div>
+            <div class="event-meta-item">
+              <span class="meta-label">Mode</span>
+              <span class="meta-val">Offline</span>
+            </div>
+            <div class="event-meta-item">
+              <span class="meta-label">Venue</span>
+              <span class="meta-val">Siddhartha Academy of Higher Education (Deemed to be University), Vijayawada, Andhra Pradesh</span>
+            </div>
+            <div class="event-meta-item">
+              <span class="meta-label">Organized by</span>
+              <span class="meta-val">School of Management, Siddhartha Academy of Higher Education</span>
+            </div>
+            <div class="event-meta-item" style="grid-column: 1 / -1;">
+              <span class="meta-label">In association with</span>
+              <span class="meta-val">AIMS &amp; Chinmaya Mission</span>
+            </div>
+          </div>
+
+          <div class="event-desc-block">
+            <p>
+              The seminar aims to provide a platform for academicians, researchers, industry professionals and students to share their research, experiences and insights on the relevance of the Bhagavad Gita to contemporary management and ethical leadership.
+            </p>
+            <p>
+              The seminar focuses on ethical leadership, management, strategic leadership, corporate sustainability, governance, youth leadership, ecology, economy and ethics, and sustainable development towards Viksit Bharat @ 2047.
+            </p>
+          </div>
+
+          <!-- Important Dates & Registration Fees Sub-grids -->
+          <div class="event-sub-tables">
+            <div class="event-info-panel">
+              <h4>Important Dates</h4>
+              <ul class="event-info-list">
+                <li><span>Abstract Submission Deadline:</span> <b>28 September 2026</b></li>
+                <li><span>Communication of Acceptance:</span> <b>30 September 2026</b></li>
+                <li><span>Full Paper Submission Deadline:</span> <b>20 October 2026</b></li>
+                <li><span>Registration Closing Date:</span> <b>27 October 2026</b></li>
+              </ul>
+            </div>
+
+            <div class="event-info-panel">
+              <h4>Registration Fees</h4>
+              <ul class="event-info-list">
+                <li><span>Industry Professionals:</span> <b>₹1,500</b></li>
+                <li><span>Academicians:</span> <b>₹1,000</b></li>
+                <li><span>Researchers:</span> <b>₹750</b></li>
+                <li><span>Students:</span> <b>₹500</b></li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="event-actions">
+            <a href="https://forms.gle/GYHurRpFLav73Hip8" target="_blank" rel="noopener noreferrer" class="btn primary btn-lg">
+              Register Now &rarr;
+            </a>
+            <a href="../assets/documents/National_Seminar_Siddhartha_Academy_2026.pdf" target="_blank" class="btn secondary btn-lg">
+              Download Brochure
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Past Events (Archived Conclaves) -->
+  <div class="section-block" id="past">
+    <h2>Past Conclaves & Archives</h2>
+    <p style="color:#64748b;font-size:13.5px;margin:0;font-style:italic">
+      There are no archived past events at this time. Verified conclave proceedings and event archives will appear here following event completion.
+    </p>
+  </div>
+
+  <div class="banner-cta">
+    <div class="banner-cta-text">
+      <h3>Connect with Event Speakers & Faculty</h3>
+      <p>Find distinguished scholars and conference chairs in the ICMTA Directory.</p>
+    </div>
+    <a href="public-directory.html" class="btn-cta">
+      <span>Explore Directory &rarr;</span>
+    </a>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="icm-fgrid">
+    <div class="icm-fcol icm-fcol-brand">
+      <div class="footer-brand">
+        <img src="../assets/images/ICMTA-footer-logo.png" alt="" class="footer-logo" loading="lazy" decoding="async">
+        <div><b>Indian Commerce and Management Teachers Association</b></div>
+      </div>
+      <p class="icm-ftag">Connect &middot; Collaborate &middot; Research &middot; Learn &middot; Contribute</p>
+    </div>
+    <div class="icm-fcol">
+      <h4>Quick links</h4>
+      <a href="public-directory.html">Member Directory</a>
+      <a href="events.html">Events</a>
+      <a href="membership.html#apply-section">Become a Member</a>
+      <a href="resources.html">ICMTA Resources</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="icm-fcol">
+      <h4>Association</h4>
+      <a href="about-us.html">About us</a>
+      <a href="about-us.html#founders">Founders &amp; mentors</a>
+      <a href="initiatives.html">Our initiatives</a>
+      <a href="about-us.html#code-of-conduct">Code of conduct</a>
+    </div>
+    <div class="icm-fcol">
+      <h4>Stay informed</h4>
+      <p class="icm-fnl">Event notices and calls for papers, a few times a year.</p>
+      <form class="icm-fnlform" action="#" method="post">
+        <input type="email" name="email" placeholder="your@institution.ac.in" aria-label="Email address">
+        <button type="submit">Subscribe</button>
+      </form>
+      <div class="icm-fsocial">
+        <a href="#" aria-label="LinkedIn">in</a>
+        <a href="#" aria-label="YouTube">&#9654;</a>
+        <a href="#" aria-label="WhatsApp">&#9990;</a>
+      </div>
+    </div>
+  </div>
+  <div class="icm-fbot">
+    <span>&copy; 2026 ICMTA &middot; icmta.in</span>
+    <span><a href="#">Privacy notice</a> <a href="admin.html">Administrator</a></span>
+    <span>Logo and tagline by Lahari</span>
+  </div>
+</footer>
+</body>
+</html>

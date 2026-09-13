@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ICMTA Faculty Directory Automation — Professional Prototype</title>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<meta name="ICMTA-data-version" content="combined-343-members-v1">
+<meta name="ICMTA-data-source" content="106 existing prototype members + 237 Final Faculty Data records">
+
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/icmta-2026.css">
+<!-- <link rel="icon" href="../assets/images/ICMTA-logo.png" type="image/png"> -->
+</head>
+<body>
+
+<div id="login" class="login">
+<div class="loginbox">
+<div style="text-align:center;margin-bottom:14px">
+  <img src="../assets/images/ICMTA-logo.png" alt="ICMTA Logo" style="height:86px;width:86px;aspect-ratio:1/1;object-fit:contain;border-radius:50%;background:#ffffff;padding:3px;box-shadow:0 4px 14px rgba(0,0,0,0.1);border:1px solid #dfe6ee;image-rendering:-webkit-optimize-contrast">
+  <div class="brand" style="justify-content:center;margin-top:10px">ICMTA Portal</div>
+  <div class="subtitle">Indian Commerce and Management Teachers Association• Admin Portal</div>
+</div>
+<h2 style="margin-top:18px;font-size:18px;font-weight:700;color:var(--navy)">Administrator Login</h2>
+<form id="loginForm" autocomplete="off" onsubmit="event.preventDefault(); login();">
+  <label>Email / User ID</label>
+  <input id="loginEmail" type="text" autocomplete="username" placeholder="Enter your user ID">
+  <label>Password</label>
+  <input id="loginPassword" type="password" autocomplete="new-password" placeholder="Enter your password">
+  <button id="loginBtn" type="submit" class="btn primary full" style="margin-top:17px">Sign in</button>
+</form>
+<div style="margin-top:16px;text-align:center;display:flex;flex-direction:column;gap:6px">
+  <a href="public-directory.html" style="font-size:12px;color:var(--blue);font-weight:600">&larr; Back to Public Faculty Directory</a>
+  <a href="../index.html" style="font-size:11px;color:var(--muted)">&larr; ICMTA Main Website</a>
+</div>
+<p class="subtitle" style="margin-top:12px;font-size:11px;text-align:center">Authorized ICMTA administrative access only.</p>
+</div></div>
+
+<div id="public" class="public hidden">
+<div class="public-top"><div style="display:flex;align-items:center;gap:12px"><img src="../assets/images/ICMTA-logo.png" alt="ICMTA Logo" style="height:64px;width:64px;border-radius:50%;background:#fff;padding:2px;border:1px solid #dfe6ee;image-rendering:-webkit-optimize-contrast"><div class="brand-text"><div class="brand">ICMTA Faculty Directory</div><div class="subtitle">Member Information Submission</div></div></div><button id="backLoginBtn" class="btn secondary">Admin Login</button></div>
+<div class="panel"><h2>Member Registration</h2><div class="notice">Members can submit their own information. The complete member database is not exposed to members.</div>
+<form id="publicForm" class="form">
+<div class="field"><label>Title</label><select name="title"><option>Dr.</option><option>Mr.</option><option>Ms.</option><option>Mrs.</option></select></div>
+<div class="field"><label>Name *</label><input name="name" required></div>
+<div class="field"><label>Qualifications</label><input name="qualification"></div>
+<div class="field"><label>Designation</label><input name="designation"></div>
+<div class="field"><label>Department</label><input name="department"></div>
+<div class="field"><label>College Name</label><input name="college"></div>
+<div class="field fullrow"><label>College Address</label><textarea name="collegeAddress"></textarea></div>
+<div class="field"><label>Pincode</label><input name="pincode"></div>
+<div class="field"><label>Permanent Address Pincode</label><input name="permanentPincode"></div>
+<div class="field"><label>State</label><input name="state"></div>
+<div class="field"><label>Country</label><input name="country" value="India"></div>
+<div class="field"><label>Research Guideship — multiple</label><input name="guideship" placeholder="e.g. Ph.D., M.Phil."><div class="help">Enter multiple values separated by commas.</div></div>
+<div class="field"><label>Expertise — multiple</label><input name="expertise" placeholder="e.g. Finance, Accounting"><div class="help">Enter multiple values separated by commas.</div></div>
+<div class="field"><label>Handheld / Mobile</label><input name="mobile"></div>
+<div class="field"><label>WhatsApp</label><input name="whatsapp"></div>
+<div class="field"><label>Professional Email</label><input name="professionalEmail" type="email"></div>
+<div class="field"><label>Personal Email</label><input name="personalEmail" type="email"></div>
+<div class="field"><label>LinkedIn</label><input name="linkedin"></div>
+<div class="field"><label>ORCID</label><input name="orcid"></div>
+<div class="field"><label>Google Scholar Profile</label><input name="scholar"></div>
+<div class="field"><label>Passport-size Photograph</label><input name="photo" type="file" accept="image/*" id="publicPhotoInput" ><div id="publicPhoto" class="photo-box" style="margin-top:7px">Photo preview</div></div>
+<div class="actions"><button type="reset" class="btn secondary">Clear</button><button class="btn primary" type="submit">Submit Information</button></div>
+</form></div></div>
+
+<div id="app" class="hidden">
+<aside class="sidebar"><div class="sidebrand" style="display:flex;align-items:center;gap:10px"><img src="../assets/images/ICMTA-logo.png" alt="ICMTA Logo" style="height:52px;width:52px;aspect-ratio:1/1;object-fit:contain;border-radius:50%;background:#ffffff;padding:2px;flex-shrink:0;image-rendering:-webkit-optimize-contrast"><div>ICMTA Portal<span>Faculty Directory & Admin</span></div></div>
+<div style="padding:10px 10px 0;margin-bottom:-12px">
+  <a href="public-directory.html" target="_blank" style="display:inline-flex;align-items:center;gap:6px;font-size:11px;color:#a9c4d6;padding:6px 10px;border-radius:6px;background:rgba(255,255,255,0.08);width:100%;transition:all .15s ease">&larr; Public Directory</a>
+</div>
+<div class="nav">
+<button class="active" data-page="dashboard">Dashboard</button>
+<button data-page="directory">Faculty Directory</button>
+<button data-page="management">Member Management</button>
+<button data-page="profile">Member Profile</button>
+<button data-page="users">User Management</button>
+</div><button id="logoutBtn" class="btn secondary logout" type="button" onclick="logout()">Logout</button></aside>
+
+<main class="main"><div class="top"><div><h1 id="title">Dashboard</h1><p>Centralized member collection, management, search and visualization</p></div><div style="display:flex;align-items:center;gap:10px"><a href="public-directory.html" class="btn secondary" style="font-size:12px;text-decoration:none" target="_blank">View Public Directory &rarr;</a><div class="role" id="rolePill">Administrator</div></div></div>
+
+<section id="dashboard" class="page active">
+<!-- 1. Top 4 Primary Summary Cards -->
+<div class="cards" style="margin-bottom:16px">
+<button class="card dashboard-metric-card" type="button" onclick="openDashboardMetric('total')"><div class="label">Total Members</div><div class="metric" id="metricTotal">0</div></button>
+<button class="card dashboard-metric-card" type="button" onclick="openDashboardMetric('pending')"><div class="label">Pending Members</div><div class="metric" id="metricPending">0</div></button>
+<button class="card dashboard-metric-card" type="button" onclick="openDashboardMetric('missing-photos')"><div class="label">Missing Photos</div><div class="metric" id="metricMissingPhotos" style="color:#d97706">0</div></button>
+<button class="card dashboard-metric-card" type="button" onclick="openDashboardMetric('incomplete')"><div class="label">Incomplete Profiles</div><div class="metric" id="metricIncomplete" style="color:#dc2626">0</div></button>
+</div>
+
+<!-- Filter Results Panel (Expands when clicking any summary card) -->
+<div id="dashboardMetricResults" class="panel" style="display:none;margin-bottom:16px">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:10px">
+    <div>
+      <h2 id="dashboardMetricTitle" style="margin:0">Filtered Members</h2>
+      <div class="subtitle" id="dashboardMetricSubtitle" style="margin-top:5px"></div>
+    </div>
+    <button class="btn secondary" type="button" onclick="closeDashboardMetric()">Close</button>
+  </div>
+  <div class="table-wrap" style="overflow-x:auto;margin-top:14px">
+    <table class="table">
+      <thead><tr><th>Photo</th><th>Member ID</th><th>Member</th><th>Designation</th><th>Department</th><th>Institution</th><th>State</th><th>Action</th></tr></thead>
+      <tbody id="dashboardMetricBody"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- 2. Compact Quick Actions & Recent Activity -->
+<div class="grid2" style="margin-bottom:16px">
+  <div class="panel" style="padding:18px;margin-bottom:0">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+      <h2 style="margin:0;font-size:15px;color:var(--navy)">Quick Actions</h2>
+      <span class="badge" style="background:#eaf5fb;color:#126b9b;font-weight:700">Admin Tools</span>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+      <button class="btn primary" type="button" style="justify-content:flex-start;padding:8px 12px;font-size:12px" onclick="showPage('add'); resetAdminForm()">
+        <span style="font-size:14px;font-weight:800">+</span> Add New Member
+      </button>
+      <button class="btn secondary" type="button" style="justify-content:flex-start;padding:8px 12px;font-size:12px" onclick="openDashboardMetric('pending')">
+        ⏳ Review Pending
+      </button>
+      <button class="btn secondary" type="button" style="justify-content:flex-start;padding:8px 12px;font-size:12px" onclick="openDashboardMetric('missing-photos')">
+        📸 Check Missing Photos
+      </button>
+      <button class="btn secondary" type="button" style="justify-content:flex-start;padding:8px 12px;font-size:12px" onclick="openDashboardMetric('incomplete')">
+        📋 Check Incomplete Profiles
+      </button>
+      <button class="btn secondary" type="button" style="grid-column:1/-1;justify-content:flex-start;padding:8px 12px;font-size:12px" onclick="showPage('management'); filterManagementQuality('all')">
+        🛡️ Data Quality
+      </button>
+    </div>
+  </div>
+
+  <div class="panel" style="padding:18px;margin-bottom:0">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+      <h2 style="margin:0;font-size:15px;color:var(--navy)">Recent Activity & Status</h2>
+      <span class="badge green" style="font-weight:700">Verified</span>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:7px;font-size:12px">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:7px 10px;background:#f8fafc;border-radius:8px;border:1px solid #edf2f7">
+        <div style="display:flex;align-items:center;gap:8px">
+          <span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#21865b"></span>
+          <span><b>Master Database:</b> 343 member records active</span>
+        </div>
+        <span style="color:var(--muted);font-size:11px">Ready</span>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:7px 10px;background:#f8fafc;border-radius:8px;border:1px solid #edf2f7">
+        <div style="display:flex;align-items:center;gap:8px">
+          <span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#126b9b"></span>
+          <span><b>Photo Sync Engine:</b> 156 member photos matched</span>
+        </div>
+        <span style="color:var(--muted);font-size:11px">Auto-Sync</span>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:7px 10px;background:#f8fafc;border-radius:8px;border:1px solid #edf2f7">
+        <div style="display:flex;align-items:center;gap:8px">
+          <span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#21865b"></span>
+          <span><b>Data Health:</b> 0 Duplicate IDs detected</span>
+        </div>
+        <span style="color:var(--muted);font-size:11px">Healthy</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 3. Reduced Secondary Statistics: Members by State & Designation (Top 5 + View All) -->
+<div class="grid2" style="margin-bottom:16px">
+  <div class="panel" style="padding:18px;margin-bottom:0">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+      <h2 style="margin:0;font-size:15px;color:var(--navy)">Members by State <span class="subtitle" style="font-size:11px;font-weight:400" id="stateStatsSubtitle">(Top 5)</span></h2>
+      <button id="stateStatsToggleBtn" class="btn secondary" type="button" style="padding:3px 8px;font-size:11px" onclick="toggleStateStatsView()">View All</button>
+    </div>
+    <div id="stateStats"></div>
+  </div>
+
+  <div class="panel" style="padding:18px;margin-bottom:0">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+      <h2 style="margin:0;font-size:15px;color:var(--navy)">Members by Designation <span class="subtitle" style="font-size:11px;font-weight:400" id="desStatsSubtitle">(Top 5)</span></h2>
+      <button id="desStatsToggleBtn" class="btn secondary" type="button" style="padding:3px 8px;font-size:11px" onclick="toggleDesStatsView()">View All</button>
+    </div>
+    <div id="designationStats"></div>
+  </div>
+</div>
+
+<!-- 4. Lower Secondary Academic & Research Highlights -->
+<div class="panel" style="padding:16px;margin-bottom:16px">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:8px">
+    <h2 style="margin:0;font-size:14px;color:var(--navy);font-weight:700">Academic & Research Highlights</h2>
+    <span class="subtitle" style="font-size:11px">Secondary distribution overview</span>
+  </div>
+  <div class="cards" style="grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px">
+    <button class="card dashboard-metric-card" type="button" style="padding:10px 12px" onclick="openDashboardMetric('scholars')">
+      <div class="label" style="font-size:10px">Research Scholars</div>
+      <div class="metric" id="metricScholars" style="font-size:18px;margin-top:2px">0</div>
+    </button>
+    <button class="card dashboard-metric-card" type="button" style="padding:10px 12px" onclick="openDashboardMetric('ap')">
+      <div class="label" style="font-size:10px">Members from AP</div>
+      <div class="metric" id="metricAP" style="font-size:18px;margin-top:2px">0</div>
+    </button>
+    <button class="card dashboard-metric-card" type="button" style="padding:10px 12px" onclick="openDashboardMetric('countries')">
+      <div class="label" style="font-size:10px">Countries Represented</div>
+      <div class="metric" id="metricCountries" style="font-size:18px;margin-top:2px">0</div>
+    </button>
+  </div>
+
+  <div class="grid2" style="gap:12px">
+    <div style="background:#f8fafc;padding:12px;border-radius:8px;border:1px solid #edf2f7">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <h3 style="margin:0;font-size:12px;font-weight:700;color:var(--navy)">Top Areas of Expertise <span id="expertiseSubtitle" style="font-weight:400;color:var(--muted)">(Top 5)</span></h3>
+        <button id="expertiseToggleBtn" class="btn secondary" type="button" style="padding:2px 7px;font-size:10px" onclick="toggleExpertiseView()">View All</button>
+      </div>
+      <div id="expertiseStats"></div>
+    </div>
+
+    <div style="background:#f8fafc;padding:12px;border-radius:8px;border:1px solid #edf2f7">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <h3 style="margin:0;font-size:12px;font-weight:700;color:var(--navy)">Research Guideship <span id="guideshipSubtitle" style="font-weight:400;color:var(--muted)">(Top 5)</span></h3>
+        <button id="guideshipToggleBtn" class="btn secondary" type="button" style="padding:2px 7px;font-size:10px" onclick="toggleGuideshipView()">View All</button>
+      </div>
+      <div id="guideshipStats"></div>
+    </div>
+  </div>
+</div>
+
+</section>
+
+<section id="directory" class="page"><div class="panel"><h2>Faculty Directory</h2>
+<div class="toolbar"><input id="search" placeholder="Search name, college, department or expertise" oninput="renderDirectory()"><select id="filterState" onchange="renderDirectory()"><option value="">All States</option></select><select id="filterCountry" onchange="renderDirectory()"><option value="">All Countries</option></select><select id="filterDes" onchange="renderDirectory()"><option value="">All Designations</option><option>Professor</option><option>Associate Professor</option><option>Assistant Professor</option><option>Research Scholar</option></select><select id="sortBy" onchange="renderDirectory()"><option value="id">Member ID (Order)</option><option value="name">Name A–Z</option><option value="designation">Designation</option><option value="state">State</option><option value="country">Country</option><option value="expertise">Expertise</option></select><button class="btn primary" onclick="showPage('add')">+ Add Member</button></div>
+<table class="table directory-table">
+<colgroup>
+<col class="c-photo"><col class="c-id"><col class="c-member"><col class="c-designation">
+<col class="c-institution"><col class="c-city"><col class="c-state"><col class="c-action">
+</colgroup>
+<thead><tr>
+<th>Photo</th><th>Member ID</th><th>Member</th><th>Designation</th>
+<th>Institution / Organization</th><th>City</th><th>State / Province</th><th>Action</th>
+</tr></thead>
+<tbody id="directoryBody"></tbody></table><div id="empty" class="empty hidden">No members match the selected criteria.</div>
+</div></section>
+
+
+<section id="management" class="page">
+  <div class="panel">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap">
+      <div>
+        <h2 style="margin:0">Member Management</h2>
+        <div class="subtitle" style="margin-top:5px">Centralized administration of ICMTA member records</div>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn secondary" type="button" onclick="openPhotoSyncDialog()">Auto-Link / Upload Photos</button>
+        <button class="btn secondary" type="button" onclick="openImportDialog()">Import Excel / CSV</button>
+        <button class="btn secondary" type="button" onclick="exportMembersCSV()">Export CSV</button>
+        <button class="btn success" type="button" onclick="exportMembersExcel()">Export Excel</button>
+        <button class="btn primary" type="button" onclick="showPage('add'); resetAdminForm()">+ Add Member</button>
+      </div>
+    </div>
+
+    <div class="notice">
+      Member records can be managed directly in this prototype.
+    </div>
+
+    <div class="panel" style="margin:0 0 16px;padding:16px;background:#f8fafc">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px">
+        <div>
+          <h3 style="margin:0">Data Quality</h3>
+          <div class="subtitle" style="margin-top:4px">Quick check of member records and photographs</div>
+        </div>
+        <span class="badge green" id="dataQualityStatus">Healthy</span>
+      </div>
+      <div class="cards" style="grid-template-columns:repeat(5,minmax(0,1fr));gap:10px">
+        <button class="card" style="cursor:pointer;text-align:left;border:1px solid #dfe6ee;background:#fff;border-radius:10px;padding:12px;width:100%" type="button" onclick="filterManagementQuality('all')"><div class="label">Total Members</div><div class="metric" id="qualityTotal">0</div></button>
+        <button class="card" style="cursor:pointer;text-align:left;border:1px solid #dfe6ee;background:#fff;border-radius:10px;padding:12px;width:100%" type="button" onclick="filterManagementQuality('complete')"><div class="label">Complete Profiles</div><div class="metric" id="qualityComplete">0</div></button>
+        <button class="card" style="cursor:pointer;text-align:left;border:1px solid #dfe6ee;background:#fff;border-radius:10px;padding:12px;width:100%" type="button" onclick="filterManagementQuality('missing-photos')"><div class="label">Missing Photos</div><div class="metric" id="qualityPhotos" style="color:#d97706">0</div></button>
+        <button class="card" style="cursor:pointer;text-align:left;border:1px solid #dfe6ee;background:#fff;border-radius:10px;padding:12px;width:100%" type="button" onclick="filterManagementQuality('missing-info')"><div class="label">Missing Info</div><div class="metric" id="qualityMissing" style="color:#dc2626">0</div></button>
+        <button class="card" style="cursor:pointer;text-align:left;border:1px solid #dfe6ee;background:#fff;border-radius:10px;padding:12px;width:100%" type="button" onclick="filterManagementQuality('duplicates')"><div class="label">Duplicate IDs</div><div class="metric" id="qualityDuplicateIds">0</div></button>
+      </div>
+    </div>
+
+    <div class="toolbar" style="grid-template-columns:1.5fr 1fr 1fr auto">
+      <input id="managementSearch" placeholder="Search member ID, name, designation, institution, email..." oninput="renderManagement()">
+      <select id="managementDesignation" onchange="renderManagement()">
+        <option value="">All Designations</option>
+        <option>Professor</option>
+        <option>Associate Professor</option>
+        <option>Assistant Professor</option>
+        <option>Research Scholar</option>
+        <option>Dean</option>
+        <option>Head of the Department</option>
+        <option>Principal</option>
+        <option>Director</option>
+      </select>
+      <select id="managementStatusFilter" onchange="renderManagement()">
+        <option value="">All Records</option>
+        <option value="missing-photos">Filter: Missing Photos</option>
+        <option value="missing-info">Filter: Missing Information</option>
+        <option value="complete">Filter: Complete Profiles</option>
+        <option value="with-photos">Filter: Photos Available</option>
+      </select>
+      <button class="btn secondary" type="button" onclick="clearManagementFilters()">Clear</button>
+    </div>
+
+    <div class="table-wrap" style="overflow-x:auto">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Photo</th>
+            <th>Member ID</th>
+            <th>Member</th>
+            <th>Designation</th>
+            <th>Institution / Organization</th>
+            <th>Qualification</th>
+            <th>Photo Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="managementBody"></tbody>
+      </table>
+    </div>
+    <div id="managementEmpty" class="empty hidden">No members match the selected criteria.</div>
+  </div>
+</section>
+
+
+<section id="memberDetails" class="page">
+  <div class="panel" style="padding:28px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;flex-wrap:wrap;gap:12px;border-bottom:1px solid var(--line);padding-bottom:18px">
+      <button class="btn secondary" type="button" onclick="showPage('management')" style="font-weight:700;padding:9px 16px;font-size:13px">
+        &larr; Back to Member Management
+      </button>
+      <div id="memberDetailsActionBtns" style="display:flex;gap:8px"></div>
+    </div>
+    <div id="memberDetailsContent"></div>
+  </div>
+</section>
+
+<div id="importModal" class="modal-overlay" style="display:none" aria-hidden="true">
+  <div class="modal-card import-card" style="max-width:1100px;max-height:92vh;overflow:auto">
+    <div class="modal-head">
+      <div>
+        <h2 style="margin:0">Import Faculty Data</h2>
+        <div class="subtitle">Upload Excel or CSV, validate the records, review changes, then import.</div>
+      </div>
+      <button class="btn secondary" type="button" onclick="closeImportDialog()">Close</button>
+    </div>
+    <div class="import-step">
+      <div class="import-step-title">1. Select file</div>
+      <input id="importFile" type="file" accept=".csv,.xlsx,.xls" onchange="handleImportFile(this)">
+      <div id="importFileName" class="subtitle" style="margin-top:7px">CSV or Excel file</div>
+    </div>
+    <div id="importSummary" class="import-summary hidden"></div>
+    <div id="importIssues" class="import-issues hidden"></div>
+    <div id="importPreviewWrap" class="hidden" style="margin-top:14px">
+      <div class="import-step-title">2. Review records</div>
+      <div class="table-wrap" style="overflow:auto;max-height:360px">
+        <table class="table"><thead><tr>
+          <th>Row</th><th>Status</th><th>Member ID</th><th>Name</th><th>Designation</th><th>Institution</th><th>Match / Deduplication Reason</th>
+        </tr></thead><tbody id="importPreviewBody"></tbody></table>
+      </div>
+    </div>
+    <div id="importActions" class="actions hidden" style="margin-top:16px;justify-content:flex-end">
+      <button class="btn secondary" type="button" onclick="closeImportDialog()">Cancel</button>
+      <button id="importCommitBtn" class="btn primary" type="button" onclick="commitImport()" disabled>Import Valid Records</button>
+    </div>
+  </div>
+</div>
+
+<div id="photoSyncModal" class="modal-overlay" style="display:none" aria-hidden="true">
+  <div class="modal-card import-card" style="max-width:1100px;max-height:92vh;overflow:auto">
+    <div class="modal-head">
+      <div>
+        <h2 style="margin:0">Auto-Link & Batch Upload Photos</h2>
+        <div class="subtitle">Select or drop photos. The system automatically detects and links each photo to its corresponding member by ID or Name.</div>
+      </div>
+      <button class="btn secondary" type="button" onclick="closePhotoSyncDialog()">Close</button>
+    </div>
+    
+    <div class="import-step">
+      <div class="import-step-title">1. Select Photo Files</div>
+      <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+        <input id="bulkPhotoInput" type="file" accept="image/*" multiple onchange="handleBulkPhotoSelect(this)" style="max-width:320px">
+        <div id="bulkPhotoCount" class="subtitle" style="margin:0">No files selected</div>
+      </div>
+      <div class="help" style="margin-top:6px">Tip: Name photo files with Member ID (e.g. <code>ICMTA107.jpg</code> or <code>107_name.png</code>) or Faculty Name (e.g. <code>Dr_Shilpa_Tandon.png</code>).</div>
+    </div>
+
+    <div id="photoSyncSummary" class="import-summary hidden"></div>
+    <div id="photoSyncIssues" class="import-issues hidden"></div>
+
+    <div id="photoSyncPreviewWrap" class="hidden" style="margin-top:14px">
+      <div class="import-step-title">2. Review Auto-Matched Members</div>
+      <div class="table-wrap" style="overflow:auto;max-height:360px">
+        <table class="table">
+          <thead>
+            <tr>
+              <th style="width:60px">Photo</th>
+              <th>Filename</th>
+              <th>Matched Member</th>
+              <th>Match Reason</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="photoSyncPreviewBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="photoSyncActions" class="actions hidden" style="margin-top:16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+      <button class="btn secondary" type="button" onclick="exportUpdatedMemberDataJS()">Download Updated member-data.js</button>
+      <div style="display:flex;gap:8px">
+        <button class="btn secondary" type="button" onclick="closePhotoSyncDialog()">Cancel</button>
+        <button id="photoSyncCommitBtn" class="btn primary" type="button" onclick="commitPhotoSync()" disabled>Apply Photos</button>
+      </div>
+    </div>
+  </div>
+</div>
+<section id="add" class="page"><div class="panel"><h2 id="addHeading">Manual Member Entry</h2><div class="notice">Available to authorized users. The same standardized member-data structure is used for manual entry and member registration.</div>
+<form id="adminForm" class="form">
+<div class="field"><label>Title</label><select name="title"><option>Dr.</option><option>Mr.</option><option>Ms.</option><option>Mrs.</option></select></div><div class="field"><label>Name *</label><input name="name" required></div>
+<div class="field"><label>Qualifications</label><input name="qualification"></div><div class="field"><label>Designation</label><select name="designation"><option>Professor</option><option>Associate Professor</option><option>Assistant Professor</option><option>Research Scholar</option></select></div>
+<div class="field"><label>Department</label><input name="department"></div><div class="field"><label>College Name</label><input name="college"></div>
+<div class="field fullrow"><label>College Address</label><textarea name="collegeAddress"></textarea></div>
+<div class="field"><label>Pincode</label><input name="pincode"></div><div class="field"><label>Permanent Address Pincode</label><input name="permanentPincode"></div>
+<div class="field"><label>State</label><input name="state"></div><div class="field"><label>Country</label><input name="country" value="India"></div>
+<div class="field"><label>Research Guideship — multiple</label><input name="guideship" placeholder="Ph.D., M.Phil."></div><div class="field"><label>Expertise — multiple</label><input name="expertise" placeholder="Finance, Accounting"></div>
+<div class="field"><label>Handheld / Mobile</label><input name="mobile"></div><div class="field"><label>WhatsApp</label><input name="whatsapp"></div>
+<div class="field"><label>Professional Email</label><input name="professionalEmail" type="email"></div><div class="field"><label>Personal Email</label><input name="personalEmail" type="email"></div>
+<div class="field"><label>LinkedIn</label><input name="linkedin"></div><div class="field"><label>ORCID</label><input name="orcid"></div>
+<div class="field"><label>Google Scholar Profile</label><input name="scholar"></div><div class="field"><label>Passport-size Photograph</label><input name="photo" type="file" accept="image/*" id="adminPhotoInput" ><div id="adminPhoto" class="photo-box" style="margin-top:7px">Photo preview</div></div>
+<div class="actions"><button type="reset" class="btn secondary">Clear</button><button id="adminSaveBtn" class="btn primary" type="submit">Save Member & Generate ID</button></div>
+</form></div></section>
+
+<section id="profile" class="page"><div class="panel"><h2>Member Profile</h2><div id="profileContent"></div></div></section>
+
+<section id="users" class="page"><div class="panel"><h2>User Management</h2><div class="notice">The administrator controls which users may participate in member data collection and entry.</div>
+<table class="table"><thead><tr><th>User</th><th>Role</th><th>Status</th><th>Data Entry Access</th><th>Action</th></tr></thead><tbody id="userBody"></tbody></table>
+</div></section>
+
+</main>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script src="../js/member-data.js"></script>
+<script src="../js/api.js"></script>
+<script src="../js/app.js"></script>
+</body></html>
+
