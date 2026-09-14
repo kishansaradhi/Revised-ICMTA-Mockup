@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Add Event | ICMTA</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/icmta-2026.css">
+
+    <style>
+        /* ==============================
+           EVENT FORM
+        ============================== */
+
+        .event-form-page {
+            background: #f5f7f8;
+            min-height: 100vh;
+            padding: 40px 20px 70px;
+        }
+
+        .event-form-container {
+            max-width: 1050px;
+            margin: 0 auto;
+        }
+
+        .event-form-header {
+            margin-bottom: 30px;
+        }
+
+        .event-form-header h1 {
+            margin: 0 0 8px;
+            color: #00566b;
+            font-size: 32px;
+        }
+
+        .event-form-header p {
+            margin: 0;
+            color: #667b84;
+            font-size: 15px;
+        }
+
+        .event-form-card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 32px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
+        }
+
+        .form-section {
+            margin-bottom: 35px;
+        }
+
+        .form-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .form-section-title {
+            color: #00566b;
+            font-size: 20px;
+            margin: 0 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e3e9ec;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            font-size: 14px;
+            font-weight: 700;
+            color: #294550;
+            margin-bottom: 7px;
+        }
+
+        .required {
+            color: #b37b17;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            box-sizing: border-box;
+            border: 1px solid #ccd9de;
+            border-radius: 7px;
+            padding: 12px 13px;
+            font-family: inherit;
+            font-size: 14px;
+            color: #263f49;
+            background: #fff;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #08718a;
+            box-shadow: 0 0 0 3px rgba(8, 113, 138, 0.10);
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        /* Poster upload */
+
+        .poster-upload {
+            border: 2px dashed #c9d7dc;
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+            background: #fafcfc;
+        }
+
+        .poster-upload input[type="file"] {
+            border: 0;
+            padding: 0;
+            box-shadow: none;
+        }
+
+        .poster-preview {
+            display: none;
+            margin: 20px auto 0;
+            max-width: 240px;
+            max-height: 320px;
+            border-radius: 8px;
+            object-fit: contain;
+            border: 1px solid #dbe4e7;
+        }
+
+        .upload-help {
+            margin: 8px 0 0;
+            font-size: 12px;
+            color: #78909a;
+        }
+
+        /* Status */
+
+        .status-options {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .status-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid #d4e0e4;
+            border-radius: 7px;
+            padding: 10px 14px;
+            cursor: pointer;
+            background: #fff;
+        }
+
+        .status-option input {
+            width: auto;
+        }
+
+        /* Buttons */
+
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            margin-top: 35px;
+            padding-top: 25px;
+            border-top: 1px solid #e3e9ec;
+        }
+
+        .btn {
+            border-radius: 7px;
+            padding: 12px 22px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+
+        .btn-secondary {
+            background: #ffffff;
+            color: #00566b;
+            border-color: #b8ccd3;
+        }
+
+        .btn-primary {
+            background: #00566b;
+            color: #ffffff;
+        }
+
+        .btn-publish {
+            background: #c99d42;
+            color: #ffffff;
+        }
+
+        .btn:hover {
+            opacity: 0.92;
+        }
+
+        /* Responsive */
+
+        @media (max-width: 700px) {
+
+            .event-form-page {
+                padding: 25px 14px 50px;
+            }
+
+            .event-form-card {
+                padding: 22px 18px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full-width {
+                grid-column: auto;
+            }
+
+            .event-form-header h1 {
+                font-size: 27px;
+            }
+
+            .form-actions {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="event-form-page">
+
+    <div class="event-form-container">
+
+        <!-- PAGE HEADER -->
+
+        <div class="event-form-header">
+            <h1>Add New Event</h1>
+            <p>
+                Create and publish an event that will appear on the ICMTA Events page.
+            </p>
+        </div>
+
+
+        <!-- FORM -->
+
+        <form id="eventForm" class="event-form-card">
+
+            <!-- =========================
+                 BASIC EVENT INFORMATION
+            ========================== -->
+
+            <section class="form-section">
+
+                <h2 class="form-section-title">
+                    Basic Event Information
+                </h2>
+
+                <div class="form-grid">
+
+                    <div class="form-group full-width">
+                        <label for="eventTitle">
+                            Event Title <span class="required">*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="eventTitle"
+                            name="eventTitle"
+                            placeholder="Enter event title"
+                            required
+                        >
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="eventCategory">
+                            Event Category <span class="required">*</span>
+                        </label>
+
+                        <select id="eventCategory" name="eventCategory" required>
+                            <option value="">Select category</option>
+                            <option value="webinar">Webinar</option>
+                            <option value="seminar">Seminar</option>
+                            <option value="workshop">Workshop</option>
+                            <option value="conference">Conference</option>
+                            <option value="faculty-development">Faculty Development Programme</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="eventMode">
+                            Event Mode <span class="required">*</span>
+                        </label>
+
+                        <select id="eventMode" name="eventMode" required>
+                            <option value="">Select mode</option>
+                            <option value="online">Online</option>
+                            <option value="offline">Offline</option>
+                            <option value="hybrid">Hybrid</option>
+                        </select>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="eventDate">
+                            Event Date <span class="required">*</span>
+                        </label>
+
+                        <input
+                            type="date"
+                            id="eventDate"
+                            name="eventDate"
+                            required
+                        >
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="registrationDeadline">
+                            Registration Deadline
+                        </label>
+
+                        <input
+                            type="date"
+                            id="registrationDeadline"
+                            name="registrationDeadline"
+                        >
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="startTime">
+                            Start Time <span class="required">*</span>
+                        </label>
+
+                        <input
+                            type="time"
+                            id="startTime"
+                            name="startTime"
+                            required
+                        >
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="endTime">
+                            End Time <span class="required">*</span>
+                        </label>
+
+                        <input
+                            type="time"
+                            id="endTime"
+                            name="endTime"
+                            required
+                        >
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =========================
+                 EVENT POSTER
+            ========================== -->
+
+            <section class="form-section">
+
+                <h2 class="form-section-title">
+                    Event Poster
+                </h2>
+
+                <div class="poster-upload">
+
+                    <div class="form-group">
+
+                        <label for="eventPoster">
+                            Upload Event Poster
+                        </label>
+
+                        <input
+                            type="file"
+                            id="eventPoster"
+                            name="eventPoster"
+                            accept="image/png, image/jpeg, image/webp"
+                        >
+
+                        <p class="upload-help">
+                            Recommended formats: JPG, PNG or WebP
+                        </p>
+
+                        <img
+                            id="posterPreview"
+                            class="poster-preview"
+                            alt="Event poster preview"
+                        >
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =========================
+                 SPEAKER INFORMATION
+            ========================== -->
+
+            <section class="form-section">
+
+                <h2 class="form-section-title">
+                    Speaker Information
+                </h2>
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <label for="speakerName">
+                            Speaker Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="speakerName"
+                            name="speakerName"
+                            placeholder="e.g. Dr. Prashanth S"
+                        >
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="speakerDesignation">
+                            Designation
+                        </label>
+
+                        <input
+                            type="text"
+                            id="speakerDesignation"
+                            name="speakerDesignation"
+                            placeholder="e.g. Principal & Radio Jockey"
+                        >
+                    </div>
+
+
+                    <div class="form-group full-width">
+                        <label for="speakerInstitution">
+                            Institution / Organization
+                        </label>
+
+                        <input
+                            type="text"
+                            id="speakerInstitution"
+                            name="speakerInstitution"
+                            placeholder="Enter institution or organization"
+                        >
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =========================
+                 EVENT DESCRIPTION
+            ========================== -->
+
+            <section class="form-section">
+
+                <h2 class="form-section-title">
+                    Event Details
+                </h2>
+
+                <div class="form-grid">
+
+                    <div class="form-group full-width">
+
+                        <label for="shortDescription">
+                            Short Description
+                        </label>
+
+                        <textarea
+                            id="shortDescription"
+                            name="shortDescription"
+                            placeholder="Enter a short description of the event"
+                        ></textarea>
+
+                    </div>
+
+
+                    <div class="form-group full-width">
+
+                        <label for="fullDescription">
+                            Full Event Description
+                        </label>
+
+                        <textarea
+                            id="fullDescription"
+                            name="fullDescription"
+                            placeholder="Enter the complete event description"
+                        ></textarea>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =========================
+                 ORGANIZATION
+            ========================== -->
+
+            <section class="form-section">
+
+                <h2 class="form-section-title">
+                    Organization Details
+                </h2>
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+
+                        <label for="organizedBy">
+                            Organized By
+                        </label>
+
+                        <input
+                            type="text"
+                            id="organizedBy"
+                            name="organizedBy"
+                            value="Indian Commerce and Management Teachers Association (ICMTA)"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="registrationFee">
+                            Registration Fee
+                        </label>
+
+                        <input
+                            type="text"
+                            id="registrationFee"
+                            name="registrationFee"
+                            placeholder="e.g. Free / ₹500"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group full-width">
+
+                        <label for="inAssociationWith">
+                            In Association With
+                        </label>
+
+                        <textarea
+                            id="inAssociationWith"
+                            name="inAssociationWith"
+                            placeholder="Enter associated institutions or organizations"
+                        ></textarea>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =========================
+                 REGISTRATION
+            ========================== -->
+
+            <section class="form-section">
+
+                <h2 class="form-section-title">
+                    Registration Information
+                </h2>
+
+                <div class="form-grid">
+
+                    <div class="form-group full-width">
+
+                        <label for="registrationLink">
+                            Registration Link
+                        </label>
+
+                        <input
+                            type="url"
+                            id="registrationLink"
+                            name="registrationLink"
+                            placeholder="https://example.com/register"
+                        >
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =========================
+                 CONTACT
+            ========================== -->
+
+            <section class="form-section">
+
+                <h2 class="form-section-title">
+                    Event Contact
+                </h2>
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+
+                        <label for="coordinatorName">
+                            Coordinator Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="coordinatorName"
+                            name="coordinatorName"
+                            placeholder="Enter coordinator name"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="coordinatorPhone">
+                            Contact Number
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="coordinatorPhone"
+                            name="coordinatorPhone"
+                            placeholder="+91 XXXXX XXXXX"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group full-width">
+
+                        <label for="coordinatorEmail">
+                            Contact Email
+                        </label>
+
+                        <input
+                            type="email"
+                            id="coordinatorEmail"
+                            name="coordinatorEmail"
+                            placeholder="coordinator@example.com"
+                        >
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =========================
+                 EVENT STATUS
+            ========================== -->
+
+            <section class="form-section">
+
+                <h2 class="form-section-title">
+                    Event Status
+                </h2>
+
+                <div class="status-options">
+
+                    <label class="status-option">
+                        <input
+                            type="radio"
+                            name="eventStatus"
+                            value="draft"
+                            checked
+                        >
+                        Draft
+                    </label>
+
+                    <label class="status-option">
+                        <input
+                            type="radio"
+                            name="eventStatus"
+                            value="published"
+                        >
+                        Published
+                    </label>
+
+                </div>
+
+            </section>
+
+
+            <!-- =========================
+                 ACTIONS
+            ========================== -->
+
+            <div class="form-actions">
+
+                <button
+                    type="button"
+                    class="btn btn-secondary"
+                    onclick="saveDraft()"
+                >
+                    Save as Draft
+                </button>
+
+                <button
+                    type="submit"
+                    class="btn btn-publish"
+                >
+                    Publish Event
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    /* ==============================
+       POSTER PREVIEW
+    ============================== */
+
+    const posterInput = document.getElementById("eventPoster");
+    const posterPreview = document.getElementById("posterPreview");
+
+    posterInput.addEventListener("change", function () {
+
+        const file = this.files[0];
+
+        if (!file) {
+            posterPreview.style.display = "none";
+            return;
+        }
+
+        const imageUrl = URL.createObjectURL(file);
+
+        posterPreview.src = imageUrl;
+        posterPreview.style.display = "block";
+    });
+
+
+    /* ==============================
+       SAVE DRAFT
+    ============================== */
+
+    function saveDraft() {
+
+        const form = document.getElementById("eventForm");
+
+        const formData = new FormData(form);
+
+        formData.set("eventStatus", "draft");
+
+        alert("Event saved as draft (preview only).");
+    }
+
+
+    /* ==============================
+       PUBLISH
+    ============================== */
+
+    document.getElementById("eventForm").addEventListener("submit", function (event) {
+
+        event.preventDefault();
+
+        alert("Event published (preview only). Database connection will be added later.");
+
+    });
+
+</script>
+
+</body>
+</html>
