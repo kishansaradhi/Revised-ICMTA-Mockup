@@ -292,7 +292,7 @@
     <h2>Upcoming Events 2026</h2>
 
     <!-- Event 1: Speak to Inspire — The Art of Voice Modulation for Effective Communication -->
-    <div class="event-featured-card">
+    <div class="event-featured-card" data-event-start="2026-09-12T19:00:00+05:30" data-event-end="2026-09-12T20:00:00+05:30">
       <div class="event-featured-grid">
         
         <!-- Left: Official Event Poster -->
@@ -628,5 +628,43 @@
     <span>Logo and tagline by Lahari</span>
   </div>
 </footer>
+
+<script>
+(function () {
+  'use strict';
+
+  function checkEventStatuses() {
+    var upcomingSection = document.getElementById('upcoming');
+    var pastSection     = document.getElementById('past');
+    if (!upcomingSection || !pastSection) return;
+
+    var now   = Date.now(); // milliseconds since epoch — timezone-agnostic
+    var cards = upcomingSection.querySelectorAll('.event-featured-card[data-event-end]');
+
+    cards.forEach(function (card) {
+      var endAttr = card.getAttribute('data-event-end');
+      if (!endAttr) return;
+
+      var endTime = new Date(endAttr).getTime(); // ISO 8601 with offset → UTC ms
+      if (isNaN(endTime)) return;
+
+      if (now >= endTime) {
+        // Hide the "no archived events" placeholder if present
+        var placeholder = pastSection.querySelector('p[style]');
+        if (placeholder) placeholder.style.display = 'none';
+
+        // Move card to the end of the Past Events section
+        pastSection.appendChild(card);
+      }
+    });
+  }
+
+  // Run on page load
+  checkEventStatuses();
+
+  // Re-run every 60 seconds so a live page auto-moves events at the correct moment
+  setInterval(checkEventStatuses, 60000);
+})();
+</script>
 </body>
 </html>
