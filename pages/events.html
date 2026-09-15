@@ -242,7 +242,9 @@
         <div class="icm-dd">
           <a href="events.html#upcoming">Upcoming Events</a>
           <a href="events.html#past">Past Events &amp; Archives</a>
-          <a href="../pages/event-form-preview.html"> New Event Registration</a> 
+          <a href="../pages/event-form-preview.html" target="_blank" rel="noopener noreferrer">
+  New Event Registration
+</a> 
         </div>
       </span>
       <span class="icm-navitem">
@@ -630,7 +632,150 @@
   </div>
 </footer>
 
+<script src="../js/eventDataService.js"></script>
+
 <script>
+/* ──────────────────────────────────────────────────────────────────────────
+   DYNAMIC APPROVED EVENTS — injected from eventDataService
+   Only events with status === "APPROVED" are rendered here.
+   PENDING_APPROVAL and REJECTED events are never shown publicly.
+
+   Each approved event gets:
+     data-event-start="<ISO 8601 IST>"
+     data-event-end="<ISO 8601 IST>"
+   so the existing auto-move (Upcoming ↔ Past) logic works for them too.
+────────────────────────────────────────────────────────────────────────── */
+(function () {
+  'use strict';
+
+  /* Build IST ISO string from date ("YYYY-MM-DD") + time ("HH:MM") */
+  function toISTiso(date, time) {
+    if (!date || !time) return null;
+    return date + 'T' + time + ':00+05:30';
+  }
+
+  /* Format date for display, e.g. "3rd & 4th November 2026" */
+  function fmtDisplayDate(startDate, endDate) {
+    var months = ['January','February','March','April','May','June',
+                  'July','August','September','October','November','December'];
+    function ordinal(n) {
+      var s = ['th','st','nd','rd'], v = n % 100;
+      return n + (s[(v-20)%10] || s[v] || s[0]);
+    }
+    if (!startDate) return '';
+    var sp = startDate.split('-');
+    var sm = months[parseInt(sp[1],10)-1], sd = ordinal(parseInt(sp[2],10)), sy = sp[0];
+    if (!endDate || endDate === startDate) return sd + ' ' + sm + ' ' + sy;
+    var ep = endDate.split('-');
+    var em = months[parseInt(ep[1],10)-1], ed = ordinal(parseInt(ep[2],10)), ey = ep[0];
+    if (sm === em && sy === ey) return sd + ' &amp; ' + ed + ' ' + sm + ' ' + sy;
+    return sd + ' ' + sm + ' &amp; ' + ed + ' ' + em + ' ' + sy;
+  }
+
+  /* Format time for display, e.g. "7:00 PM" */
+  function fmtDisplayTime(t) {
+    if (!t) return '';
+    var p = t.split(':'), h = parseInt(p[0],10), m = p[1];
+    var ap = h >= 12 ? 'PM' : 'AM';
+    h = h % 12 || 12;
+    return h + ':' + m + ' ' + ap;
+  }
+
+  /* Build an event card identical in structure to the existing hard-coded cards */
+  function buildEventCard(ev) {
+    var startISO = toISTiso(ev.startDate, ev.startTime);
+    var endISO   = toISTiso(ev.endDate,   ev.endTime);
+
+    var card = document.createElement('div');
+    card.className = 'event-featured-card';
+    if (startISO) card.setAttribute('data-event-start', startISO);
+    if (endISO)   card.setAttribute('data-event-end',   endISO);
+
+    var displayDate = fmtDisplayDate(ev.startDate, ev.endDate);
+    var displayTime = ev.startTime ? fmtDisplayTime(ev.startTime) + (ev.endTime ? ' – ' + fmtDisplayTime(ev.endTime) : '') : '—';
+
+    var regBtn = ev.registrationLink
+      ? '<a href="' + ev.registrationLink + '" target="_blank" rel="noopener noreferrer" class="btn primary btn-lg">Register Now &rarr;</a>'
+      : '';
+
+    card.innerHTML =
+      '<div class="event-featured-grid">' +
+        '<div class="event-poster-wrap">' +
+          (ev.poster
+            ? '<img src="' + ev.poster + '" alt="' + (ev.title || '') + '" class="event-poster-img">'
+            : '<div style="height:200px;background:#f0f4f8;display:flex;align-items:center;justify-content:center;color:#94a3b8;font-size:13px">No Poster</div>') +
+        '</div>' +
+
+        '<div class="event-details-wrap">' +
+          '<span class="event-badge">' + (ev.category || 'Event') + (ev.mode ? ' &bull; ' + ev.mode : '') + '</span>' +
+          '<h3 class="event-title">\u201c' + (ev.title || 'Untitled Event') + '\u201d</h3>' +
+
+          '<div class="event-meta-grid">' +
+            '<div class="event-meta-item"><span class="meta-label">Date</span><span class="meta-val">' + displayDate + '</span></div>' +
+            '<div class="event-meta-item"><span class="meta-label">Time</span><span class="meta-val">' + displayTime + '</span></div>' +
+            (ev.mode ? '<div class="event-meta-item"><span class="meta-label">Mode</span><span class="meta-val">' + ev.mode + '</span></div>' : '') +
+            (ev.organizedBy ? '<div class="event-meta-item"><span class="meta-label">Organized by</span><span class="meta-val">' + ev.organizedBy + '</span></div>' : '') +
+            (ev.speakerName ? '<div class="event-meta-item"><span class="meta-label">Speaker</span><span class="meta-val">' + ev.speakerName + (ev.speakerDesignation ? ' (' + ev.speakerDesignation + ')' : '') + '</span></div>' : '') +
+            (ev.registrationFee ? '<div class="event-meta-item"><span class="meta-label">Registration Fee</span><span class="meta-val">' + ev.registrationFee + '</span></div>' : '') +
+          '</div>' +
+
+          (ev.shortDescription || ev.fullDescription
+            ? '<div class="event-desc-block"><p>' + (ev.shortDescription || ev.fullDescription) + '</p></div>'
+            : '') +
+
+          (regBtn ? '<div class="event-actions">' + regBtn + '</div>' : '') +
+        '</div>' +
+      '</div>';
+
+    return card;
+  }
+
+  /* Inject all approved dynamic events */
+  function injectApprovedEvents() {
+    var upcomingSection = document.getElementById('upcoming');
+    var pastSection     = document.getElementById('past');
+    if (!upcomingSection || !pastSection) return;
+
+    var approvedEvents;
+    try {
+      approvedEvents = (typeof EventDataService !== 'undefined')
+        ? EventDataService.getEvents()
+        : [];
+    } catch (e) {
+      approvedEvents = [];
+    }
+
+    if (approvedEvents.length === 0) return;
+
+    var now = Date.now();
+
+    approvedEvents.forEach(function (ev) {
+      var card     = buildEventCard(ev);
+      var endISO   = toISTiso(ev.endDate, ev.endTime);
+      var endMs    = endISO ? new Date(endISO).getTime() : NaN;
+      var isPast   = !isNaN(endMs) && now >= endMs;
+
+      if (isPast) {
+        /* Hide the "no archived events" placeholder */
+        var placeholder = pastSection.querySelector('p[style]');
+        if (placeholder) placeholder.style.display = 'none';
+        pastSection.appendChild(card);
+      } else {
+        upcomingSection.appendChild(card);
+      }
+    });
+  }
+
+  injectApprovedEvents();
+})();
+</script>
+
+<script>
+/* ──────────────────────────────────────────────────────────────────────────
+   EXISTING AUTO-MOVE LOGIC — moves hard-coded + dynamic events
+   from Upcoming → Past when their data-event-end passes.
+   Unchanged from the original implementation.
+────────────────────────────────────────────────────────────────────────── */
 (function () {
   'use strict';
 

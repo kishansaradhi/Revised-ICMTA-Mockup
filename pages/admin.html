@@ -94,6 +94,7 @@
 <button data-page="management">Member Management</button>
 <button data-page="profile">Member Profile</button>
 <button data-page="users">User Management</button>
+<button data-page="event-approvals">Event Approvals</button>
 </div><button id="logoutBtn" class="btn secondary logout" type="button" onclick="logout()">Logout</button></aside>
 
 <main class="main"><div class="top"><div><h1 id="title">Dashboard</h1><p>Centralized member collection, management, search and visualization</p></div><div style="display:flex;align-items:center;gap:10px"><a href="public-directory.html" class="btn secondary" style="font-size:12px;text-decoration:none" target="_blank">View Public Directory &rarr;</a><div class="role" id="rolePill">Administrator</div></div></div>
@@ -455,6 +456,241 @@
 
 </main>
 </div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     EVENT APPROVALS — section rendered inside admin <main> by JS below
+     ═══════════════════════════════════════════════════════════════════════ -->
+<template id="event-approvals-tpl">
+<section id="event-approvals" class="page">
+  <div class="panel">
+
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap">
+      <div>
+        <h2 style="margin:0">Event Approvals</h2>
+        <div class="subtitle" style="margin-top:5px">Review and approve or reject submitted event applications</div>
+      </div>
+      <button class="btn secondary" type="button" onclick="eaRefresh()">↻ Refresh</button>
+    </div>
+
+    <!-- Pending count badge -->
+    <div style="margin-bottom:16px">
+      <span id="ea-pending-badge" class="badge" style="background:#fff8ec;color:#7a5c00;border:1px solid #f0c96a;font-size:13px;padding:5px 14px">0 Pending</span>
+    </div>
+
+    <!-- Pending events table -->
+    <div class="table-wrap" style="overflow-x:auto">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Event ID</th>
+            <th>Title</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Mode</th>
+            <th>Speaker</th>
+            <th>Submitted</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="ea-tbody"></tbody>
+      </table>
+    </div>
+    <div id="ea-empty" style="display:none;padding:20px 0;color:#64748b;font-style:italic;font-size:13.5px">
+      No pending event applications at this time.
+    </div>
+
+    <!-- Event review drawer (hidden until Review clicked) -->
+    <div id="ea-review-panel" style="display:none;margin-top:24px;border-top:1px solid #edf2f7;padding-top:22px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;flex-wrap:wrap;gap:10px">
+        <h3 style="margin:0;color:var(--navy)">Event Review</h3>
+        <button class="btn secondary" type="button" onclick="eaCloseReview()">✕ Close</button>
+      </div>
+      <div id="ea-review-content"></div>
+      <div id="ea-review-actions" style="display:flex;gap:12px;margin-top:20px;padding-top:16px;border-top:1px solid #edf2f7;flex-wrap:wrap"></div>
+    </div>
+
+  </div>
+</section>
+</template>
+
+<script src="../js/eventDataService.js"></script>
+<script>
+/* ──────────────────────────────────────────────────────────────────────────
+   EVENT APPROVALS — Admin UI logic
+   Reads/writes ONLY through EventDataService.  No direct localStorage here.
+────────────────────────────────────────────────────────────────────────── */
+(function () {
+  'use strict';
+
+  /* Inject the template into <main> once DOM is ready */
+  document.addEventListener('DOMContentLoaded', function () {
+    var tpl = document.getElementById('event-approvals-tpl');
+    if (!tpl) return;
+    var main = document.querySelector('main.main');
+    if (!main) return;
+    var frag = tpl.content.cloneNode(true);
+    main.appendChild(frag);
+    eaRefresh();
+  });
+
+  /* ── Format helpers ──────────────────────────────────────────────────── */
+  function fmtDate(d) {
+    if (!d) return '—';
+    var parts = d.split('-');
+    if (parts.length !== 3) return d;
+    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    return parts[2] + ' ' + months[parseInt(parts[1],10)-1] + ' ' + parts[0];
+  }
+  function fmtTime(t) {
+    if (!t) return '—';
+    var p = t.split(':');
+    var h = parseInt(p[0],10), m = p[1];
+    var ap = h >= 12 ? 'PM' : 'AM';
+    h = h % 12 || 12;
+    return h + ':' + m + ' ' + ap;
+  }
+  function fmtISO(iso) {
+    if (!iso) return '—';
+    try { return new Date(iso).toLocaleString('en-IN', {dateStyle:'medium',timeStyle:'short'}); }
+    catch(e) { return iso; }
+  }
+  function statusBadge(s) {
+    var map = {
+      PENDING_APPROVAL: 'background:#fff8ec;color:#7a5c00;border:1px solid #f0c96a',
+      APPROVED:         'background:#ecfdf5;color:#065f46;border:1px solid #6ee7b7',
+      REJECTED:         'background:#fef2f2;color:#991b1b;border:1px solid #fca5a5'
+    };
+    return '<span style="display:inline-block;padding:3px 10px;border-radius:20px;font-size:11.5px;font-weight:700;'+
+           (map[s]||'background:#f1f5f9;color:#475569')+'">'+(s||'UNKNOWN')+'</span>';
+  }
+
+  /* ── Render pending list ─────────────────────────────────────────────── */
+  window.eaRefresh = function () {
+    var events  = EventDataService.getPendingEvents();
+    var tbody   = document.getElementById('ea-tbody');
+    var empty   = document.getElementById('ea-empty');
+    var badge   = document.getElementById('ea-pending-badge');
+    if (!tbody) return;
+
+    badge.textContent = events.length + ' Pending';
+    tbody.innerHTML = '';
+
+    if (events.length === 0) {
+      tbody.closest('.table-wrap').style.display = 'none';
+      empty.style.display = 'block';
+      return;
+    }
+
+    tbody.closest('.table-wrap').style.display = '';
+    empty.style.display = 'none';
+
+    events.forEach(function (ev) {
+      var tr = document.createElement('tr');
+      tr.innerHTML =
+        '<td style="font-family:monospace;font-size:12px">' + ev.id + '</td>' +
+        '<td style="font-weight:600;color:var(--navy)">' + (ev.title || '—') + '</td>' +
+        '<td>' + fmtDate(ev.startDate) + (ev.endDate && ev.endDate !== ev.startDate ? ' – ' + fmtDate(ev.endDate) : '') + '</td>' +
+        '<td>' + fmtTime(ev.startTime) + ' – ' + fmtTime(ev.endTime) + '</td>' +
+        '<td>' + (ev.mode || '—') + '</td>' +
+        '<td>' + (ev.speakerName || '—') + '</td>' +
+        '<td style="font-size:12px;color:#64748b">' + fmtISO(ev.submittedAt) + '</td>' +
+        '<td>' + statusBadge(ev.status) + '</td>' +
+        '<td><button class="btn secondary" style="padding:5px 12px;font-size:12px" type="button" onclick="eaReview(\'' + ev.id + '\')">Review</button></td>';
+      tbody.appendChild(tr);
+    });
+  };
+
+  /* ── Open review drawer ──────────────────────────────────────────────── */
+  window.eaReview = function (id) {
+    var ev = EventDataService.getEventById(id);
+    if (!ev) return;
+
+    var panel   = document.getElementById('ea-review-panel');
+    var content = document.getElementById('ea-review-content');
+    var actions = document.getElementById('ea-review-actions');
+
+    content.innerHTML =
+      '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px 24px">' +
+      row('Event ID',      ev.id) +
+      row('Title',         ev.title) +
+      row('Category',      ev.category) +
+      row('Mode',          ev.mode) +
+      row('Start Date',    fmtDate(ev.startDate)) +
+      row('End Date',      fmtDate(ev.endDate)) +
+      row('Start Time',    fmtTime(ev.startTime)) +
+      row('End Time',      fmtTime(ev.endTime)) +
+      row('Speaker',       ev.speakerName) +
+      row('Designation',   ev.speakerDesignation) +
+      row('Institution',   ev.speakerInstitution) +
+      row('Organized By',  ev.organizedBy) +
+      row('Reg. Fee',      ev.registrationFee) +
+      row('Reg. Link',     ev.registrationLink ? '<a href="'+ev.registrationLink+'" target="_blank" style="color:var(--navy)">'+ev.registrationLink+'</a>' : '—') +
+      row('Coordinator',   ev.coordinatorName) +
+      row('Contact No.',   ev.contactNumber) +
+      row('Contact Email', ev.contactEmail) +
+      row('Submitted',     fmtISO(ev.submittedAt)) +
+      row('Status',        statusBadge(ev.status)) +
+      '</div>' +
+      (ev.shortDescription ? '<div style="margin-top:16px"><div style="font-size:11.5px;font-weight:700;color:#64748b;text-transform:uppercase;margin-bottom:5px">Short Description</div><div style="font-size:13.5px;color:#334155">'+ev.shortDescription+'</div></div>' : '') +
+      (ev.fullDescription  ? '<div style="margin-top:14px"><div style="font-size:11.5px;font-weight:700;color:#64748b;text-transform:uppercase;margin-bottom:5px">Full Description</div><div style="font-size:13.5px;color:#334155;line-height:1.7">'+ev.fullDescription+'</div></div>' : '') +
+      (ev.inAssociationWith ? '<div style="margin-top:14px"><div style="font-size:11.5px;font-weight:700;color:#64748b;text-transform:uppercase;margin-bottom:5px">In Association With</div><div style="font-size:13.5px;color:#334155">'+ev.inAssociationWith+'</div></div>' : '');
+
+    actions.innerHTML =
+      '<button class="btn success" type="button" style="padding:11px 22px;font-size:14px;font-weight:700;background:#065f46;color:#fff;border:none;border-radius:8px;cursor:pointer" onclick="eaApprove(\'' + ev.id + '\')">✅ Approve Event</button>' +
+      '<button class="btn" type="button" style="padding:11px 22px;font-size:14px;font-weight:700;background:#991b1b;color:#fff;border:none;border-radius:8px;cursor:pointer" onclick="eaReject(\'' + ev.id + '\')">✗ Reject Event</button>';
+
+    panel.style.display = 'block';
+    panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  function row(label, val) {
+    return '<div style="display:flex;flex-direction:column;gap:3px">' +
+           '<span style="font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase">' + label + '</span>' +
+           '<span style="font-size:13.5px;color:#1e293b;font-weight:500">' + (val || '—') + '</span>' +
+           '</div>';
+  }
+
+  /* ── Close review drawer ─────────────────────────────────────────────── */
+  window.eaCloseReview = function () {
+    document.getElementById('ea-review-panel').style.display = 'none';
+  };
+
+  /* ── Approve ─────────────────────────────────────────────────────────── */
+  window.eaApprove = function (id) {
+    var ok = EventDataService.approveEvent(id);
+    if (!ok) { showAdminToast('Event not found.', 'error'); return; }
+    showAdminToast('✅ Event approved successfully. It is now live on the Events page.', 'success');
+    eaCloseReview();
+    eaRefresh();
+  };
+
+  /* ── Reject ──────────────────────────────────────────────────────────── */
+  window.eaReject = function (id) {
+    if (!confirm('Reject this event? It will NOT appear on the public Events page. The record will be retained for audit history.')) return;
+    var ok = EventDataService.rejectEvent(id);
+    if (!ok) { showAdminToast('Event not found.', 'error'); return; }
+    showAdminToast('Event rejected. The record has been retained.', 'info');
+    eaCloseReview();
+    eaRefresh();
+  };
+
+  /* ── Toast helper (reuses existing admin toast if available) ─────────── */
+  function showAdminToast(msg, type) {
+    var toast = document.getElementById('toast');
+    if (toast) {
+      toast.textContent = msg;
+      toast.className = 'toast ' + (type === 'error' ? 'error' : type === 'info' ? '' : 'success');
+      toast.classList.add('show');
+      setTimeout(function () { toast.classList.remove('show'); }, 4000);
+    } else {
+      alert(msg);
+    }
+  }
+
+})();
+</script>
+
 
 <div id="toast" class="toast"></div>
 

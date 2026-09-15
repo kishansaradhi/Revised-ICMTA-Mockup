@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="css/icmta-2026.css">
 
     <style>
-        
         /* ==============================
            EVENT FORM
         ============================== */
@@ -336,6 +335,20 @@
                             type="date"
                             id="eventDate"
                             name="eventDate"
+                            required
+                        >
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="endDate">
+                            End Date <span class="required">*</span>
+                        </label>
+
+                        <input
+                            type="date"
+                            id="endDate"
+                            name="endDate"
                             required
                         >
                     </div>
@@ -701,27 +714,10 @@
                     Event Status
                 </h2>
 
-                <div class="status-options">
-
-                    <label class="status-option">
-                        <input
-                            type="radio"
-                            name="eventStatus"
-                            value="draft"
-                            checked
-                        >
-                        Draft
-                    </label>
-
-                    <label class="status-option">
-                        <input
-                            type="radio"
-                            name="eventStatus"
-                            value="published"
-                        >
-                        Published
-                    </label>
-
+                <div style="display:inline-flex;align-items:center;gap:10px;background:#fff8ec;border:1px solid #f0c96a;border-radius:8px;padding:12px 18px;">
+                    <span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#c99d42;flex-shrink:0"></span>
+                    <span style="font-size:13.5px;font-weight:700;color:#7a5c00;">PENDING_APPROVAL</span>
+                    <span style="font-size:12px;color:#a07a30;margin-left:4px;">— Submitted events await admin review before going live.</span>
                 </div>
 
             </section>
@@ -757,29 +753,53 @@
 </div>
 
 
+<script src="../js/eventDataService.js"></script>
+
 <script>
 
     /* ==============================
        POSTER PREVIEW
     ============================== */
 
-    const posterInput = document.getElementById("eventPoster");
-    const posterPreview = document.getElementById("posterPreview");
+    var posterInput   = document.getElementById('eventPoster');
+    var posterPreview = document.getElementById('posterPreview');
 
-    posterInput.addEventListener("change", function () {
-
-        const file = this.files[0];
-
-        if (!file) {
-            posterPreview.style.display = "none";
-            return;
-        }
-
-        const imageUrl = URL.createObjectURL(file);
-
-        posterPreview.src = imageUrl;
-        posterPreview.style.display = "block";
+    posterInput.addEventListener('change', function () {
+        var file = this.files[0];
+        if (!file) { posterPreview.style.display = 'none'; return; }
+        posterPreview.src = URL.createObjectURL(file);
+        posterPreview.style.display = 'block';
     });
+
+
+    /* ==============================
+       SUCCESS BANNER (inline, no alert)
+    ============================== */
+
+    function showSuccessBanner(msg) {
+        var existing = document.getElementById('ef-success-banner');
+        if (existing) existing.remove();
+
+        var banner = document.createElement('div');
+        banner.id = 'ef-success-banner';
+        banner.style.cssText = [
+            'background:#ecfdf5', 'border:1px solid #6ee7b7',
+            'border-radius:10px', 'padding:18px 22px',
+            'margin-bottom:24px', 'display:flex',
+            'align-items:flex-start', 'gap:14px'
+        ].join(';');
+
+        banner.innerHTML =
+            '<span style="font-size:22px;line-height:1">✅</span>' +
+            '<div>' +
+            '<div style="font-size:15px;font-weight:700;color:#065f46;margin-bottom:4px">Application submitted successfully.</div>' +
+            '<div style="font-size:13.5px;color:#047857">Your event is awaiting admin approval. It will appear on the public Events page only after an administrator approves it.</div>' +
+            '</div>';
+
+        var formCard = document.querySelector('.event-form-card');
+        formCard.parentNode.insertBefore(banner, formCard);
+        banner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
 
 
     /* ==============================
@@ -787,27 +807,59 @@
     ============================== */
 
     function saveDraft() {
-
-        const form = document.getElementById("eventForm");
-
-        const formData = new FormData(form);
-
-        formData.set("eventStatus", "draft");
-
-        alert("Event saved as draft (preview only).");
+        alert('Event saved as draft (preview only).');
     }
 
 
     /* ==============================
-       PUBLISH
+       PUBLISH — submit for approval
     ============================== */
 
-    document.getElementById("eventForm").addEventListener("submit", function (event) {
+    document.getElementById('eventForm').addEventListener('submit', function (e) {
+        e.preventDefault();
 
-        event.preventDefault();
+        var form = this;
+        if (!form.checkValidity()) {
+            form.reportValidity();
+            return;
+        }
 
-        alert("Event published (preview only). Database connection will be added later.");
+        /* Collect all form fields into an event object */
+        var eventData = {
+            title:               form.eventTitle.value.trim(),
+            category:            form.eventCategory.value,
+            mode:                form.eventMode.value,
+            startDate:           form.eventDate.value,
+            endDate:             form.endDate.value,
+            startTime:           form.startTime.value,
+            endTime:             form.endTime.value,
+            registrationDeadline: form.registrationDeadline.value,
+            speakerName:         form.speakerName.value.trim(),
+            speakerDesignation:  form.speakerDesignation.value.trim(),
+            speakerInstitution:  form.speakerInstitution.value.trim(),
+            shortDescription:    form.shortDescription.value.trim(),
+            fullDescription:     form.fullDescription.value.trim(),
+            organizedBy:         form.organizedBy.value.trim(),
+            registrationFee:     form.registrationFee.value.trim(),
+            inAssociationWith:   form.inAssociationWith.value.trim(),
+            registrationLink:    form.registrationLink.value.trim(),
+            coordinatorName:     form.coordinatorName.value.trim(),
+            contactNumber:       form.coordinatorPhone.value.trim(),
+            contactEmail:        form.coordinatorEmail.value.trim(),
+            poster:              ''   /* file upload: URL stored after backend integration */
+        };
 
+        /* Hand off to the data service — this is the only call to localStorage (indirectly) */
+        var saved = EventDataService.submitEvent(eventData);
+
+        console.info('[ICMTA] Event submitted:', saved.id, '| Status:', saved.status);
+
+        /* Reset form and show confirmation */
+        form.reset();
+        posterPreview.style.display = 'none';
+        showSuccessBanner(
+            'Application submitted successfully.\nYour event is awaiting admin approval.'
+        );
     });
 
 </script>
