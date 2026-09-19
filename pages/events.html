@@ -46,8 +46,8 @@
 }
 .event-badge {
   display: inline-block;
-  background: #eaf5fb;
-  color: #1e6c93;
+  background: var(--icm-gold-wash);
+  color: var(--icm-gold-deep);
   font-size: 11.5px;
   font-weight: 700;
   text-transform: uppercase;
@@ -55,12 +55,12 @@
   padding: 5px 14px;
   border-radius: 20px;
   margin-bottom: 12px;
-  border: 1px solid #b9d2e3;
+  border: 1px solid var(--icm-gold);
 }
 .event-title {
   font-size: 22px;
   font-weight: 800;
-  color: #1e6c93;
+  color: var(--icm-blue-deep);
   line-height: 1.38;
   margin: 0 0 16px 0;
 }
@@ -114,10 +114,10 @@
 .event-info-panel h4 {
   font-size: 14.5px;
   font-weight: 700;
-  color: #1e6c93;
+  color: var(--icm-blue-deep);
   margin: 0 0 12px 0;
   padding-bottom: 8px;
-  border-bottom: 1px solid #edf2f7;
+  border-bottom: 2px solid var(--icm-gold);
 }
 .event-info-list {
   list-style: none;
@@ -255,10 +255,6 @@
           <a href="membership.html#apply-section">How to Apply</a>
         </div>
       </span>
-      <span class="icm-sitesearch">
-        <button class="icm-ss-btn" aria-label="Search the site" onclick="this.parentNode.classList.toggle('icm-open');var i=this.parentNode.querySelector('input');if(this.parentNode.classList.contains('icm-open'))i.focus()">&#8981;</button>
-        <form class="icm-ss-form" action="public-directory.html" method="get">
-          <input type="search" name="q" placeholder="Search the site…" aria-label="Search the site">
       <span class="icm-sitesearch" style="position:relative">
         <button class="icm-ss-btn" aria-label="Search the site" onclick="this.parentNode.classList.toggle('icm-open');var i=this.parentNode.querySelector('input');if(this.parentNode.classList.contains('icm-open')){i.focus();}else{var r=document.getElementById('headerSearchResults');if(r)r.style.display='none';}">&#8981;</button>
         <form class="icm-ss-form" id="headerSearchForm" action="#" method="get" onsubmit="event.preventDefault()">
@@ -633,7 +629,7 @@
   <div class="icm-fbot">
     <span>&copy; 2026 ICMTA &middot; icmta.in</span>
     <span><a href="#">Privacy notice</a> <a href="admin.html">Administrator</a></span>
-    <span>Logo and tagline by Lahari</span>
+    <span>Disclaimer: The information provided on the ICMTA website is intended for general academic and informational purposes and may be updated or modified from time to time. ICMTA makes reasonable efforts to ensure accuracy but does not guarantee that all information is complete, current, or free from errors, and shall not be responsible for reliance placed on such information.</span>
   </div>
 </footer>
 

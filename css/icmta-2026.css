@@ -34,6 +34,17 @@
   --icm-radius:6px;
   --icm-serif:"Source Serif 4",Georgia,"Times New Roman",serif;
   --icm-shadow:0 1px 2px rgba(19,38,48,.05),0 10px 30px -18px rgba(19,38,48,.35);
+
+  /* Harmonize legacy style.css variables with approved Home color system */
+  --navy: var(--icm-blue-deep);
+  --navy-dark: var(--icm-blue-dark);
+  --blue: var(--icm-blue);
+  --blue-hover: var(--icm-blue-deep);
+  --blue-light: var(--icm-wash);
+  --blue2: var(--icm-wash);
+  --text: var(--icm-ink);
+  --text-muted: var(--icm-ink-2);
+  --muted: var(--icm-ink-3);
 }
 
 /* ---------------------------------------------------------------
@@ -114,18 +125,175 @@
 
 /* ---------------------------------------------------------------
    2a. OVERRIDES of existing style.css
-   The approved design has a WHITE header and a DARK footer.
-   style.css ships the opposite of both. These five rules flip them.
-   Delete this block to revert to the old look.
+   Standardizes all pages to match the approved Home page (index.html):
+   - Dark teal utility bar
+   - White main navigation with dark teal text and gold active underline
+   - Cream / warm off-white hero sections (.site-hero)
+   - Dark teal headings and primary buttons
+   - Gold secondary buttons, borders, eyebrows, and accents
+   - Dark footer with gold highlights
    --------------------------------------------------------------- */
 .header{
-  background:#fff;color:var(--icm-ink);
-  border-bottom:1px solid var(--icm-rule-cool);
-  box-shadow:none;
+  background:#fff !important;color:var(--icm-ink) !important;
+  border-bottom:1px solid var(--icm-rule-cool) !important;
+  box-shadow:none !important;
+  background:#1e6c93 !important;
+  color:#ffffff !important;
+  border-bottom:1px solid rgba(0,0,0,0.12) !important;
+  box-shadow:0 2px 8px rgba(0,0,0,0.12) !important;
 }
-.nav-item{color:var(--icm-ink-2);font-weight:700;font-size:15px;padding:9px 14px}
-.nav-item:hover{background:var(--icm-wash);color:var(--icm-blue-deep)}
-.nav-item.active{color:var(--icm-blue-deep);background:transparent}
+.header .brand-title{color:var(--icm-blue-deep) !important}
+.header .brand-sub{color:var(--icm-ink-2) !important}
+.nav-links .nav-item{color:var(--icm-ink-2) !important;font-weight:700;font-size:15px;padding:9px 14px}
+.nav-links .nav-item:hover{background:var(--icm-wash) !important;color:var(--icm-blue-deep) !important}
+.nav-links .nav-item.active{color:var(--icm-blue-deep) !important;background:transparent !important}
+.nav-dropdown.active > .nav-item{background:transparent !important;color:var(--icm-blue-deep) !important}
+.dropdown-item:hover,.dropdown-item.active{background:var(--icm-gold-wash) !important;color:var(--icm-gold-deep) !important;font-weight:700}
+.header .brand{
+  color:#ffffff !important;
+}
+.header .brand-title{
+  color:#ffffff !important;
+}
+.header .brand-sub{
+  color:#d5eaf5 !important;
+}
+.nav-links .nav-item{
+  color:#ffffff !important;
+  font-weight:700;
+  font-size:15px;
+  padding:9px 14px;
+}
+.nav-links .nav-item:hover{
+  background:rgba(255,255,255,0.15) !important;
+  color:#ffffff !important;
+}
+.nav-links .nav-item.active{
+  color:#ffffff !important;
+  background:transparent !important;
+}
+.nav-links .nav-item.active::after{
+  background:var(--icm-gold) !important;
+}
+.nav-dropdown.active > .nav-item{
+  background:transparent !important;
+  color:#ffffff !important;
+}
+.header .icm-caret{
+  color:rgba(255,255,255,0.85) !important;
+}
+.header .icm-ss-btn{
+  border-color:rgba(255,255,255,0.4) !important;
+  color:#ffffff !important;
+}
+.header .icm-ss-btn:hover{
+  border-color:var(--icm-gold) !important;
+  background:rgba(255,255,255,0.15) !important;
+  color:#ffffff !important;
+}
+.dropdown-item:hover,.dropdown-item.active{
+  background:var(--icm-gold-wash) !important;
+  color:var(--icm-gold-deep) !important;
+  font-weight:700;
+}
+
+/* Primary & Secondary Button Theme */
+.btn.primary,
+.btn-primary,
+.hero-cta-primary{
+  background:var(--icm-blue-deep) !important;
+  color:#ffffff !important;
+  box-shadow:0 4px 14px rgba(0,77,102,0.22);
+}
+.btn.primary:hover,
+.btn-primary:hover,
+.hero-cta-primary:hover{
+  background:var(--icm-blue) !important;
+  color:#ffffff !important;
+}
+.btn.secondary,
+.btn-secondary,
+.hero-cta-secondary,
+.nav-btn-admin{
+  background:#ffffff !important;
+  border:1.5px solid var(--icm-gold) !important;
+  color:var(--icm-gold-deep) !important;
+  box-shadow:0 2px 8px rgba(196,155,75,0.12);
+}
+.btn.secondary:hover,
+.btn-secondary:hover,
+.hero-cta-secondary:hover,
+.nav-btn-admin:hover{
+  border-color:var(--icm-gold) !important;
+  color:var(--icm-gold-deep) !important;
+  background:var(--icm-gold-wash) !important;
+}
+
+/* Subpage Hero Standardized (.site-hero) */
+.site-hero{
+  position:relative;
+  background:radial-gradient(900px 380px at 78% -12%, rgba(196,155,75,.16), transparent 62%),
+             linear-gradient(180deg, var(--icm-gold-wash) 0%, var(--icm-ground) 58%, var(--icm-paper) 100%) !important;
+  color:var(--icm-ink) !important;
+  border-bottom:3px solid var(--icm-blue-deep) !important;
+}
+.site-hero::before{
+  display:none !important;
+}
+.site-hero .hero-badge{
+  background:var(--icm-gold-wash) !important;
+  color:var(--icm-gold-deep) !important;
+  border:1px solid var(--icm-gold) !important;
+  font-weight:900 !important;
+  letter-spacing:0.12em !important;
+}
+.site-hero h1{
+  color:var(--icm-blue-deep) !important;
+}
+.site-hero p{
+  color:var(--icm-ink-2) !important;
+}
+.site-hero .hero-wave svg path{
+  fill:#ffffff !important;
+}
+
+/* Headings across components */
+.page-header h1,
+.section-block h2,
+.panel h2,
+.event-title,
+.contact-info-box h3,
+.payment-card h3{
+  color:var(--icm-blue-deep) !important;
+}
+
+/* Gold Accents & Card Highlights */
+.feature-card:hover,
+.founder-card:hover,
+.faculty-card:hover,
+.member-card:hover{
+  border-color:var(--icm-gold) !important;
+  box-shadow:var(--icm-shadow) !important;
+}
+.category-card.featured{
+  border:2px solid var(--icm-gold) !important;
+}
+.badge-popular,
+.badge-gold{
+  background:var(--icm-gold) !important;
+  color:#ffffff !important;
+}
+.tab-btn.active{
+  color:var(--icm-blue-deep) !important;
+  border-bottom-color:var(--icm-gold) !important;
+}
+.view-toggle button.active{
+  color:var(--icm-blue-deep) !important;
+  border-color:var(--icm-gold) !important;
+}
+.breadcrumb-inner a:hover{
+  color:var(--icm-gold-deep) !important;
+}
 
 .footer{
   background:var(--icm-ink);color:#9db3bd;

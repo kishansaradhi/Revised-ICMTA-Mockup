@@ -8,6 +8,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/icmta-2026.css">
 <!-- <link rel="icon" href="../assets/images/ICMTA-logo.png" type="image/png"> -->
 <style>
 :root{
@@ -33,146 +35,6 @@ body{
 }
 a{text-decoration:none;color:inherit}
 
-/* Header & Navigation */
-.site-welcome-banner{
-  background:linear-gradient(90deg,#004d66 0%,#1e6c93 100%);
-  color:#ffffff;
-  padding:8px 24px;
-  font-size:12.5px;
-  text-align:center;
-  font-weight:400;
-  letter-spacing:0.2px;
-  border-bottom:1px solid rgba(255,255,255,0.12);
-}
-.site-welcome-banner b{
-  font-weight:700;
-  color:#e0f2fe;
-}
-.header{
-  background:var(--navy);
-  color:#fff;
-  padding:12px 24px;
-  position:sticky;
-  top:0;
-  z-index:100;
-  box-shadow:0 2px 8px rgba(0,0,0,0.12);
-}
-.header-inner{
-  max-width:1280px;
-  margin:0 auto;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:16px;
-}
-.brand{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  text-decoration:none;
-  color:#fff;
-}
-.brand-logo{
-  height:76px;
-  width:76px;
-  aspect-ratio:1/1;
-  object-fit:contain;
-  border-radius:50%;
-  background:#ffffff;
-  padding:3px;
-  box-shadow:0 3px 10px rgba(0,0,0,0.22);
-  flex-shrink:0;
-  image-rendering:-webkit-optimize-contrast;
-}
-.brand-text{
-  display:flex;
-  flex-direction:column;
-}
-.brand-title{
-  font-size:22px;
-  font-weight:700;
-  letter-spacing:0.5px;
-  line-height:1.2;
-}
-.brand-sub{
-  font-size:11px;
-  color:#d5eaf5;
-  font-weight:300;
-}
-.nav-links{
-  display:flex;
-  align-items:center;
-  gap:4px;
-  flex-wrap:wrap;
-}
-.nav-item{
-  padding:8px 12px;
-  border-radius:6px;
-  font-size:13px;
-  font-weight:400;
-  color:#ffffff;
-  text-decoration:none;
-  transition:all .15s ease;
-  white-space:nowrap;
-}
-.nav-item:hover{
-  background:rgba(255,255,255,0.15);
-  color:#ffffff;
-}
-.nav-dropdown{
-  position:relative;
-  display:inline-block;
-}
-.nav-dropdown-menu{
-  display:none;
-  position:absolute;
-  top:100%;
-  left:0;
-  background:#ffffff;
-  min-width:190px;
-  box-shadow:0 8px 24px rgba(0,0,0,0.15);
-  border-radius:8px;
-  padding:6px 0;
-  z-index:110;
-  border:1px solid #dfe6ee;
-}
-.nav-dropdown:hover .nav-dropdown-menu,
-.nav-dropdown:focus-within .nav-dropdown-menu{
-  display:block;
-}
-.dropdown-item{
-  display:block;
-  padding:8px 16px;
-  font-size:13px;
-  color:#212121;
-  text-decoration:none;
-  transition:background .15s ease;
-}
-.dropdown-item:hover{
-  background:#eaf5fb;
-  color:#1e6c93;
-}
-.nav-dropdown.active > .nav-item,
-.nav-item.active{
-  background:rgba(0,0,0,0.2);
-  font-weight:700;
-  color:#ffffff;
-}
-.nav-btn-admin{
-  background:#ffffff;
-  color:var(--navy);
-  padding:7px 15px;
-  border-radius:6px;
-  font-size:13px;
-  font-weight:700;
-  text-decoration:none;
-  margin-left:6px;
-  transition:all .15s ease;
-}
-.nav-btn-admin:hover{
-  background:#eaf5fb;
-  box-shadow:0 2px 8px rgba(0,0,0,0.1);
-}
 
 /* Breadcrumb Bar */
 .breadcrumb-bar{
@@ -433,10 +295,6 @@ a{text-decoration:none;color:inherit}
           <a href="membership.html#apply-section">How to Apply</a>
         </div>
       </span>
-      <span class="icm-sitesearch">
-        <button class="icm-ss-btn" aria-label="Search the site" onclick="this.parentNode.classList.toggle('icm-open');var i=this.parentNode.querySelector('input');if(this.parentNode.classList.contains('icm-open'))i.focus()">&#8981;</button>
-        <form class="icm-ss-form" action="public-directory.html" method="get">
-          <input type="search" name="q" placeholder="Search the site…" aria-label="Search the site">
       <span class="icm-sitesearch" style="position:relative">
         <button class="icm-ss-btn" aria-label="Search the site" onclick="this.parentNode.classList.toggle('icm-open');var i=this.parentNode.querySelector('input');if(this.parentNode.classList.contains('icm-open')){i.focus();}else{var r=document.getElementById('headerSearchResults');if(r)r.style.display='none';}">&#8981;</button>
         <form class="icm-ss-form" id="headerSearchForm" action="#" method="get" onsubmit="event.preventDefault()">
@@ -510,7 +368,7 @@ a{text-decoration:none;color:inherit}
   <div class="icm-fbot">
     <span>&copy; 2026 ICMTA &middot; icmta.in</span>
     <span><a href="#">Privacy notice</a> <a href="admin.html">Administrator</a></span>
-    <span>Logo and tagline by Lahari</span>
+    <span>Disclaimer: The information provided on the ICMTA website is intended for general academic and informational purposes and may be updated or modified from time to time. ICMTA makes reasonable efforts to ensure accuracy but does not guarantee that all information is complete, current, or free from errors, and shall not be responsible for reliance placed on such information.</span>
   </div>
 </footer>
 
