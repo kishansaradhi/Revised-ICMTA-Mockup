@@ -3,14 +3,16 @@ const USER_STORE_KEY = "ICMTAFacultyDirectoryUsers_v4";
 const MEMBER_DATA_VERSION = "combined-343-members-restored-v5";
 try {
   const savedVersion = localStorage.getItem("ICMTAFacultyDirectoryDataVersion");
-  const master = window.ICMTA_MASTER_DATA || [];
-  if (savedVersion !== MEMBER_DATA_VERSION) {
+  const master = window.ICMTA_MASTER_DATA;
+  if (master && Array.isArray(master) && master.length > 0 && savedVersion !== MEMBER_DATA_VERSION) {
     localStorage.setItem(MEMBER_STORE_KEY, JSON.stringify(master));
     localStorage.setItem("ICMTAFacultyDirectoryDataVersion", MEMBER_DATA_VERSION);
   }
 } catch(e) {
-  localStorage.setItem(MEMBER_STORE_KEY, JSON.stringify(window.ICMTA_MASTER_DATA || []));
-  localStorage.setItem("ICMTAFacultyDirectoryDataVersion", MEMBER_DATA_VERSION);
+  if (window.ICMTA_MASTER_DATA && Array.isArray(window.ICMTA_MASTER_DATA) && window.ICMTA_MASTER_DATA.length > 0) {
+    localStorage.setItem(MEMBER_STORE_KEY, JSON.stringify(window.ICMTA_MASTER_DATA));
+    localStorage.setItem("ICMTAFacultyDirectoryDataVersion", MEMBER_DATA_VERSION);
+  }
 }
 
 let members = loadMembers();
@@ -2384,3 +2386,354 @@ document.addEventListener("DOMContentLoaded", function(){
   }catch(e){}
   applyRoleAccess();
 });
+
+/* ==========================================================================
+   ICMTA — GLOBAL WEBSITE SEARCH
+   ========================================================================== */
+(function () {
+  'use strict';
+
+  var WEBSITE_PAGES = [
+    {
+      title: 'Home — Indian Commerce and Management Teachers Association',
+      section: 'Connecting Commerce and Management Teachers across India',
+      url: 'index.html',
+      content: 'An independent, non-profit professional platform established by senior academicians. Supporting research, doctoral supervision and faculty development from the first year of teaching to the last. Built by academicians, for academicians. Connecting commerce and management teachers across India. 343 faculty listed, 310 institutions, 26 states and UTs.'
+    },
+    {
+      title: 'Home — Spotlight & Current Events',
+      section: 'Spotlight: National Seminar & Webinar Announcements',
+      url: 'index.html#events',
+      content: 'Call for Papers National Seminar Vijayawada Siddhartha Academy Bhagavad Gita ethical leadership management sustainable development Viksit Bharat 2047. Webinar: The Art of Voice Modulation speak to inspire Dr Prashanth S Principal Bengaluru. Panel Discussion: Performative Wokeism.'
+    },
+    {
+      title: 'About Us — Overview',
+      section: 'About ICMTA',
+      url: 'pages/about-us.html',
+      content: 'Indian Commerce and Management Teachers Association is an independent, non-profit academic body founded by senior professors and academicians to foster collaboration, research excellence, and professional growth in commerce and management education across India.'
+    },
+    {
+      title: 'About Us — Vision & Mission',
+      section: 'Vision and Mission Statements',
+      url: 'pages/about-us.html#vision-mission',
+      content: 'Our vision is to empower commerce and management educators, foster impactful research, elevate teaching standards, and build a unified national academic community dedicated to excellence, innovation, and ethical leadership.'
+    },
+    {
+      title: 'About Us — Founders & Mentors',
+      section: 'Founders, Mentors & Advisory Board',
+      url: 'pages/about-us.html#founders',
+      content: 'ICMTA was established and mentored by esteemed professors, deans, and educational leaders from premier universities and institutions across India who guide our academic mission, research initiatives, and governance.'
+    },
+    {
+      title: 'About Us — Code of Conduct',
+      section: 'Professional Code of Conduct',
+      url: 'pages/about-us.html#code-of-conduct',
+      content: 'Guiding principles of integrity, academic honesty, professional respect, inclusivity, and ethical research standards expected from all ICMTA members, fellows, and participating scholars.'
+    },
+    {
+      title: 'Our Initiatives — Overview',
+      section: 'Academic & Faculty Development Initiatives',
+      url: 'pages/initiatives.html',
+      content: 'ICMTA conducts specialized faculty development programmes, research workshops, public speaking networks, doctoral mentorship symposiums, and national academic conclaves.'
+    },
+    {
+      title: 'Our Initiatives — Global Public Speaking Network',
+      section: 'Global Public Speaking Network (GPSN)',
+      url: 'pages/initiatives.html',
+      content: 'Empowering teachers and research scholars with voice modulation, rhetorical clarity, confidence, and international academic presentation skills.'
+    },
+    {
+      title: 'Events — Upcoming Events 2026',
+      section: 'Upcoming Conclaves, Seminars & Workshops',
+      url: 'pages/events.html#upcoming',
+      content: 'Upcoming academic events, conferences, national seminars, call for papers, and interactive webinars organized by ICMTA and partner universities. Check dates, speaker profiles, registration links, and deadlines.'
+    },
+    {
+      title: 'Events — National Seminar (Vijayawada)',
+      section: 'National Seminar on Bhagavad Gita & Ethical Leadership',
+      url: 'pages/events.html#upcoming',
+      content: 'Organized in collaboration with Siddhartha Academy, Vijayawada, Andhra Pradesh. Exploring ethical leadership, management principles, sustainable development, and Viksit Bharat 2047. Call for research papers and abstract submissions.'
+    },
+    {
+      title: 'Events — Voice Modulation Webinar',
+      section: 'Webinar: The Art of Voice Modulation',
+      url: 'pages/events.html#upcoming',
+      content: 'Speak to Inspire with Dr. Prashanth S, Principal and Radio Jockey at Rainbow FM Bengaluru. Master vocal dynamics, clarity, engagement, and effective classroom delivery for educators.'
+    },
+    {
+      title: 'Events — Performative Wokeism Panel Discussion',
+      section: 'Panel Discussion on Performative Wokeism',
+      url: 'pages/events.html#upcoming',
+      content: 'Critical examination of social media discourse, brand ethics, and academic perspectives on performative wokeism, organized with Ashoka Institute, Varanasi.'
+    },
+    {
+      title: 'Events — Past Conclaves & Archives',
+      section: 'Past Conclaves & Archive Records',
+      url: 'pages/events.html#past',
+      content: 'Archived proceedings, recordings, summaries, and delegate outcomes from past ICMTA national conferences, faculty development programs, and academic seminars.'
+    },
+    {
+      title: 'Membership — Overview & Benefits',
+      section: 'Why Join ICMTA',
+      url: 'pages/membership.html#why',
+      content: 'Discover the advantages of joining ICMTA: national academic networking, research collaboration, publication opportunities, conference fee discounts, faculty recognition, and access to doctoral mentors.'
+    },
+    {
+      title: 'Membership — Categories & Fee Structure',
+      section: 'Membership Categories & Annual Fees',
+      url: 'pages/membership.html#categories',
+      content: 'Detailed fee structure for Life Membership, Annual Membership, Associate Membership, and Student / Research Scholar Membership for commerce and management faculty.'
+    },
+    {
+      title: 'Membership — Application Process',
+      section: 'How to Apply for Membership',
+      url: 'pages/membership.html#apply-section',
+      content: 'Step-by-step instructions for submitting your membership application online, uploading credentials, completing payment verification, and receiving your ICMTA membership certificate.'
+    },
+    {
+      title: 'Scholars Corner — Public Directory',
+      section: 'Member Directory & Faculty Roster',
+      url: 'pages/public-directory.html',
+      content: 'Explore profiles of commerce and management professors, assistant professors, associate professors, deans, and research scholars across India. Filter by state, specialization, and institution in the Directory.'
+    },
+    {
+      title: 'Members Corner',
+      section: 'Member Portal & Exclusive Services',
+      url: 'pages/members.html',
+      content: 'Dedicated corner for registered ICMTA members. Access member-only updates, update profile information, access academic resources, and view membership credentials.'
+    },
+    {
+      title: 'ICMTA Resources',
+      section: 'Academic Resources, Downloads & Forms',
+      url: 'pages/resources.html',
+      content: 'Downloadable academic guidelines, curriculum frameworks, research methodology notes, membership forms, association constitution, and teaching aids for faculty members.'
+    },
+    {
+      title: 'ICMT Resources',
+      section: 'Commerce & Management Teaching Materials',
+      url: 'pages/icmt-resources.html',
+      content: 'Reference materials, case studies, academic articles, reading lists, and teaching methodologies curated for commerce and business management faculty.'
+    },
+    {
+      title: 'Contact Us',
+      section: 'Reach the ICMTA Secretariat',
+      url: 'pages/contact.html',
+      content: 'Get in touch with ICMTA for membership queries, event collaboration, research proposals, or administrative support. Email: support@icmta.in, contact phone, and official office address.'
+    },
+    {
+      title: 'Contact Information',
+      section: 'Secretariat Address & Office Locations',
+      url: 'pages/contact-us.html',
+      content: 'Official secretariat office location, administrative phone numbers, communication desk, and support emails for institutional partners.'
+    },
+    {
+      title: 'Faculty Listing',
+      section: 'Faculty Members by Department & University',
+      url: 'pages/faculty.html',
+      content: 'Faculty database listing professors, associate professors, and lecturers representing universities, colleges, and business schools nationwide.'
+    },
+    {
+      title: 'Membership Payment',
+      section: 'Online Membership Fee Payment',
+      url: 'pages/payment.html',
+      content: 'Secure fee payment portal for new membership registrations and annual renewals via UPI, Net Banking, NEFT, IMPS, and card payment gateways.'
+    }
+  ];
+
+  function escapeRegExp(str) {
+    return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
+
+  function highlightMatches(text, words) {
+    if (!text) return '';
+    var safeText = text;
+    words.forEach(function (w) {
+      if (!w) return;
+      var re = new RegExp('(' + escapeRegExp(w) + ')', 'gi');
+      safeText = safeText.replace(re, '<mark style="background:#fef08a;color:#854d0e;padding:1px 3px;border-radius:2px;font-weight:600;">$1</mark>');
+    });
+    return safeText;
+  }
+
+  function createSnippet(content, words, maxLen) {
+    maxLen = maxLen || 140;
+    var lower = content.toLowerCase();
+    var firstIdx = content.length;
+    words.forEach(function (w) {
+      var i = lower.indexOf(w.toLowerCase());
+      if (i !== -1 && i < firstIdx) firstIdx = i;
+    });
+
+    var start = Math.max(0, firstIdx - 35);
+    var end = Math.min(content.length, start + maxLen);
+    var snippet = (start > 0 ? '&hellip; ' : '') + content.substring(start, end) + (end < content.length ? ' &hellip;' : '');
+    return highlightMatches(snippet, words);
+  }
+
+  function scorePage(page, words) {
+    var haystack = (page.title + ' ' + page.section + ' ' + page.content).toLowerCase();
+    var score = 0;
+    var allMatched = true;
+
+    words.forEach(function (w) {
+      var lowerW = w.toLowerCase();
+      var re = new RegExp(escapeRegExp(lowerW), 'g');
+      var matches = haystack.match(re);
+      if (matches && matches.length > 0) {
+        score += matches.length;
+        if (page.title.toLowerCase().indexOf(lowerW) !== -1) score += 6;
+        if (page.section.toLowerCase().indexOf(lowerW) !== -1) score += 4;
+      } else {
+        allMatched = false;
+      }
+    });
+
+    if (allMatched) score += 5;
+    return score;
+  }
+
+  function performSearch(query) {
+    var raw = query.trim().replace(/\s+/g, ' ');
+    var words = raw.split(' ').filter(function (w) { return w.length > 1; });
+    if (!words.length) return [];
+
+    var scored = [];
+    WEBSITE_PAGES.forEach(function (p) {
+      var s = scorePage(p, words);
+      if (s > 0) {
+        scored.push({ page: p, score: s });
+      }
+    });
+
+    scored.sort(function (a, b) { return b.score - a.score; });
+    return scored.map(function (item) { return item.page; });
+  }
+
+  function resolvePageUrl(targetUrl) {
+    if (!targetUrl) return '';
+    var path = (typeof window !== 'undefined' && window.location && window.location.pathname) ? window.location.pathname.replace(/\\/g, '/') : '';
+    var href = (typeof window !== 'undefined' && window.location && window.location.href) ? window.location.href.replace(/\\/g, '/') : '';
+    var isInPagesDir = /\/pages\//i.test(path) || /\/pages\//i.test(href);
+
+    if (isInPagesDir) {
+      if (targetUrl.indexOf('pages/') === 0) {
+        return targetUrl.substring(6);
+      }
+      if (targetUrl.indexOf('../') === 0 || targetUrl.indexOf('/') === 0) {
+        return targetUrl;
+      }
+      return '../' + targetUrl;
+    } else {
+      return targetUrl;
+    }
+  }
+
+  function initHeaderSearch() {
+    var form = document.getElementById('headerSearchForm');
+    var input = document.getElementById('headerSearchInput');
+    var resultsBox = document.getElementById('headerSearchResults');
+    if (!form || !input || !resultsBox) return;
+
+    function renderResults(results, query) {
+      var words = query.trim().split(/\s+/).filter(function (w) { return w.length > 1; });
+      resultsBox.style.display = 'block';
+
+      if (!results || results.length === 0) {
+        resultsBox.innerHTML =
+          '<div style="padding:18px 16px;text-align:center;color:#475569;">' +
+            '<div style="font-weight:700;font-size:14px;color:#1e293b;margin-bottom:4px;">No results found</div>' +
+            '<div style="font-size:12.5px;">No website pages matched &ldquo;' + highlightMatches(query, [query]) + '&rdquo;. Try another term.</div>' +
+          '</div>';
+        return;
+      }
+
+      var html = '<div style="padding:8px 14px;background:#f8fafc;border-bottom:1px solid #e2e8f0;display:flex;justify-content:space-between;align-items:center;">' +
+                   '<span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#64748b;">' + results.length + ' website result' + (results.length > 1 ? 's' : '') + '</span>' +
+                   '<button type="button" id="closeSearchPanel" style="background:none;border:none;cursor:pointer;color:#94a3b8;font-size:14px;line-height:1;padding:2px 6px;">&times;</button>' +
+                 '</div>' +
+                 '<div style="max-height:410px;overflow-y:auto;">';
+
+      results.forEach(function (p) {
+        var resolvedUrl = resolvePageUrl(p.url);
+        html +=
+          '<a href="' + resolvedUrl + '" style="display:block;padding:12px 14px;border-bottom:1px solid #f1f5f9;text-decoration:none;color:inherit;transition:background 0.15s;" ' +
+          'onmouseover="this.style.backgroundColor=\'#f8fafc\'" onmouseout="this.style.backgroundColor=\'transparent\'">' +
+            '<div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:3px;">' +
+              '<span style="font-size:13.5px;font-weight:700;color:#00566b;">' + highlightMatches(p.section, words) + '</span>' +
+              '<span style="font-size:11.5px;font-weight:600;color:#c49b4b;margin-left:8px;white-space:nowrap;">Open &rarr;</span>' +
+            '</div>' +
+            '<div style="font-size:11px;font-weight:600;color:#64748b;margin-bottom:4px;">' + p.title + '</div>' +
+            '<div style="font-size:12.5px;color:#475569;line-height:1.5;">' + createSnippet(p.content, words) + '</div>' +
+          '</a>';
+      });
+
+      html += '</div>';
+      resultsBox.innerHTML = html;
+
+      var closeBtn = document.getElementById('closeSearchPanel');
+      if (closeBtn) {
+        closeBtn.addEventListener('click', function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          resultsBox.style.display = 'none';
+        });
+      }
+
+      var links = resultsBox.querySelectorAll('a');
+      for (var i = 0; i < links.length; i++) {
+        links[i].addEventListener('click', function () {
+          resultsBox.style.display = 'none';
+        });
+      }
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var q = input.value.trim();
+      if (!q) {
+        resultsBox.style.display = 'none';
+        return;
+      }
+      var matches = performSearch(q);
+      renderResults(matches, q);
+    });
+
+    var debounceTimer;
+    input.addEventListener('input', function () {
+      clearTimeout(debounceTimer);
+      var q = input.value.trim();
+      if (q.length < 2) {
+        resultsBox.style.display = 'none';
+        return;
+      }
+      debounceTimer = setTimeout(function () {
+        var matches = performSearch(q);
+        renderResults(matches, q);
+      }, 160);
+    });
+
+    document.addEventListener('click', function (e) {
+      if (!form.contains(e.target) && !resultsBox.contains(e.target)) {
+        resultsBox.style.display = 'none';
+      }
+    });
+
+    input.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        resultsBox.style.display = 'none';
+      }
+    });
+  }
+
+  if (typeof window !== 'undefined') {
+    window.WEBSITE_PAGES = WEBSITE_PAGES;
+    window.performSearch = performSearch;
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initHeaderSearch);
+  } else {
+    initHeaderSearch();
+  }
+})();
+
