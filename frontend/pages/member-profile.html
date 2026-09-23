@@ -1,0 +1,519 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Member Profile — ICMTA Member Directory</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/icmta-2026.css">
+<!-- <link rel="icon" href="../assets/images/ICMTA-logo.png" type="image/png"> -->
+<style>
+:root{
+  --navy:#1e6c93;
+  --navy-dark:#004d66;
+  --blue:#1e6c93;
+  --blue-hover:#005a7d;
+  --blue2:#eaf5fb;
+  --green:#21865b;
+  --bg:var(--icm-ground, #f8f6f1);
+  --card-bg:#ffffff;
+  --line:#dfe6ee;
+  --text:#212121;
+  --muted:#667085;
+  --white:#ffffff;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:'Lato',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+}
+a{text-decoration:none;color:inherit}
+
+
+/* Breadcrumb Bar */
+.breadcrumb-bar{
+  background:#ffffff;
+  border-bottom:1px solid var(--line);
+  padding:10px 24px;
+  font-size:13px;
+  color:var(--muted);
+}
+.breadcrumb-inner{
+  max-width:1280px;
+  margin:0 auto;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.breadcrumb-inner a{
+  color:var(--navy);
+}
+.breadcrumb-inner a:hover{
+  text-decoration:underline;
+}
+
+.btn{
+  border:0;
+  border-radius:8px;
+  padding:8px 14px;
+  font-size:13px;
+  font-weight:600;
+  transition:all .15s ease;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  cursor:pointer;
+}
+.btn-primary{
+  background:var(--blue);
+  color:#fff;
+}
+.btn-primary:hover{
+  background:var(--blue-hover);
+}
+.btn-secondary{
+  background:#eaf0f5;
+  color:#344054;
+}
+.btn-secondary:hover{
+  background:#dbe5ed;
+}
+.btn-ghost{
+  background:rgba(255,255,255,0.12);
+  color:#fff;
+}
+.btn-ghost:hover{
+  background:rgba(255,255,255,0.22);
+}
+
+/* Container */
+.container{
+  max-width:1100px;
+  margin:32px auto 60px;
+  padding:0 24px;
+}
+
+/* Profile Card */
+.profile-card{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:16px;
+  box-shadow:0 8px 30px rgba(13,53,84,0.06);
+  padding:36px;
+  margin-top:16px;
+}
+
+.profile-layout{
+  display:grid;
+  grid-template-columns:220px 1fr;
+  gap:36px;
+  align-items:start;
+}
+
+.profile-photo-box{
+  width:180px;
+  height:180px;
+  border-radius:50%;
+  overflow:hidden;
+  border:4px solid #fff;
+  box-shadow:0 8px 24px rgba(13,53,84,0.15);
+  background:#e8eef3;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:0 auto;
+}
+.profile-photo-box img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center 15%;
+  aspect-ratio:1 / 1;
+}
+.avatar-b64-photo{
+  transform:scale(1.36);
+  transform-origin:center center;
+}
+.profile-photo-placeholder{
+  font-size:42px;
+  font-weight:800;
+  color:#155c7d;
+  background:#e2f0f7;
+  width:100%;
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.id-badge{
+  display:inline-block;
+  font-size:12px;
+  font-weight:700;
+  color:var(--blue);
+  background:var(--blue2);
+  padding:3px 10px;
+  border-radius:6px;
+  margin-bottom:8px;
+}
+
+.profile-details h1{
+  font-size:26px;
+  font-weight:800;
+  color:var(--navy);
+  margin-bottom:4px;
+}
+
+.profile-sub{
+  font-size:15px;
+  font-weight:600;
+  color:var(--muted);
+  margin-bottom:20px;
+}
+
+.profile-info-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+.profile-info-item{
+  background:#f8fafc;
+  border:1px solid #edf2f7;
+  border-radius:10px;
+  padding:12px 16px;
+}
+.profile-info-item.full{
+  grid-column:1/-1;
+}
+.profile-label{
+  font-size:11px;
+  font-weight:700;
+  color:var(--muted);
+  text-transform:uppercase;
+  letter-spacing:0.3px;
+  margin-bottom:3px;
+}
+.profile-val{
+  font-size:14px;
+  color:var(--text);
+  word-break:break-word;
+}
+.profile-chips{
+  display:flex;
+  gap:6px;
+  flex-wrap:wrap;
+  margin-top:6px;
+}
+.profile-chip{
+  background:var(--blue2);
+  color:#126b9b;
+  padding:4px 10px;
+  border-radius:14px;
+  font-size:12px;
+  font-weight:600;
+}
+
+/* Footer */
+.footer{
+  background:#fff;
+  border-top:1px solid var(--line);
+  padding:24px;
+  font-size:13px;
+  color:var(--muted);
+}
+.footer a{
+  color:var(--blue);
+  font-weight:600;
+}
+
+@media(max-width:800px){
+  .profile-layout{grid-template-columns:1fr;text-align:center}
+  .profile-photo-box{margin:0 auto 16px}
+  .profile-info-grid{grid-template-columns:1fr;text-align:left}
+}
+</style>
+</head>
+<body>
+<div class="icm-watermark" aria-hidden="true"></div>
+
+<div class="icm-utilbar">
+  <div class="icm-utilbar-inner">
+    <span class="icm-ub-left">A non-profit professional platform &middot; Established by academicians</span>
+    <span class="icm-ub-right">
+      <a href="members.html">Members Corner</a>
+      <a href="public-directory.html">Scholars Corner</a>
+      <a href="mailto:support@icmta.in">support@icmta.in</a>
+      <a class="icm-ub-ic" href="#" aria-label="LinkedIn">in</a>
+      <a class="icm-ub-ic" href="#" aria-label="YouTube">&#9654;</a>
+    </span>
+  </div>
+</div>
+
+<header class="header">
+  <div class="header-inner">
+    <a href="../index.html" class="brand">
+      <img src="../assets/images/ICMTA-logo.png" alt="ICMTA Logo" class="brand-logo">
+      <div class="brand-text"></div>
+    </a>
+    <nav class="nav-links">
+      <span class="icm-navitem">
+        <a href="../index.html" class="nav-item">Home</a>
+      </span>
+      <span class="icm-navitem">
+        <a href="about-us.html" class="nav-item">About <i class="icm-caret">&#9662;</i></a>
+        <div class="icm-dd">
+          <a href="about-us.html#vision-mission">Vision &amp; Mission</a>
+          <a href="about-us.html#founders">Founders &amp; Mentors</a>
+          <a href="initiatives.html">Our Initiatives</a>
+          <a href="about-us.html#code-of-conduct">Code of Conduct</a>
+          <a href="contact.html">Contact Us</a>
+        </div>
+      </span>
+      <span class="icm-navitem">
+        <a href="public-directory.html" class="nav-item active">Directory</a>
+      </span>
+      <span class="icm-navitem">
+        <a href="events.html" class="nav-item">Events <i class="icm-caret">&#9662;</i></a>
+        <div class="icm-dd">
+          <a href="events.html#upcoming">Upcoming Events</a>
+          <a href="events.html#past">Past Events &amp; Archives</a>
+          <a href="../pages/event-form-preview.html">
+  New Event Registration
+</a>
+        </div>
+      </span>
+      <span class="icm-navitem">
+        <a href="membership.html" class="nav-item">Membership <i class="icm-caret">&#9662;</i></a>
+        <div class="icm-dd">
+          <a href="membership.html#why">Why Join</a>
+          <a href="membership.html#categories">Categories &amp; Fees</a>
+          <a href="membership.html#apply-section">How to Apply</a>
+        </div>
+      </span>
+      <span class="icm-sitesearch" style="position:relative">
+        <button class="icm-ss-btn" aria-label="Search the site" onclick="this.parentNode.classList.toggle('icm-open');var i=this.parentNode.querySelector('input');if(this.parentNode.classList.contains('icm-open')){i.focus();}else{var r=document.getElementById('headerSearchResults');if(r)r.style.display='none';}">&#8981;</button>
+        <form class="icm-ss-form" id="headerSearchForm" action="#" method="get" onsubmit="event.preventDefault()">
+          <input type="search" id="headerSearchInput" name="q" placeholder="Search the site…" aria-label="Search the site" autocomplete="off">
+        </form>
+        <div id="headerSearchResults" style="display:none;position:absolute;top:calc(100% + 8px);right:0;width:min(440px,92vw);max-height:480px;overflow-y:auto;background:#ffffff;border:1px solid #d9e6ed;border-top:3px solid #c49b4b;border-radius:6px;box-shadow:0 14px 35px rgba(19,38,48,0.22);z-index:9999;text-align:left;font-family:inherit;"></div>
+      </span>
+    </nav>
+  </div>
+</header>
+
+<div class="breadcrumb-bar">
+  <div class="breadcrumb-inner">
+    <a href="../index.html">Home</a>
+    <span>&rsaquo;</span>
+    <a href="members.html">Member</a>
+    <span>&rsaquo;</span>
+    <a href="public-directory.html">Member Directory</a>
+    <span>&rsaquo;</span>
+    <span style="color:#212121;font-weight:700">Member Profile</span>
+  </div>
+</div>
+
+<main class="container">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:10px">
+    <a href="public-directory.html" class="btn btn-secondary">&larr; Back to Member Directory</a>
+    <span class="subtitle" style="font-size:12px;color:var(--muted)">Official ICMTA Academic Record</span>
+  </div>
+
+  <div id="profileContainer"></div>
+</main>
+
+<footer class="footer" style="background:var(--icm-ink, #132630) !important; color:#9db3bd !important; border-top:0 !important; padding:58px 0 26px !important;">
+  <div class="icm-fgrid">
+    <div class="icm-fcol icm-fcol-brand">
+      <div class="footer-brand">
+        <img src="../assets/images/ICMTA-footer-logo.png" alt="" class="footer-logo" loading="lazy" decoding="async">
+        <div><b>Indian Commerce and Management Teachers Association</b></div>
+      </div>
+      <p class="icm-ftag">Connect &middot; Collaborate &middot; Research &middot; Learn &middot; Contribute</p>
+    </div>
+    <div class="icm-fcol">
+      <h4>Quick links</h4>
+      <a href="public-directory.html">Member Directory</a>
+      <a href="events.html">Events</a>
+      <a href="membership.html#apply-section">Become a Member</a>
+      <a href="resources.html">ICMTA Resources</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="icm-fcol">
+      <h4>Association</h4>
+      <a href="about-us.html">About us</a>
+      <a href="about-us.html#founders">Founders &amp; mentors</a>
+      <a href="initiatives.html">Our initiatives</a>
+      <a href="about-us.html#code-of-conduct">Code of conduct</a>
+    </div>
+    <div class="icm-fcol">
+      <h4>Stay informed</h4>
+      <p class="icm-fnl">Event notices and calls for papers, a few times a year.</p>
+      <form class="icm-fnlform" action="#" method="post">
+        <input type="email" name="email" placeholder="your@institution.ac.in" aria-label="Email address">
+        <button type="submit">Subscribe</button>
+      </form>
+      <div class="icm-fsocial">
+        <a href="#" aria-label="LinkedIn">in</a>
+        <a href="#" aria-label="YouTube">&#9654;</a>
+        <a href="#" aria-label="WhatsApp">&#9990;</a>
+      </div>
+    </div>
+  </div>
+  <div class="icm-fbot">
+    <span>&copy; 2026 ICMTA &middot; icmta.in</span>
+    <span><a href="#">Privacy notice</a> <a href="admin.html">Administrator</a></span>
+    <span>Disclaimer: The information provided on the ICMTA website is intended for general academic and informational purposes and may be updated or modified from time to time. ICMTA makes reasonable efforts to ensure accuracy but does not guarantee that all information is complete, current, or free from errors, and shall not be responsible for reliance placed on such information.</span>
+  </div>
+</footer>
+
+<script src="../js/member-data.js"></script>
+<script>
+function esc(v){
+  return String(v ?? "").replace(/[&<>"]/g, c=>({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"
+  }[c]));
+}
+
+function initials(name){
+  const clean = String(name || "").replace(/^(Dr.|Prof.|Mr.|Mrs.|Ms.|Lt.s*Dr.)s+/i, "").trim();
+  const parts = clean.split(/s+/).filter(Boolean);
+  if(parts.length === 0) return "M";
+  if(parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
+  return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+}
+
+function getFacultyList(){
+  try {
+    const raw = localStorage.getItem("ICMTAFacultyDirectoryMembers_v4");
+    if(raw){
+      const parsed = JSON.parse(raw);
+      if(Array.isArray(parsed) && parsed.length > 0){
+        return parsed;
+      }
+    }
+  } catch(e){}
+  return window.ICMTA_MASTER_DATA || [];
+}
+
+function loadMemberProfile(){
+  const params = new URLSearchParams(window.location.search);
+  const targetId = (params.get("id") || "").trim().toUpperCase();
+
+  const list = getFacultyList();
+  let member = list.find(m => String(m.id || "").trim().toUpperCase() === targetId);
+
+  if(!member && list.length){
+    member = list[0]; // fallback to first member
+  }
+
+  const container = document.getElementById("profileContainer");
+  if(!member){
+    container.innerHTML = `
+      <div class="profile-card" style="text-align:center;padding:48px">
+        <h2>Member Record Not Found</h2>
+        <p style="color:var(--muted);margin:10px 0 20px">The requested member ID could not be located in the directory.</p>
+        <a href="public-directory.html" class="btn btn-primary">Browse All Members &rarr;</a>
+      </div>
+    `;
+    return;
+  }
+
+  document.title = (member.name || "Member Profile") + " — ICMTA Member Directory";
+
+  const isB64 = member.photo && member.photo.startsWith("data:");
+  const b64Class = isB64 ? "avatar-b64-photo" : "";
+  const initialText = esc(initials(member.name));
+  const avatar = member.photo
+    ? `<img class="${b64Class}" src="${member.photo}" alt="${esc(member.name)}" onerror="this.onerror=null;this.parentElement.innerHTML='<div class=\\'profile-photo-placeholder\\'>${initialText}</div>'">`
+    : `<div class="profile-photo-placeholder">${initialText}</div>`;
+
+  const expList = Array.isArray(member.expertise)
+    ? member.expertise
+    : String(member.expertise || "").split(",").map(x => x.trim()).filter(Boolean);
+
+  const guideList = String(member.guideship || member.researchSupervisor || "").split(",").map(x => x.trim()).filter(Boolean);
+
+  container.innerHTML = `
+    <div class="profile-card">
+      <div class="profile-layout">
+        <div>
+          <div class="profile-photo-box">${avatar}</div>
+        </div>
+        <div class="profile-details">
+          <span class="id-badge">${esc(member.id)}</span>
+          <h1>${esc(member.name)}</h1>
+          <div class="profile-sub">${esc(member.designation || "Member")} &bull; ${esc(member.qualification || "Academician")}</div>
+
+          <div class="profile-info-grid">
+            <div class="profile-info-item">
+              <div class="profile-label">Department</div>
+              <div class="profile-val">${esc(member.department || "Not specified")}</div>
+            </div>
+            <div class="profile-info-item">
+              <div class="profile-label">Institution / Organization</div>
+              <div class="profile-val">${esc(member.college || "Not specified")}</div>
+            </div>
+            <div class="profile-info-item">
+              <div class="profile-label">City & State</div>
+              <div class="profile-val">${esc([member.city, member.state].filter(Boolean).join(", ") || "Not specified")}</div>
+            </div>
+            <div class="profile-info-item">
+              <div class="profile-label">Country</div>
+              <div class="profile-val">${esc(member.country || "India")}</div>
+            </div>
+
+            ${member.collegeAddress ? `
+              <div class="profile-info-item full">
+                <div class="profile-label">Campus Address</div>
+                <div class="profile-val">${esc(member.collegeAddress)}</div>
+              </div>
+            ` : ""}
+
+            ${guideList.length ? `
+              <div class="profile-info-item full">
+                <div class="profile-label">Research Guideship & Supervision</div>
+                <div class="profile-chips">
+                  ${guideList.map(g => `<span class="profile-chip" style="background:#eaf7f0;color:#1d754e">${esc(g)}</span>`).join("")}
+                </div>
+              </div>
+            ` : ""}
+
+            ${expList.length ? `
+              <div class="profile-info-item full">
+                <div class="profile-label">Areas of Specialization & Expertise</div>
+                <div class="profile-chips">
+                  ${expList.map(e => `<span class="profile-chip">${esc(e)}</span>`).join("")}
+                </div>
+              </div>
+            ` : ""}
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+if(document.readyState === "loading"){
+  document.addEventListener("DOMContentLoaded", loadMemberProfile);
+} else {
+  loadMemberProfile();
+}
+
+window.addEventListener("focus", loadMemberProfile);
+
+window.addEventListener("storage", function(e){
+  if(e.key === "ICMTAFacultyDirectoryMembers_v4"){
+    loadMemberProfile();
+  }
+});
+</script>
+<script src="../js/app.js"></script>
+</body>
+</html>

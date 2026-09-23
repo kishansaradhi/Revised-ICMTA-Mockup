@@ -1,0 +1,45 @@
+ICMTA_Staged — revised home page and navigation
+===============================================
+
+WHAT CHANGED
+
+index.html
+  New home page: ICMTA intro -> Spotlight -> What's happening ->
+  Find a resource person -> What we do -> Join.
+  No fees on the home page; they stay on membership.html.
+
+All 16 pages
+  - New header: utility strip, white bar, five nav items with dropdowns
+    on About / Events / Membership, site-search button.
+    The old .site-welcome-banner is gone — the utility strip replaces it.
+  - New footer: Quick links, Association, Stay informed. 11 links, not 16.
+  - css/icmta-2026.css added after css/style.css on every page.
+  - Source Serif 4 added alongside Lato.
+  - Seal watermark behind the page, except on the directory, member
+    profile and admin pages where it would sit under tables.
+
+Anchors added so the dropdowns land in the right place
+  pages/events.html      #upcoming  #past
+  pages/membership.html  #why  #categories
+  (#apply-section, #founders, #vision-mission, #code-of-conduct
+   already existed and are used as-is)
+
+Images
+  92 images resized and recompressed: 25.3 MB -> 12.6 MB.
+  Repo 60 MB -> 29 MB. The logo was 807 KB at 1024px, now 96 KB at 320px.
+
+VERIFIED
+  374 link and asset references across 16 pages — all resolve.
+  Every dropdown anchor exists on its target page.
+  No horizontal scroll at 1440px or 390px. No console errors.
+  Both logos load.
+
+STILL TO BUILD
+  - Site search posts to public-directory.html; it needs a page index
+    or should point at Google with site:icmta.in until then.
+  - Newsletter form posts nowhere.
+  - The directory page needs to read ?q= and ?expertise= from the URL
+    for the home page chips to filter anything.
+  - pages/contact-us.html, our-initiatives.html and icmt-resources.html
+    are unused duplicates of contact.html, initiatives.html and
+    resources.html. Nothing links to them. Safe to delete.

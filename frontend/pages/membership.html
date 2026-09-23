@@ -1,0 +1,1025 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Membership — ICMTA Indian Commerce and Management Teachers Association</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/icmta-2026.css">
+<!-- <link rel="icon" href="../assets/images/ICMTA-logo.png" type="image/png"> -->
+<style>
+
+/* Membership Specific Layout & Components */
+.membership-tabs{
+  display:flex;
+  gap:12px;
+  margin:24px 0 28px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+.m-tab-btn{
+  background:#ffffff;
+  border:2px solid #cbd5e1;
+  color:#334155;
+  padding:10px 24px;
+  border-radius:30px;
+  font-size:14px;
+  font-weight:700;
+  cursor:pointer;
+  transition:all .2s ease;
+}
+.m-tab-btn.active,.m-tab-btn:hover{
+  background:var(--icm-blue-deep);
+  color:#ffffff;
+  border-color:var(--icm-blue-deep);
+  box-shadow:0 4px 14px rgba(0,77,102,0.2);
+}
+.category-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+  gap:24px;
+  margin-top:20px;
+}
+.category-card{
+  background:#ffffff;
+  border:1px solid #e2e8f0;
+  border-radius:12px;
+  padding:26px 22px;
+  transition:var(--transition);
+  display:flex;
+  flex-direction:column;
+  position:relative;
+  box-shadow:var(--shadow-sm);
+}
+.category-card:hover{
+  transform:translateY(-4px);
+  border-color:var(--icm-gold);
+  box-shadow:var(--shadow-md);
+}
+.category-card.featured{
+  border:2px solid #1e6c93;
+  background:linear-gradient(180deg, #f0f7fb 0%, #ffffff 100%);
+}
+.badge-popular{
+  position:absolute;
+  top:-12px;
+  right:20px;
+  background:#1e6c93;
+  color:#ffffff;
+  padding:4px 12px;
+  border-radius:12px;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:0.5px;
+  text-transform:uppercase;
+  box-shadow:0 2px 8px rgba(30,108,147,0.25);
+}
+.cat-title{
+  font-size:18px;
+  font-weight:700;
+  color:#1e6c93;
+  margin-bottom:6px;
+}
+.cat-eligibility{
+  font-size:12.5px;
+  color:#64748b;
+  margin-bottom:14px;
+  min-height:36px;
+  line-height:1.45;
+}
+.cat-fee{
+  font-size:24px;
+  font-weight:800;
+  color:#0f172a;
+  margin-bottom:18px;
+  padding-bottom:14px;
+  border-bottom:1px solid #e2e8f0;
+  display:flex;
+  align-items:baseline;
+  gap:4px;
+}
+.cat-fee small{
+  font-size:12px;
+  font-weight:400;
+  color:#64748b;
+}
+.hidden-on-page{display:none !important}
+.cat-features{
+  list-style:none;
+  padding:0;
+  margin:0 0 24px;
+  flex-grow:1;
+}
+.cat-features li{
+  font-size:13px;
+  color:#334155;
+  margin-bottom:10px;
+  display:flex;
+  align-items:flex-start;
+  gap:8px;
+  line-height:1.45;
+}
+.cat-features li svg{
+  flex-shrink:0;
+  width:16px;
+  height:16px;
+  color:#21865b;
+  margin-top:2px;
+}
+
+/* Steps Flow */
+.steps-grid{
+  display:grid;
+  grid-template-columns:repeat(4, 1fr);
+  gap:20px;
+  margin-top:24px;
+}
+.step-card{
+  background:#f8fafc;
+  border:1px solid #e2e8f0;
+  border-radius:10px;
+  padding:22px 18px;
+  text-align:center;
+  position:relative;
+  transition:var(--transition);
+}
+.step-card:hover{
+  background:#ffffff;
+  border-color:#b9d2e3;
+  transform:translateY(-3px);
+  box-shadow:var(--shadow-sm);
+}
+.step-num{
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  background:#1e6c93;
+  color:#ffffff;
+  font-weight:800;
+  font-size:15px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  margin-bottom:12px;
+  box-shadow:0 3px 8px rgba(30,108,147,0.25);
+}
+.step-card h3{
+  font-size:15px;
+  font-weight:700;
+  color:#1e6c93;
+  margin-bottom:6px;
+}
+.step-card p{
+  font-size:12.5px;
+  color:#64748b;
+  margin:0;
+  line-height:1.5;
+}
+
+/* Application Form */
+.apply-form-container{
+  background:#ffffff;
+  border:1px solid #e2e8f0;
+  border-radius:12px;
+  padding:34px;
+  box-shadow:var(--shadow-md);
+}
+
+/* Membership heading style */
+.membership-choose{
+  font-size:1.35rem;
+  font-weight:800;
+  color:#0f172a;
+  margin-bottom:8px;
+}
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+}
+.full-col{
+  grid-column:1/-1;
+}
+.form-group{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+.form-group label{
+  font-size:13px;
+  font-weight:700;
+  color:#334155;
+}
+.form-group input,.form-group select,.form-group textarea{
+  width:100%;
+  padding:10px 14px;
+  border:1px solid #cbd5df;
+  border-radius:8px;
+  font-size:13.5px;
+  outline:none;
+  transition:all .15s ease;
+}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{
+  border-color:#1e6c93;
+  box-shadow:0 0 0 3px rgba(30,108,147,0.12);
+}
+.form-help{
+  font-size:11.5px;
+  color:#64748b;
+}
+
+/* Photo Upload Box */
+.photo-upload-container{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+.photo-preview-box{
+  width:58px;
+  height:58px;
+  border-radius:8px;
+  border:2px dashed #cbd5df;
+  background:#f8fafc;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  flex-shrink:0;
+}
+.photo-preview-box img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:none;
+}
+.photo-preview-placeholder{
+  font-size:24px;
+  color:#94a3b8;
+}
+
+/* Existing Member Option Box */
+.existing-member-box{
+  background:linear-gradient(135deg, #eaf5fb 0%, #f0f7fb 100%);
+  border:1px solid #b9d2e3;
+  border-radius:12px;
+  padding:26px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:20px;
+  margin-top:28px;
+}
+.existing-member-box h3{
+  font-size:18px;
+  font-weight:700;
+  color:#1e6c93;
+  margin-bottom:4px;
+}
+.existing-member-box p{
+  font-size:13.5px;
+  color:#475569;
+  margin:0;
+}
+
+/* Benefits 4-Column Grid */
+.benefits-grid{
+  display:grid;
+  grid-template-columns:repeat(4, 1fr);
+  gap:20px;
+  margin-top:20px;
+}
+.benefits-grid .feature-card{
+  height:100%;
+}
+
+@media(max-width:1100px){
+  .benefits-grid{grid-template-columns:repeat(2, 1fr)}
+}
+@media(max-width:980px){
+  .steps-grid{grid-template-columns:1fr 1fr}
+  .form-grid{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+  .benefits-grid{grid-template-columns:1fr}
+  .steps-grid{grid-template-columns:1fr}
+  .existing-member-box{flex-direction:column;text-align:center}
+}
+
+</style>
+</head>
+<body>
+<div class="icm-watermark" aria-hidden="true"></div>
+
+<div class="icm-utilbar">
+  <div class="icm-utilbar-inner">
+    <span class="icm-ub-left">A non-profit professional platform &middot; Established by academicians</span>
+    <span class="icm-ub-right">
+      <a href="members.html">Members Corner</a>
+      <a href="public-directory.html">Scholars Corner</a>
+      <a href="mailto:support@icmta.in">support@icmta.in</a>
+      <a class="icm-ub-ic" href="#" aria-label="LinkedIn">in</a>
+      <a class="icm-ub-ic" href="#" aria-label="YouTube">&#9654;</a>
+    </span>
+  </div>
+</div>
+
+<header class="header">
+  <div class="header-inner">
+    <a href="../index.html" class="brand">
+      <img src="../assets/images/ICMTA-logo.png" alt="ICMTA Logo" class="brand-logo">
+      <div class="brand-text"></div>
+    </a>
+    <nav class="nav-links">
+      <span class="icm-navitem">
+        <a href="../index.html" class="nav-item">Home</a>
+      </span>
+      <span class="icm-navitem">
+        <a href="about-us.html" class="nav-item">About <i class="icm-caret">&#9662;</i></a>
+        <div class="icm-dd">
+          <a href="about-us.html#vision-mission">Vision &amp; Mission</a>
+          <a href="about-us.html#founders">Founders &amp; Mentors</a>
+          <a href="initiatives.html">Our Initiatives</a>
+          <a href="about-us.html#code-of-conduct">Code of Conduct</a>
+          <a href="contact.html">Contact Us</a>
+        </div>
+      </span>
+      <span class="icm-navitem">
+        <a href="public-directory.html" class="nav-item">Directory</a>
+      </span>
+      <span class="icm-navitem">
+        <a href="events.html" class="nav-item">Events <i class="icm-caret">&#9662;</i></a>
+        <div class="icm-dd">
+          <a href="events.html#upcoming">Upcoming Events</a>
+          <a href="events.html#past">Past Events &amp; Archives</a>
+          <a href="../pages/event-form-preview.html">
+  New Event Registration
+</a>
+        </div>
+      </span>
+      <span class="icm-navitem">
+        <a href="membership.html" class="nav-item active">Membership <i class="icm-caret">&#9662;</i></a>
+        <div class="icm-dd">
+          <a href="membership.html#why">Why Join</a>
+          <a href="membership.html#categories">Categories &amp; Fees</a>
+          <a href="membership.html#apply-section">How to Apply</a>
+        </div>
+      </span>
+      <span class="icm-sitesearch" style="position:relative">
+        <button class="icm-ss-btn" aria-label="Search the site" onclick="this.parentNode.classList.toggle('icm-open');var i=this.parentNode.querySelector('input');if(this.parentNode.classList.contains('icm-open')){i.focus();}else{var r=document.getElementById('headerSearchResults');if(r)r.style.display='none';}">&#8981;</button>
+        <form class="icm-ss-form" id="headerSearchForm" action="#" method="get" onsubmit="event.preventDefault()">
+          <input type="search" id="headerSearchInput" name="q" placeholder="Search the site…" aria-label="Search the site" autocomplete="off">
+        </form>
+        <div id="headerSearchResults" style="display:none;position:absolute;top:calc(100% + 8px);right:0;width:min(440px,92vw);max-height:480px;overflow-y:auto;background:#ffffff;border:1px solid #d9e6ed;border-top:3px solid #c49b4b;border-radius:6px;box-shadow:0 14px 35px rgba(19,38,48,0.22);z-index:9999;text-align:left;font-family:inherit;"></div>
+      </span>
+    </nav>
+  </div>
+</header>
+
+
+<div class="breadcrumb-bar">
+  <div class="breadcrumb-inner">
+    <a href="../index.html">Home</a>
+    <span>&rsaquo;</span>
+    <span style="color:#212121;font-weight:700">Membership</span>
+  </div>
+</div>
+
+<main class="container">
+
+  <!-- Membership Access Required Banner -->
+  <div class="membership-access-card" style="background:linear-gradient(135deg, #eaf5fb 0%, #ffffff 100%);border:2px solid #1e6c93;border-radius:12px;padding:24px 28px;margin-bottom:32px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;box-shadow:0 4px 14px rgba(30,108,147,0.12)">
+    <div style="max-width:760px">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+        <span style="display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:#1e6c93;color:#ffffff;font-size:14px;font-weight:700">🔒</span>
+        <h2 style="font-size:20px;font-weight:800;color:#1e6c93;margin:0">Membership Access Required</h2>
+      </div>
+      <p style="font-size:14.5px;color:#334155;margin:0;line-height:1.5">
+        Detailed member information is available to ICMTA members only.<br>
+        Please become an ICMTA member to access the complete member profile.
+      </p>
+    </div>
+    <div>
+      <a href="#apply-section" class="btn primary" style="font-size:14.5px;padding:12px 24px;border-radius:8px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;font-weight:700">
+        Get Membership &rarr;
+      </a>
+    </div>
+  </div>
+
+  <!-- 1. Introduction & Why Join -->
+  <div class="section-block" id="why">
+    <h2> Why Become an ICMTA Member?</h2>
+    <p><b>More Than Membership. A Community for Academic Growth.</b></p>
+    <p>ICMTA membership is designed to provide academics and researchers with opportunities to connect, collaborate, learn, contribute and grow.</p>
+    <p>As an ICMTA member, you become part of an academic community committed to strengthening commerce and management education, research and professional practice.</p>
+    <p><i>Connect:</i> Build meaningful professional relationships with academicians, researchers, doctoral scholars and academic leaders.</p>
+    <p><i>Collaborate:</i> Discover opportunities for research collaboration, knowledge exchange, academic partnerships and interdisciplinary engagement.</p>
+    <p><i>Learn:</i> Participate in conferences, webinars, workshops, FDPs, seminars and other academic development initiatives.</p>
+    <p><i>Research:</i> Engage with research-oriented activities, methodological discussions, scholarly resources and collaborative research opportunities.</p>
+    <p><i>Contribute:</i> Share your knowledge, expertise, research insights, teaching practices and academic experiences with the wider community.</p>
+    <p><i>Grow:</i> Develop your academic profile through participation, leadership, recognition and professional engagement.</p>
+  </div>
+
+  <!-- 2. Who is ICMTA Membership for? -->
+  <div class="section-block">
+    <h2> Who is ICMTA Membership for?</h2>
+    <p>ICMTA welcomes individuals and institutions engaged in or supporting Commerce, Management, Business, Accounting, Economics and allied disciplines.</p>
+    <p><i>Faculty Members:</i> Professors, Associate Professors, Assistant Professors, Lecturers and academic professionals.</p>
+    <p><i>Researchers:</i> Researchers and scholars engaged in commerce, management, business and allied disciplines.</p>
+    <p><i>Doctoral Scholars:</i> Ph.D. scholars and research scholars seeking academic networking, research engagement and professional development.</p>
+    <p><i>Academic Leaders:</i> Principals, Deans, Directors, Heads of Departments and institutional leaders.</p>
+    <p><i>Industry & Professional Community:</i> Professionals, consultants, entrepreneurs and practitioners interested in academic–industry engagement.</p>
+    <p><i>Institutions:</i> Universities, colleges, business schools, departments, research centres and other academic institutions.</p>
+  </div>
+
+  <!-- 3. Membership Benefits -->
+  <div class="section-block">
+    <h2> Your ICMTA Membership Benefits</h2>
+    <p>Discover the comprehensive range of academic privileges, digital resources, and networking benefits available to ICMTA members:</p>
+
+    <div class="benefits-grid">
+      <div class="feature-card">
+        <!--div class="icon">📚</div-->
+        <h3>Academic & Knowledge Resources</h3>
+        <p>Access curated academic resources and opportunities designed to support teaching, learning and research in commerce and management.</p>
+      </div>
+      <div class="feature-card">
+        <!--div class="icon">🔬</div-->
+        <h3>Research Engagement</h3>
+        <p>Participate in research-oriented initiatives, research discussions, collaborative opportunities and academic knowledge-sharing activities.</p>
+      </div>
+      <div class="feature-card">
+        <!--div class="icon">🎓</div-->
+        <h3>Faculty Development</h3>
+        <p>Participate in FDPs, workshops, webinars, seminars and professional development programmes.</p>
+      </div>
+      <div class="feature-card">
+        <!--div class="icon">🌐</div-->
+        <h3>Academic Networking</h3>
+        <p>Connect with faculty members, researchers, doctoral scholars, academic leaders and professionals from different institutions and regions.</p>
+      </div>
+      <div class="feature-card">
+        <!--div class="icon">👥</div-->
+        <h3>Professional Visibility</h3>
+        <p>Create and maintain your professional profile within the ICMTA member community.</p>
+      </div>
+      <div class="feature-card">
+        <!--div class="icon">🏆</div-->
+        <h3>Recognition & Awards</h3>
+        <p>Become eligible for selected ICMTA recognition programmes, awards, fellowships and member spotlights, subject to applicable criteria.</p>
+      </div>
+      <div class="feature-card">
+        <!--div class="icon">📑</div-->
+        <h3>Publications & Knowledge Sharing</h3>
+        <p>Explore opportunities to contribute research, articles, teaching resources, academic insights, newsletters and other knowledge initiatives.</p>
+      </div>
+      <div class="feature-card">
+        <!--div class="icon">🎙️</div-->
+        <h3>Conference & Event Opportunities</h3>
+        <p>Participate in ICMTA conferences, seminars, webinars, workshops and other academic programmes.</p>
+      </div>
+      <div class="feature-card">
+        <!--div class="icon">🏛️</div-->
+        <h3>Academic Communities</h3>
+        <p>Engage with communities based on research interests, disciplines, teaching areas and professional interests.</p>
+      </div>
+      <div class="feature-card">
+        <!--div class="icon">🪪</div-->
+        <h3>Professional Identity</h3>
+        <p>Every eligible ICMTA member can have a digital academic profile within the ICMTA member directory.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Membership Categories -->
+  <div class="section-block" id="categories">
+    <h2> Membership Categories & Eligibility</h2>
+    <p>Choose the category that best aligns with your academic standing, institutional role, or research pursuits:</p>
+
+    <!-- Category Toggle Buttons -->
+    <div class="membership-tabs">
+      <button class="m-tab-btn active">Individual / Faculty Membership</button>
+    </div>
+
+    <!-- Individual Membership Grid -->
+    <div id="cat-individual" class="category-grid">
+      
+      <!-- Category 1: Life Member -->
+      <div class="category-card featured">
+        <span class="badge-popular">Most Popular</span>
+        <div class="cat-title">Lifetime Member (Faculty)</div>
+        <div class="cat-eligibility">For Professors, Associate & Assistant Professors in Commerce & Management with 3+ years teaching experience.</div>
+        <div class="cat-fee hidden-on-page">₹ 5,000 <small>/ Lifetime</small></div>
+        <ul class="cat-features">
+          <li>Ideal for: Professors • Associate Professors • Assistant Professors • Lecturers • Academic Professionals</li>
+        </ul>
+        <a href="#apply-section" onclick="selectPlan('Individual Academic Membership')" class="btn primary full">Apply</a>
+      </div>
+
+      <div class="category-card" data-price="TBD">
+        <div class="cat-title">Research Scholar Membership</div>
+        <div class="cat-eligibility">For doctoral scholars and researchers pursuing research in commerce, management, business and allied areas.</div>
+        <ul class="cat-features">
+          <li>Ideal for: Ph.D. Scholars • Research Scholars • Early-Career Researchers</li>
+        </ul>
+        <a href="#apply-section" onclick="selectPlan('Research Scholar Membership')" class="btn secondary full">Apply</a>
+      </div>
+
+      <div class="category-card" data-price="TBD">
+        <div class="cat-title">Student Membership</div>
+        <div class="cat-eligibility">For students interested in developing their knowledge and professional engagement in commerce and management.</div>
+        <ul class="cat-features">
+          <li>Ideal for: UG • PG • Professional Programme Students</li>
+        </ul>
+        <a href="#apply-section" onclick="selectPlan('Student Membership')" class="btn secondary full">Apply</a>
+      </div>
+
+      <div class="category-card" data-price="TBD">
+        <div class="cat-title">Professional / Practitioner Membership</div>
+        <div class="cat-eligibility">For industry professionals, consultants, entrepreneurs and practitioners interested in connecting with academia.</div>
+        <ul class="cat-features">
+          <li>Ideal for: Industry Professionals • Consultants • Entrepreneurs • Practitioners</li>
+        </ul>
+        <a href="#apply-section" onclick="selectPlan('Professional/Practitioner Membership')" class="btn secondary full">Apply</a>
+      </div>
+
+      <div class="category-card featured" data-price="TBD">
+        <div class="cat-title">Institutional Membership</div>
+        <div class="cat-eligibility">For colleges, universities, business schools, departments, research centres and academic institutions.</div>
+        <ul class="cat-features">
+          <li>Ideal for: Universities • Colleges • B-Schools • Departments • Research Institutions</li>
+        </ul>
+        <a href="#apply-section" onclick="selectPlan('Institutional Membership')" class="btn primary full">Apply</a>
+      </div>
+
+      <div class="category-card" data-price="TBD">
+        <div class="cat-title">Distinguished / Emeritus Member</div>
+        <div class="cat-eligibility">For senior and retired academicians who have made significant contributions to commerce, management education, research or academic leadership.</div>
+        <ul class="cat-features">
+          <li>Ideal for: Retired Professors • Senior Academicians • Distinguished Academic Contributors</li>
+        </ul>
+        <a href="#apply-section" onclick="selectPlan('Distinguished / Emeritus Member')" class="btn secondary full">Apply</a>
+      </div>
+
+    </div>
+    
+    <!-- Institutional membership grid removed per request -->
+  </div>
+
+  <!-- 4. How to Join -->
+  <div class="section-block">
+    <h2> How to Join (Simple 4-Step Process)</h2>
+    <p>Follow these four simple steps to become an enrolled member of the ICMTA academic fraternity:</p>
+
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <h3>Select Category</h3>
+        <p>Choose between Individual Faculty (Life / Annual / Scholar) or Institutional Membership.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <h3>Submit Application</h3>
+        <p>Fill out the online enrollment form with your academic qualifications, department, and institution.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <h3>Verification Review</h3>
+        <p>The ICMTA Secretariat verifies your academic credentials and processes membership enrollment.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">4</div>
+        <h3>Member ID & Directory</h3>
+        <p>Receive your official ICMTA Member ID and activate your verified public profile in the Directory.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. Online Application Form -->
+  <div id="apply-section" class="section-block apply-form-container">
+    <h2> Online Membership Application</h2>
+    <p>Complete the application form below. Our secretariat desk will reach out with payment and onboarding instructions.</p>
+
+    <form id="membershipForm" onsubmit="handleMembershipSubmit(event)" style="margin-top:20px">
+      <div class="form-grid">
+        
+        <div class="form-group">
+          <label>Membership Category *</label>
+          <select id="mCategory" required>
+            <option value="Life Member (Faculty)">Life Member (Faculty) — ₹ 5,000</option>
+            <option value="Annual Member (Faculty)">Annual Member (Faculty) — ₹ 1,000</option>
+            <option value="Research Scholar Member">Research Scholar Member — ₹ 600</option>
+            <option value="Institutional (University / B-School)">Institutional (University / B-School) — ₹ 25,000</option>
+            <option value="Institutional (College / Institute)">Institutional (College / Institute) — ₹ 12,000</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Academic Title *</label>
+          <select id="mTitle" required>
+            <option>Dr.</option>
+            <option>Prof.</option>
+            <option>Mr.</option>
+            <option>Mrs.</option>
+            <option>Ms.</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>First Name *</label>
+          <input id="mFirstName" required placeholder="first name">
+        </div>
+
+        <div class="form-group">
+          <label>Middle Name </label>
+          <input id="mMiddleName" placeholder="middle name">
+        </div>
+
+        <div class="form-group">
+          <label>Last Name *</label>
+          <input id="mLastName" required placeholder="last name">
+        </div>
+
+        <div class="form-group">
+          <label>Date of Birth *</label>
+          <input id="mDob" type="date" required>
+        </div>
+
+        <div class="form-group">
+          <label>Personal Email *</label>
+          <input id="mPersonalEmail" type="email" required placeholder="e.g. ramesh.personal@gmail.com">
+        </div>
+
+        <div class="form-group">
+          <label>Professional Email *</label>
+          <input id="mEmail" type="email" required placeholder="e.g. ramesh@university.ac.in">
+        </div>
+
+        <div class="form-group">
+          <label>Mobile *</label>
+          <input id="mMobile" type="tel" required placeholder="e.g. +91 9876543210">
+        </div>
+
+        <div class="form-group">
+          <label>WhatsApp *</label>
+          <input id="mWhatsapp" type="tel" required placeholder="e.g. +91 9876543210">
+        </div>
+
+        <div class="form-group">
+          <label>WhatsApp Number 2 (Optional)</label>
+          <input id="mWhatsapp2" type="tel" placeholder="e.g. +91 9123456780">
+        </div>
+
+        <div class="form-group">
+          <label>Upload Passport Size Photograph *</label>
+          <div class="photo-upload-container">
+            <div class="photo-preview-box" id="photoPreviewBox">
+              <span class="photo-preview-placeholder" id="photoPlaceholder">📷</span>
+              <img id="photoPreviewImg" alt="Photo Preview">
+            </div>
+            <div style="flex-grow:1">
+              <input id="mPhoto" type="file" accept="image/*" required onchange="handlePhotoPreview(event)">
+              <span class="form-help">Accepted formats: JPG, PNG, WEBP.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Highest Qualification *</label>
+          <input id="mQual" required placeholder="e.g. Ph.D. in Commerce, M.Com, NET/SET">
+        </div>
+
+        <div class="form-group">
+          <label>Designation *</label>
+          <input id="mDesig" required placeholder="e.g. Associate Professor / Dean">
+        </div>
+
+        <div class="form-group">
+          <label>Department *</label>
+          <input id="mDept" required placeholder="e.g. Department of Commerce & Management">
+        </div>
+
+        <div class="form-group">
+          <label>College / University Name *</label>
+          <input id="mCollege" required placeholder="e.g. Sri Krishnadevaraya University">
+        </div>
+
+        <div class="form-group full-col">
+          <label>College Address *</label>
+          <textarea id="mCollegeAddress" required placeholder="Enter full campus / institutional address..." style="min-height:70px"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Pincode *</label>
+          <input id="mPincode" required placeholder="e.g. 515003">
+        </div>
+
+        <div class="form-group">
+          <label>State / Region *</label>
+          <input id="mState" required placeholder="e.g. Andhra Pradesh, Telangana, Karnataka">
+        </div>
+
+        <div class="form-group full-col">
+          <label>Country *</label>
+          <input id="mCountry" required value="India" placeholder="e.g. India">
+        </div>
+
+        <div class="form-group">
+          <label>Google Scholar Profile (Optional)</label>
+          <input id="mScholar" placeholder="e.g. https://scholar.google.com/citations?user=...">
+        </div>
+
+        <div class="form-group">
+          <label>LinkedIn Profile (Optional)</label>
+          <input id="mLinkedin" placeholder="e.g. https://linkedin.com/in/username">
+        </div>
+
+        <div class="form-group full-col">
+          <label>ORCID (Optional)</label>
+          <input id="mOrcid" placeholder="e.g. 0000-0002-1825-0097 or https://orcid.org/...">
+        </div>
+
+        <div class="form-group full-col">
+          <label>Primary Areas of Expertise & Research Specialization</label>
+          <input id="mExpertise" placeholder="e.g. Financial Accounting, Taxation, Corporate Finance, Strategic Management">
+          <span class="form-help">Separate multiple areas with commas.</span>
+        </div>
+
+        <div class="form-group full-col">
+          <label>Research Guideship (Optional)</label>
+          <input id="mGuideship" placeholder="e.g. Ph.D. Supervisor (3 Scholars Awarded), M.Phil. Guide">
+        </div>
+
+      </div>
+
+      <!-- Privacy Policy & Member Consent -->
+      <div class="consent-section" style="margin-top:24px;padding:18px 20px;background:#f8fafc;border:1px solid #e2e8f0;border-left:4px solid #1e6c93;border-radius:8px;">
+        <h4 style="margin:0 0 10px;font-size:15px;font-weight:700;color:#1e6c93;">Privacy Policy &amp; Member Consent</h4>
+        <p style="margin:0 0 10px;font-size:12.5px;line-height:1.6;color:#475569;">
+          By submitting a membership application or information through this website, you consent to ICMTA collecting, processing, and using your information for membership administration, official communication, and legitimate academic and organizational activities. You confirm that the information provided by you is accurate and authorize ICMTA to use it in accordance with this Privacy Policy.
+        </p>
+        <p style="margin:0 0 14px;font-size:12.5px;line-height:1.6;color:#475569;">
+          <strong>Privacy Policy:</strong> ICMTA respects your privacy and collects personal information submitted through this website only for membership administration, communication, academic activities, and other legitimate organizational purposes. We do not sell or misuse personal information and take reasonable measures to protect the information entrusted to us, subject to applicable laws.
+        </p>
+        <div style="display:flex;align-items:flex-start;gap:10px;">
+          <input type="checkbox" id="mConsentCheckbox" required style="margin-top:3px;width:17px;height:17px;cursor:pointer;flex-shrink:0;">
+          <label for="mConsentCheckbox" style="font-size:13px;font-weight:600;color:#1e293b;line-height:1.5;cursor:pointer;">
+            I have read and understood the above Privacy Policy and Member Consent, and I agree to the terms.
+          </label>
+        </div>
+        <div id="consentErrorMsg" style="display:none;margin-top:10px;padding:8px 12px;background:#fef2f2;border:1px solid #fecaca;border-radius:6px;font-size:12.5px;color:#dc2626;font-weight:600;">
+          Please read and accept the Privacy Policy &amp; Member Consent before submitting your application.
+        </div>
+      </div>
+
+      <div style="margin-top:24px;display:flex;justify-content:flex-end;gap:12px;flex-wrap:wrap">
+        <button type="reset" class="btn secondary">Reset Form</button>
+        <button type="submit" id="mSubmitBtn" class="btn primary" disabled style="padding:11px 28px;font-size:14.5px;opacity:0.55;cursor:not-allowed;">Submit Application &rarr;</button>
+      </div>
+
+      <div id="appSuccessAlert" style="display:none;margin-top:20px;padding:16px;background:#eaf7f0;border-left:4px solid #21865b;border-radius:8px;color:#1d754e">
+        <b style="display:block;font-size:15px;margin-bottom:4px">🎉 Application Submitted Successfully!</b>
+        <p style="margin:0;font-size:13px;color:#2e694d">Thank you for applying to the Indian Commerce and Management Teachers Association(ICMTA). Our secretariat team will review your application and email the formal confirmation within 1-2 business days.</p>
+      </div>
+    </form>
+  </div>
+
+  <!-- 6. Existing Member / Profile Search Option -->
+  <div class="existing-member-box">
+    <div>
+      <h3> Already an ICMTA Member?</h3>
+      <p>Search for your verified profile, research guideship, and contact information in the National Faculty Directory.</p>
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <a href="public-directory.html" class="btn primary">Open Member Directory &rarr;</a>
+      <a href="admin.html" class="btn secondary">Admin Portal</a>
+    </div>
+  </div>
+
+</main>
+
+<footer class="footer">
+  <div class="icm-fgrid">
+    <div class="icm-fcol icm-fcol-brand">
+      <div class="footer-brand">
+        <img src="../assets/images/ICMTA-footer-logo.png" alt="" class="footer-logo" loading="lazy" decoding="async">
+        <div><b>Indian Commerce and Management Teachers Association</b></div>
+      </div>
+      <p class="icm-ftag">Connect &middot; Collaborate &middot; Research &middot; Learn &middot; Contribute</p>
+    </div>
+    <div class="icm-fcol">
+      <h4>Quick links</h4>
+      <a href="public-directory.html">Member Directory</a>
+      <a href="events.html">Events</a>
+      <a href="membership.html#apply-section">Become a Member</a>
+      <a href="resources.html">ICMTA Resources</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="icm-fcol">
+      <h4>Association</h4>
+      <a href="about-us.html">About us</a>
+      <a href="about-us.html#founders">Founders &amp; mentors</a>
+      <a href="initiatives.html">Our initiatives</a>
+      <a href="about-us.html#code-of-conduct">Code of conduct</a>
+    </div>
+    <div class="icm-fcol">
+      <h4>Stay informed</h4>
+      <p class="icm-fnl">Event notices and calls for papers, a few times a year.</p>
+      <form class="icm-fnlform" action="#" method="post">
+        <input type="email" name="email" placeholder="your@institution.ac.in" aria-label="Email address">
+        <button type="submit">Subscribe</button>
+      </form>
+      <div class="icm-fsocial">
+        <a href="#" aria-label="LinkedIn">in</a>
+        <a href="#" aria-label="YouTube">&#9654;</a>
+        <a href="#" aria-label="WhatsApp">&#9990;</a>
+      </div>
+    </div>
+  </div>
+  <div class="icm-fbot">
+    <span>&copy; 2026 ICMTA &middot; icmta.in</span>
+    <span><a href="#">Privacy notice</a> <a href="admin.html">Administrator</a></span>
+    <span>Disclaimer: The information provided on the ICMTA website is intended for general academic and informational purposes and may be updated or modified from time to time. ICMTA makes reasonable efforts to ensure accuracy but does not guarantee that all information is complete, current, or free from errors, and shall not be responsible for reliance placed on such information.</span>
+  </div>
+</footer>
+
+<script>
+function switchCategory(type){
+  const indBtn = document.querySelectorAll('.m-tab-btn')[0];
+  const indGrid = document.getElementById('cat-individual');
+  const instBtn = document.getElementById('tab-institutional');
+  const instGrid = document.getElementById('cat-institutional');
+
+  if(type === 'individual'){
+    indBtn.classList.add('active');
+    if(instBtn) instBtn.classList.remove('active');
+    indBtn.setAttribute('aria-selected','true');
+    indBtn.setAttribute('tabindex','0');
+    if(instBtn) instBtn.setAttribute('aria-selected','false');
+    if(instBtn) instBtn.setAttribute('tabindex','-1');
+    if(indGrid) indGrid.style.display = 'grid';
+    if(instGrid) instGrid.style.display = 'none';
+  } else {
+    if(instBtn) instBtn.classList.add('active');
+    if(indBtn) indBtn.classList.remove('active');
+    if(instBtn) instBtn.setAttribute('aria-selected','true');
+    if(instBtn) instBtn.setAttribute('tabindex','0');
+    if(indBtn) indBtn.setAttribute('aria-selected','false');
+    if(indBtn) indBtn.setAttribute('tabindex','-1');
+    if(instGrid) instGrid.style.display = 'grid';
+    if(indGrid) indGrid.style.display = 'none';
+  }
+}
+
+function selectPlan(planName){
+  const sel = document.getElementById('mCategory');
+  if(sel){
+    for(let i=0; i<sel.options.length; i++){
+      if(sel.options[i].value.includes(planName) || sel.options[i].text.includes(planName)){
+        sel.selectedIndex = i;
+        break;
+      }
+    }
+  }
+}
+
+function handlePhotoPreview(e){
+  const file = e.target.files && e.target.files[0];
+  const img = document.getElementById('photoPreviewImg');
+  const placeholder = document.getElementById('photoPlaceholder');
+  if(file){
+    const reader = new FileReader();
+    reader.onload = function(evt){
+      if(img){
+        img.src = evt.target.result;
+        img.style.display = 'block';
+      }
+      if(placeholder){
+        placeholder.style.display = 'none';
+      }
+    };
+    reader.readAsDataURL(file);
+  } else {
+    resetPhotoPreview();
+  }
+}
+
+function resetPhotoPreview(){
+  const img = document.getElementById('photoPreviewImg');
+  const placeholder = document.getElementById('photoPlaceholder');
+  if(img){
+    img.src = '';
+    img.style.display = 'none';
+  }
+  if(placeholder){
+    placeholder.style.display = 'block';
+  }
+}
+
+function handleMembershipSubmit(e){
+  e.preventDefault();
+
+  const consentCheckbox = document.getElementById('mConsentCheckbox');
+  const consentErrorMsg = document.getElementById('consentErrorMsg');
+  const submitBtn = document.getElementById('mSubmitBtn');
+
+  // Safety validation: verify consent checkbox is checked
+  if(!consentCheckbox || !consentCheckbox.checked){
+    if(consentErrorMsg){
+      consentErrorMsg.style.display = 'block';
+      consentErrorMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    if(submitBtn){
+      submitBtn.disabled = true;
+      submitBtn.style.opacity = '0.55';
+      submitBtn.style.cursor = 'not-allowed';
+    }
+    return;
+  }
+
+  if(consentErrorMsg){
+    consentErrorMsg.style.display = 'none';
+  }
+
+  const alertBox = document.getElementById('appSuccessAlert');
+  if(alertBox){
+    alertBox.style.display = 'block';
+    alertBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    document.getElementById('membershipForm').reset();
+    resetPhotoPreview();
+    if(consentCheckbox){
+      consentCheckbox.checked = false;
+    }
+    if(submitBtn){
+      submitBtn.disabled = true;
+      submitBtn.style.opacity = '0.55';
+      submitBtn.style.cursor = 'not-allowed';
+    }
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function(){
+  const form = document.getElementById('membershipForm');
+  const consentCheckbox = document.getElementById('mConsentCheckbox');
+  const submitBtn = document.getElementById('mSubmitBtn');
+  const consentErrorMsg = document.getElementById('consentErrorMsg');
+
+  // Ensure checkbox is unchecked and Submit Application is disabled by default
+  if(consentCheckbox && submitBtn){
+    consentCheckbox.checked = false;
+    submitBtn.disabled = true;
+    submitBtn.style.opacity = '0.55';
+    submitBtn.style.cursor = 'not-allowed';
+
+    consentCheckbox.addEventListener('change', function(){
+      if(this.checked){
+        submitBtn.disabled = false;
+        submitBtn.style.opacity = '1';
+        submitBtn.style.cursor = 'pointer';
+        if(consentErrorMsg){
+          consentErrorMsg.style.display = 'none';
+        }
+      } else {
+        submitBtn.disabled = true;
+        submitBtn.style.opacity = '0.55';
+        submitBtn.style.cursor = 'not-allowed';
+      }
+    });
+  }
+
+  if(form){
+    form.addEventListener('reset', function(){
+      setTimeout(function(){
+        resetPhotoPreview();
+        if(consentCheckbox && submitBtn){
+          consentCheckbox.checked = false;
+          submitBtn.disabled = true;
+          submitBtn.style.opacity = '0.55';
+          submitBtn.style.cursor = 'not-allowed';
+        }
+        if(consentErrorMsg){
+          consentErrorMsg.style.display = 'none';
+        }
+      }, 50);
+    });
+  }
+  // Initialize membership tabs (only individual tab present)
+  const tabInd = document.getElementById('tab-individual');
+  const indGrid = document.getElementById('cat-individual');
+  if(indGrid){
+    indGrid.style.display = 'grid';
+  }
+  if(tabInd){
+    tabInd.setAttribute('aria-selected','true');
+    tabInd.setAttribute('tabindex','0');
+  }
+});
+</script>
+
+<script src="../js/app.js"></script>
+</body>
+</html>

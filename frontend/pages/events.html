@@ -1,0 +1,922 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Events & Conferences — ICMTA Indian Commerce and Management Teachers Association</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/icmta-2026.css">
+<!-- <link rel="icon" href="../assets/images/ICMTA-logo.png" type="image/png"> -->
+
+<style>
+.event-featured-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  box-shadow: 0 4px 20px rgba(30,108,147,0.08);
+  padding: 30px;
+  margin-top: 18px;
+}
+.event-featured-grid {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 32px;
+  align-items: start;
+}
+.event-poster-wrap {
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #cbd5e1;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+  background: #f8fafc;
+}
+.event-poster-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  transition: transform 0.25s ease;
+}
+.event-poster-wrap:hover .event-poster-img {
+  transform: scale(1.02);
+}
+.event-badge {
+  display: inline-block;
+  background: var(--icm-gold-wash);
+  color: var(--icm-gold-deep);
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  padding: 5px 14px;
+  border-radius: 20px;
+  margin-bottom: 12px;
+  border: 1px solid var(--icm-gold);
+}
+.event-title {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--icm-blue-deep);
+  line-height: 1.38;
+  margin: 0 0 16px 0;
+}
+.event-meta-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 18px;
+  background: #f8fafc;
+  padding: 16px 18px;
+  border-radius: 10px;
+  border: 1px solid #edf2f7;
+  margin-bottom: 18px;
+}
+.event-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.meta-label {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+.meta-val {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #1e293b;
+  line-height: 1.45;
+}
+.event-desc-block p {
+  font-size: 14px;
+  line-height: 1.75;
+  color: #475569;
+  margin-bottom: 12px;
+}
+.event-sub-tables {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin: 22px 0;
+}
+.event-info-panel {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 18px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+}
+.event-info-panel h4 {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--icm-blue-deep);
+  margin: 0 0 12px 0;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--icm-gold);
+}
+.event-info-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.event-info-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 7px 0;
+  font-size: 13px;
+  color: #475569;
+  border-bottom: 1px dashed #f1f5f9;
+}
+.event-info-list li:last-child {
+  border-bottom: none;
+}
+.event-info-list li b {
+  color: #0f172a;
+  font-weight: 700;
+  margin-left: 10px;
+  text-align: right;
+}
+.event-actions {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid #edf2f7;
+}
+.btn-lg {
+  padding: 12px 26px !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  border-radius: 8px !important;
+  text-decoration: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  transition: all 0.2s ease !important;
+}
+
+@media(max-width: 980px) {
+  .event-featured-grid {
+    grid-template-columns: 1fr;
+  }
+  .event-poster-wrap {
+    max-width: 360px;
+    margin: 0 auto 10px;
+  }
+}
+@media(max-width: 640px) {
+  .event-meta-grid {
+    grid-template-columns: 1fr;
+  }
+  .event-sub-tables {
+    grid-template-columns: 1fr;
+  }
+  .event-featured-card {
+    padding: 18px;
+  }
+  .event-title {
+    font-size: 18px;
+  }
+  .event-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  .event-actions a {
+    width: 100%;
+    text-align: center;
+  }
+}
+</style>
+
+</head>
+<body>
+<div class="icm-watermark" aria-hidden="false"></div>
+
+<div class="icm-utilbar">
+  <div class="icm-utilbar-inner">
+    <span class="icm-ub-left">A non-profit professional platform &middot; Established by academicians</span>
+    <span class="icm-ub-right">
+      <a href="members.html" target="_blank" rel="noopener noreferrer">Members Corner</a>
+      <a href="public-directory.html" target="_blank" rel="noopener noreferrer">Scholars Corner</a>
+      <a href="mailto:support@icmta.in">support@icmta.in</a>
+      <a class="icm-ub-ic" href="#" aria-label="LinkedIn">in</a>
+      <a class="icm-ub-ic" href="#" aria-label="YouTube">&#9654;</a>
+    </span>
+  </div>
+</div>
+
+<header class="header">
+  <div class="header-inner">
+    <a href="../index.html" class="brand" target="_blank" rel="noopener noreferrer">
+      <img src="../assets/images/ICMTA-logo.png" alt="ICMTA Logo" class="brand-logo">
+      <div class="brand-text"></div>
+    </a>
+    <nav class="nav-links">
+      <span class="icm-navitem">
+        <a href="../index.html" class="nav-item" target="_blank" rel="noopener noreferrer">Home</a>
+      </span>
+      <span class="icm-navitem">
+        <a href="about-us.html" class="nav-item" target="_blank" rel="noopener noreferrer">About <i class="icm-caret">&#9662;</i></a>
+        <div class="icm-dd">
+          <a href="about-us.html#vision-mission" target="_blank" rel="noopener noreferrer">Vision &amp; Mission</a>
+          <a href="about-us.html#founders" target="_blank" rel="noopener noreferrer">Founders &amp; Mentors</a>
+          <a href="initiatives.html" target="_blank" rel="noopener noreferrer">Our Initiatives</a>
+          <a href="about-us.html#code-of-conduct" target="_blank" rel="noopener noreferrer">Code of Conduct</a>
+          <a href="contact.html" target="_blank" rel="noopener noreferrer">Contact Us</a>
+        </div>
+      </span>
+      <span class="icm-navitem">
+        <a href="public-directory.html" class="nav-item" target="_blank" rel="noopener noreferrer">Directory</a>
+      </span>
+      <span class="icm-navitem">
+        <a href="events.html" class="nav-item active" target="_blank" rel="noopener noreferrer">Events <i class="icm-caret">&#9662;</i></a>
+        <div class="icm-dd">
+          <a href="events.html#upcoming" target="_blank" rel="noopener noreferrer">Upcoming Events</a>
+          <a href="events.html#past" target="_blank" rel="noopener noreferrer">Past Events &amp; Archives</a>
+          <a href="../pages/event-form-preview.html" 
+          target="_blank"
+   rel="noopener noreferrer">
+  New Event Registration
+</a> 
+        </div>
+      </span>
+      <span class="icm-navitem">
+        <a href="membership.html" class="nav-item" target="_blank" rel="noopener noreferrer">Membership <i class="icm-caret">&#9662;</i></a>
+        <div class="icm-dd">
+          <a href="membership.html#why" target="_blank" rel="noopener noreferrer">Why Join</a>
+          <a href="membership.html#categories" target="_blank" rel="noopener noreferrer">Categories &amp; Fees</a>
+          <a href="membership.html#apply-section" target="_blank" rel="noopener noreferrer">How to Apply</a>
+        </div>
+      </span>
+      <span class="icm-sitesearch" style="position:relative">
+        <button class="icm-ss-btn" aria-label="Search the site" onclick="this.parentNode.classList.toggle('icm-open');var i=this.parentNode.querySelector('input');if(this.parentNode.classList.contains('icm-open')){i.focus();}else{var r=document.getElementById('headerSearchResults');if(r)r.style.display='none';}">&#8981;</button>
+        <form class="icm-ss-form" id="headerSearchForm" action="#" method="get" onsubmit="event.preventDefault()">
+          <input type="search" id="headerSearchInput" name="q" placeholder="Search the site…" aria-label="Search the site" autocomplete="off">
+        </form>
+        <div id="headerSearchResults" style="display:none;position:absolute;top:calc(100% + 8px);right:0;width:min(440px,92vw);max-height:480px;overflow-y:auto;background:#ffffff;border:1px solid #d9e6ed;border-top:3px solid #c49b4b;border-radius:6px;box-shadow:0 14px 35px rgba(19,38,48,0.22);z-index:9999;text-align:left;font-family:inherit;"></div>
+      </span>
+    </nav>
+  </div>
+</header>
+
+
+<div class="breadcrumb-bar">
+  <div class="breadcrumb-inner">
+    <a href="../index.html" target="_blank" rel="noopener noreferrer">Home</a>
+    <span>&rsaquo;</span>
+    <span style="color:#212121;font-weight:700">Events</span>
+  </div>
+</div>
+
+<main class="container">
+  
+  <!-- 1. Featured / Upcoming Events -->
+  <div class="section-block" id="upcoming">
+    <h2>Upcoming Events 2026</h2>
+
+    <!-- Event: ALERT - 2026 One Day Online FDP -->
+    <div class="event-featured-card" id="alert-2026" data-event-start="2026-09-30T10:00:00+05:30" data-event-end="2026-09-30T17:00:00+05:30">
+      <div class="event-featured-grid">
+        
+        <!-- Left: Official Event Poster -->
+        <div class="event-poster-wrap">
+          <img src="../assets/images/events/alert-2026-fdp.jpg" alt="ALERT-2026 One Day Online FDP — Empowering Educators with Future Skills" class="event-poster-img">
+        </div>
+
+        <!-- Right: Event Details -->
+        <div class="event-details-wrap">
+          <span class="event-badge">One Day Online FDP &bull; 30 September 2026</span>
+          <h3 class="event-title">ALERT - 2026: “Empowering Educators with Future Skills”</h3>
+
+          <div class="event-meta-grid">
+            <div class="event-meta-item">
+              <span class="meta-label">Date</span>
+              <span class="meta-val">30th September 2026 (Wednesday)</span>
+            </div>
+            <div class="event-meta-item">
+              <span class="meta-label">Time</span>
+              <span class="meta-val">10:00 AM – 5:00 PM (IST)</span>
+            </div>
+            <div class="event-meta-item">
+              <span class="meta-label">Mode / Platform</span>
+              <span class="meta-val">Online</span>
+            </div>
+            <div class="event-meta-item">
+              <span class="meta-label">Registration Fee</span>
+              <span class="meta-val" style="color:#15803d;font-weight:700">No Registration Fee (Free)</span>
+            </div>
+            <div class="event-meta-item">
+              <span class="meta-label">Organized by</span>
+              <span class="meta-val">Indian Commerce and Management Teachers Association (ICMTA)</span>
+            </div>
+            <div class="event-meta-item">
+              <span class="meta-label">In Association with</span>
+              <span class="meta-val">Sri Krishnadevaraya University, Anantapuram - 515003, Andhra Pradesh</span>
+            </div>
+            <div class="event-meta-item" style="grid-column: 1 / -1;">
+              <span class="meta-label">Theme &amp; Pillars</span>
+              <span class="meta-val">People &middot; Pedagogy &middot; Research &middot; Impact &nbsp;|&nbsp; <em>Educators Shape Better Tomorrows</em></span>
+            </div>
+          </div>
+
+          <div class="event-desc-block">
+            <p>
+              The <strong>Indian Commerce and Management Teachers Association (ICMTA)</strong>, in association with <strong>Sri Krishnadevaraya University, Anantapuram</strong>, organizes a One Day Online Faculty Development Programme (FDP) on <strong>ALERT - 2026: "Empowering Educators with Future Skills"</strong>.
+            </p>
+            <p>
+              ALERT-2026 is designed to empower educators with future-ready skills for excellence in higher education. The programme offers a meaningful platform for teachers and academic leaders to strengthen their professional capabilities, enrich teaching-learning practices, and enhance research orientation. It focuses on key areas such as Academic Leadership, Learning Excellence, Research Innovation, and Transformative Practices.
+            </p>
+          </div>
+
+          <!-- Highlights & Committee Details -->
+          <div class="event-sub-tables">
+            <div class="event-info-panel">
+              <h4>FDP Focus &amp; Highlights</h4>
+              <ul class="event-info-list">
+                <li><span>Academic Leadership:</span> <b>Institutional Vision &amp; Strategy</b></li>
+                <li><span>Learning Excellence:</span> <b>Pedagogy &amp; Student Engagement</b></li>
+                <li><span>Research Innovation:</span> <b>Methodologies &amp; Publications</b></li>
+                <li><span>Transformative Practices:</span> <b>Future Skills for Educators</b></li>
+                <li><span>Certificate:</span> <b>E-Certificate for Participation</b></li>
+                <li><span>Registration Fee:</span> <b style="color:#15803d">Zero (Free Registration)</b></li>
+              </ul>
+            </div>
+
+            <div class="event-info-panel">
+              <h4>Registration &amp; Contacts</h4>
+              <ul class="event-info-list">
+                <li><span>Online Registration:</span> <b><a href="https://forms.gle/WBQ9562Xsmmpvc9a6" target="_blank" rel="noopener noreferrer" style="color:var(--navy);text-decoration:underline">Google Form Link</a></b></li>
+                <li><span>Program Convenor:</span> <b>Dr. D. Prabhakar (SKIM, SKU)</b></li>
+                <li><span>Organising Secretary:</span> <b>Dr. Ch. Krishnudu (+91 9440577673)</b></li>
+                <li><span>ICMTA Coordinator:</span> <b>Dr. Gunduapgi Manjunath (+91 9652168059)</b></li>
+                <li><span>Convenor Email:</span> <b>drkrish6skim@gmail.com</b></li>
+                <li><span>Coordinator Email:</span> <b>gundupagimanjunath@gmail.com</b></li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="event-actions">
+            <a href="https://forms.gle/WBQ9562Xsmmpvc9a6" target="_blank" rel="noopener noreferrer" class="btn primary btn-lg"
+               target="_blank"
+               rel="noopener noreferrer">
+              Register via Google Form &rarr;
+            </a>
+            <a href="../assets/images/events/alert-2026-fdp.jpg" target="_blank" class="btn secondary btn-lg" rel="noopener noreferrer">
+              View Official Poster
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Event 1: Speak to Inspire — The Art of Voice Modulation for Effective Communication -->
+    <div class="event-featured-card" data-event-start="2026-09-12T19:00:00+05:30" data-event-end="2026-09-12T20:00:00+05:30">
+      <div class="event-featured-grid">
+        
+        <!-- Left: Official Event Poster -->
+        <div class="event-poster-wrap">
+          <img src="../assets/images/events/voice-modulation-webinar.jpg" alt="Speak to Inspire: The Art of Voice Modulation for Effective Communication" class="event-poster-img">
+        </div>
+
+        <!-- Right: Event Details -->
+        <div class="event-details-wrap">
+          <span class="event-badge">Online Session &bull; Speak to Inspire</span>
+          <h3 class="event-title">“The Art of Voice Modulation for Effective Communication”</h3>
+
+          <div class="event-meta-grid">
+            <div class="event-meta-item">
+              <span class="meta-label">Date</span>
+              <span class="meta-val">12th September 2026 (Saturday)</span>
+            </div>
+            <div class="event-meta-item">
+              <span class="meta-label">Time</span>
+              <span class="meta-val">7:00 PM – 8:00 PM</span>
+            </div>
+            <div class="event-meta-item">
+              <span class="meta-label">Mode</span>
+              <span class="meta-val">Online</span>
+            </div>
+            <div class="event-meta-item">
+              <span class="meta-label">Organized by</span>
+              <span class="meta-val">Indian Commerce and Management Teachers Association (ICMTA)</span>
+            </div>
+            <div class="event-meta-item">
+              <span class="meta-label">Resource Person / Speaker</span>
+              <span class="meta-val">Dr. Prashanth S (Principal, SRN Adarsh College &amp; RJ Rainbow FM, Bengaluru)</span>
+            </div>
+            <div class="event-meta-item">
+              <span class="meta-label">Registration Fee</span>
+              <span class="meta-val">None (Free Registration)</span>
+            </div>
+            <div class="event-meta-item" style="grid-column: 1 / -1;">
+              <span class="meta-label">In association with</span>
+              <span class="meta-val">Bheemi Reddy Institute of Management Science (Adoni - 518301), Sri Ramakrishna Degree College (Nandyal – 518501), Dr. K.V. Subba Reddy Institute of Technology (Kurnool – 518218), Narayana Engineering College (Nellore – 524003) and Global Public Speaking Network (An Initiative of ICMTA)</span>
+            </div>
+          </div>
+
+          <div class="event-desc-block">
+            <p>
+              Dear Sir/Madam, We are delighted to invite you to an enriching online session, <strong>"The Art of Voice Modulation for Effective Communication,"</strong> organized by the Indian Commerce and Management Teachers Association (ICMTA). This session is designed to help you master the skill of voice modulation to enhance your communication and presentation abilities.
+            </p>
+            <p>
+              This session is being conducted in association with Bheemi Reddy Institute of Management Science, Adoni- 518301, Sri Ramakrishna Degree College, Nandyal – 518501, Dr.K.V.Subba Reddy Institute of Technology, Kurnool – 518218, Narayana Engineering College, Nellore – 524003 and Global Public Speaking Network (An Initiative of ICMTA). It’s a wonderful opportunity to learn from an experienced professional and take your communication skills to the next level.
+            </p>
+          </div>
+
+          <!-- Session Info & Registration Details -->
+          <div class="event-sub-tables">
+            <div class="event-info-panel">
+              <h4>Session Highlights</h4>
+              <ul class="event-info-list">
+                <li><span>Speaker:</span> <b>Dr. Prashanth S</b></li>
+                <li><span>Designation:</span> <b>Principal &amp; Radio Jockey</b></li>
+                <li><span>E-Certificate:</span> <b>Issued to all participants</b></li>
+                <li><span>Mode / Platform:</span> <b>Online</b></li>
+              </ul>
+            </div>
+
+            <div class="event-info-panel">
+              <h4>How to Register</h4>
+              <ul class="event-info-list">
+                <li><span>Online Registration:</span> <b><a href="https://forms.gle/uR6vQc3xicUf2gmy7" target="_blank" rel="noopener noreferrer" style="color:var(--navy);text-decoration:underline">Click to Register</a></b></li>
+                <li><span>Coordinator:</span> <b>Dr. Gundupagi Manjunath</b></li>
+                <li><span>Contact Number:</span> <b>+91 96521 68059</b></li>
+                <li><span>Registration Fee:</span> <b>None (Free)</b></li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="event-actions">
+            <a href="https://forms.gle/uR6vQc3xicUf2gmy7" target="_blank" rel="noopener noreferrer" class="btn primary btn-lg"
+               target="_blank"
+               rel="noopener noreferrer"> 
+              Register Now &rarr;
+            </a>
+            <a href="../assets/images/events/voice-modulation-webinar.jpg" target="_blank" class="btn secondary btn-lg" rel="noopener noreferrer">
+              View Poster
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Event 2: Panel Discussion — Performative Wokeism and Virtue Signalling on Social Media -->
+    <div class="event-featured-card" data-event-start="2026-09-19T19:00:00+05:30" data-event-end="2026-09-19T21:00:00+05:30">
+      <div class="event-featured-grid">
+        
+        <!-- Left: Official Event Poster -->
+        <div class="event-poster-wrap">
+          <img src="../assets/images/events/performative-wokeism-panel-discussion.jpg" alt="Panel Discussion: Performative Wokeism and Virtue Signalling on Social Media" class="event-poster-img">
+        </div>
+
+        <!-- Right: Event Details -->
+        <div class="event-details-wrap">
+          <span class="event-badge">Panel Discussion &bull; Online (Zoom)</span>
+          <h3 class="event-title">“Performative Wokeism and Virtue Signalling on Social Media”</h3>
+
+          <div class="event-meta-grid">
+            <div class="event-meta-item">
+              <span class="meta-label">Date</span>
+              <span class="meta-val">19th September 2026</span>
+            </div>
+            <div class="event-meta-item">
+              <span class="meta-label">Time</span>
+              <span class="meta-val">7:00 PM (IST)</span>
+            </div>
+            <div class="event-meta-item">
+              <span class="meta-label">Platform / Mode</span>
+              <span class="meta-val">Zoom &bull; Online</span>
+            </div>
+            <div class="event-meta-item">
+              <span class="meta-label">Registration Fee</span>
+              <span class="meta-val">Zero Registration Fees (Free)</span>
+            </div>
+            <div class="event-meta-item">
+              <span class="meta-label">Organized by</span>
+              <span class="meta-val">Ashoka Institute of Technology and Management, School of Business, Varanasi</span>
+            </div>
+            <div class="event-meta-item">
+              <span class="meta-label">In association with</span>
+              <span class="meta-val">Indian Commerce and Management Teachers Association (ICMTA)</span>
+            </div>
+            <div class="event-meta-item">
+              <span class="meta-label">Patron</span>
+              <span class="meta-val">Prof. K. Venu Gopal Rao (Former VC, Himalayan University, Itanagar)</span>
+            </div>
+            <div class="event-meta-item">
+              <span class="meta-label">Moderator &amp; Convenor</span>
+              <span class="meta-val">Dr. Pallavi Singh (Assistant Professor, AITM, Varanasi)</span>
+            </div>
+          </div>
+
+          <div class="event-desc-block">
+            <p>
+              A national panel discussion organised by <strong>Ashoka Institute of Technology and Management, School of Business, Varanasi</strong>, in association with the <strong>Indian Commerce and Management Teachers Association (ICMTA)</strong> on <em>"Performative Wokeism and Virtue Signalling on Social Media"</em>.
+            </p>
+            <p>
+              Open to Senior Delegates, Faculty Members, Research Scholars, and Students of Management and Commerce. Join prominent academicians and thought leaders as they deliberate on contemporary online discourse and social dynamics.
+            </p>
+          </div>
+
+          <!-- Panelists & Registration Details -->
+          <div class="event-sub-tables">
+            <div class="event-info-panel">
+              <h4>Distinguished Panelists</h4>
+              <ul class="event-info-list">
+                <li><span>Dr. Premendra Sahu:</span> <b>Assoc. Prof., MATS Univ., Raipur</b></li>
+                <li><span>Dr. J. Sneha Jayalakshmi:</span> <b>Asst. Prof., Sanjivani Univ.</b></li>
+                <li><span>Dr. Rajiv Sikroria:</span> <b>Assoc. Prof., Sunbeam Women's College</b></li>
+                <li><span>Dr. Shivam Bhartiya:</span> <b>Asst. Prof., JAIN University</b></li>
+                <li><span>Dr. Roshni Jaiswal:</span> <b>Assoc. Prof., Ashoka Institute</b></li>
+                <li><span>B. Pawni:</span> <b>Research Scholar, St. John College</b></li>
+              </ul>
+            </div>
+
+            <div class="event-info-panel">
+              <h4>Registration &amp; Participation</h4>
+              <ul class="event-info-list">
+                <li><span>Online Registration:</span> <b><a href="https://forms.gle/j9kPkBaCLPKZRR2x9" target="_blank" rel="noopener noreferrer" style="color:var(--navy);text-decoration:underline">Click to Register</a></b></li>
+                <li><span>Registration Fee:</span> <b>Zero (Free)</b></li>
+                <li><span>E-Certificate:</span> <b>Provided to registered participants</b></li>
+                <li><span>Moderator &amp; Convenor:</span> <b>Dr. Pallavi Singh (AITM)</b></li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="event-actions">
+            <a href="https://forms.gle/j9kPkBaCLPKZRR2x9" target="_blank" rel="noopener noreferrer" class="btn primary btn-lg"
+                target="_blank"
+                rel="noopener noreferrer">
+              Register Now &rarr;
+            </a>
+            <a href="../assets/images/events/performative-wokeism-panel-discussion.jpg" target="_blank" class="btn secondary btn-lg" rel="noopener noreferrer">
+              View Poster
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <div class="event-featured-card">
+      <div class="event-featured-grid">
+        
+        <!-- Left: Official Seminar Brochure Cover / Poster -->
+        <div class="event-poster-wrap">
+          <img src="../assets/images/events/siddhartha-seminar-poster.jpg" alt="Two-Day National Seminar Brochure — Siddhartha Academy of Higher Education" class="event-poster-img">
+        </div>
+
+        <!-- Right: Event Details -->
+        <div class="event-details-wrap">
+          <span class="event-badge">Two-Day National Seminar</span>
+          <h3 class="event-title">“Ethical Leadership and Management through the Lens of Bhagavad Gita for Sustainable Development towards Viksit Bharat @ 2047”</h3>
+
+          <div class="event-meta-grid">
+            <div class="event-meta-item">
+              <span class="meta-label">Date</span>
+              <span class="meta-val">3rd &amp; 4th November 2026</span>
+            </div>
+            <div class="event-meta-item">
+              <span class="meta-label">Mode</span>
+              <span class="meta-val">Offline</span>
+            </div>
+            <div class="event-meta-item">
+              <span class="meta-label">Venue</span>
+              <span class="meta-val">Siddhartha Academy of Higher Education (Deemed to be University), Vijayawada, Andhra Pradesh</span>
+            </div>
+            <div class="event-meta-item">
+              <span class="meta-label">Organized by</span>
+              <span class="meta-val">School of Management, Siddhartha Academy of Higher Education</span>
+            </div>
+            <div class="event-meta-item" style="grid-column: 1 / -1;">
+              <span class="meta-label">In association with</span>
+              <span class="meta-val">AIMS &amp; Chinmaya Mission</span>
+            </div>
+          </div>
+
+          <div class="event-desc-block">
+            <p>
+              The seminar aims to provide a platform for academicians, researchers, industry professionals and students to share their research, experiences and insights on the relevance of the Bhagavad Gita to contemporary management and ethical leadership.
+            </p>
+            <p>
+              The seminar focuses on ethical leadership, management, strategic leadership, corporate sustainability, governance, youth leadership, ecology, economy and ethics, and sustainable development towards Viksit Bharat @ 2047.
+            </p>
+          </div>
+
+          <!-- Important Dates & Registration Fees Sub-grids -->
+          <div class="event-sub-tables">
+            <div class="event-info-panel">
+              <h4>Important Dates</h4>
+              <ul class="event-info-list">
+                <li><span>Abstract Submission Deadline:</span> <b>28 September 2026</b></li>
+                <li><span>Communication of Acceptance:</span> <b>30 September 2026</b></li>
+                <li><span>Full Paper Submission Deadline:</span> <b>20 October 2026</b></li>
+                <li><span>Registration Closing Date:</span> <b>27 October 2026</b></li>
+              </ul>
+            </div>
+
+            <div class="event-info-panel">
+              <h4>Registration Fees</h4>
+              <ul class="event-info-list">
+                <li><span>Industry Professionals:</span> <b>₹1,500</b></li>
+                <li><span>Academicians:</span> <b>₹1,000</b></li>
+                <li><span>Researchers:</span> <b>₹750</b></li>
+                <li><span>Students:</span> <b>₹500</b></li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="event-actions">
+            <a href="https://forms.gle/GYHurRpFLav73Hip8" target="_blank" rel="noopener noreferrer" class="btn primary btn-lg"
+                target="_blank"
+                rel="noopener noreferrer">
+              Register Now &rarr;
+            </a>
+            <a href="../assets/documents/National_Seminar_Siddhartha_Academy_2026.pdf" target="_blank" class="btn secondary btn-lg" rel="noopener noreferrer">
+              Download Brochure
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Past Events (Archived Conclaves) -->
+  <div class="section-block" id="past">
+    <h2>Past Conclaves & Archives</h2>
+    <p style="color:#64748b;font-size:13.5px;margin:0;font-style:italic">
+      There are no archived past events at this time. Verified conclave proceedings and event archives will appear here following event completion.
+    </p>
+  </div>
+
+  <div class="banner-cta">
+    <div class="banner-cta-text">
+      <h3>Connect with Event Speakers & Faculty</h3>
+      <p>Find distinguished scholars and conference chairs in the ICMTA Directory.</p>
+    </div>
+    <a href="public-directory.html" class="btn-cta" target="_blank" rel="noopener noreferrer">
+      <span>Explore Directory &rarr;</span>
+    </a>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="icm-fgrid">
+    <div class="icm-fcol icm-fcol-brand">
+      <div class="footer-brand">
+        <img src="../assets/images/ICMTA-footer-logo.png" alt="" class="footer-logo" loading="lazy" decoding="async">
+        <div><b>Indian Commerce and Management Teachers Association</b></div>
+      </div>
+      <p class="icm-ftag">Connect &middot; Collaborate &middot; Research &middot; Learn &middot; Contribute</p>
+    </div>
+    <div class="icm-fcol">
+      <h4>Quick links</h4>
+      <a href="public-directory.html" target="_blank" rel="noopener noreferrer">Member Directory</a>
+      <a href="events.html" target="_blank" rel="noopener noreferrer">Events</a>
+      <a href="membership.html#apply-section" target="_blank" rel="noopener noreferrer">Become a Member</a>
+      <a href="resources.html" target="_blank" rel="noopener noreferrer">ICMTA Resources</a>
+      <a href="contact.html" target="_blank" rel="noopener noreferrer">Contact</a>
+    </div>
+    <div class="icm-fcol">
+      <h4>Association</h4>
+      <a href="about-us.html" target="_blank" rel="noopener noreferrer">About us</a>
+      <a href="about-us.html#founders" target="_blank" rel="noopener noreferrer">Founders &amp; mentors</a>
+      <a href="initiatives.html" target="_blank" rel="noopener noreferrer">Our initiatives</a>
+      <a href="about-us.html#code-of-conduct" target="_blank" rel="noopener noreferrer">Code of conduct</a>
+    </div>
+    <div class="icm-fcol">
+      <h4>Stay informed</h4>
+      <p class="icm-fnl">Event notices and calls for papers, a few times a year.</p>
+      <form class="icm-fnlform" action="#" method="post">
+        <input type="email" name="email" placeholder="your@institution.ac.in" aria-label="Email address">
+        <button type="submit">Subscribe</button>
+      </form>
+      <div class="icm-fsocial">
+        <a href="#" aria-label="LinkedIn">in</a>
+        <a href="#" aria-label="YouTube">&#9654;</a>
+        <a href="#" aria-label="WhatsApp">&#9990;</a>
+      </div>
+    </div>
+  </div>
+  <div class="icm-fbot">
+    <span>&copy; 2026 ICMTA &middot; icmta.in</span>
+    <span><a href="#">Privacy notice</a> <a href="admin.html" target="_blank" rel="noopener noreferrer">Administrator</a></span>
+    <span>Disclaimer: The information provided on the ICMTA website is intended for general academic and informational purposes and may be updated or modified from time to time. ICMTA makes reasonable efforts to ensure accuracy but does not guarantee that all information is complete, current, or free from errors, and shall not be responsible for reliance placed on such information.</span>
+  </div>
+</footer>
+
+<script src="../js/eventDataService.js"></script>
+
+<script>
+/* ──────────────────────────────────────────────────────────────────────────
+   DYNAMIC APPROVED EVENTS — injected from eventDataService
+   Only events with status === "APPROVED" are rendered here.
+   PENDING_APPROVAL and REJECTED events are never shown publicly.
+
+   Each approved event gets:
+     data-event-start="<ISO 8601 IST>"
+     data-event-end="<ISO 8601 IST>"
+   so the existing auto-move (Upcoming ↔ Past) logic works for them too.
+────────────────────────────────────────────────────────────────────────── */
+(function () {
+  'use strict';
+
+  /* Build IST ISO string from date ("YYYY-MM-DD") + time ("HH:MM") */
+  function toISTiso(date, time) {
+    if (!date || !time) return null;
+    return date + 'T' + time + ':00+05:30';
+  }
+
+  /* Format date for display, e.g. "3rd & 4th November 2026" */
+  function fmtDisplayDate(startDate, endDate) {
+    var months = ['January','February','March','April','May','June',
+                  'July','August','September','October','November','December'];
+    function ordinal(n) {
+      var s = ['th','st','nd','rd'], v = n % 100;
+      return n + (s[(v-20)%10] || s[v] || s[0]);
+    }
+    if (!startDate) return '';
+    var sp = startDate.split('-');
+    var sm = months[parseInt(sp[1],10)-1], sd = ordinal(parseInt(sp[2],10)), sy = sp[0];
+    if (!endDate || endDate === startDate) return sd + ' ' + sm + ' ' + sy;
+    var ep = endDate.split('-');
+    var em = months[parseInt(ep[1],10)-1], ed = ordinal(parseInt(ep[2],10)), ey = ep[0];
+    if (sm === em && sy === ey) return sd + ' &amp; ' + ed + ' ' + sm + ' ' + sy;
+    return sd + ' ' + sm + ' &amp; ' + ed + ' ' + em + ' ' + sy;
+  }
+
+  /* Format time for display, e.g. "7:00 PM" */
+  function fmtDisplayTime(t) {
+    if (!t) return '';
+    var p = t.split(':'), h = parseInt(p[0],10), m = p[1];
+    var ap = h >= 12 ? 'PM' : 'AM';
+    h = h % 12 || 12;
+    return h + ':' + m + ' ' + ap;
+  }
+
+  /* Build an event card identical in structure to the existing hard-coded cards */
+  function buildEventCard(ev) {
+    var startISO = toISTiso(ev.startDate, ev.startTime);
+    var endISO   = toISTiso(ev.endDate,   ev.endTime);
+
+    var card = document.createElement('div');
+    card.className = 'event-featured-card';
+    if (startISO) card.setAttribute('data-event-start', startISO);
+    if (endISO)   card.setAttribute('data-event-end',   endISO);
+
+    var displayDate = fmtDisplayDate(ev.startDate, ev.endDate);
+    var displayTime = ev.startTime ? fmtDisplayTime(ev.startTime) + (ev.endTime ? ' – ' + fmtDisplayTime(ev.endTime) : '') : '—';
+
+    var regBtn = ev.registrationLink
+      ? '<a href="' + ev.registrationLink + '" target="_blank" rel="noopener noreferrer" class="btn primary btn-lg">Register Now &rarr;</a>'
+      : '';
+
+    card.innerHTML =
+      '<div class="event-featured-grid">' +
+        '<div class="event-poster-wrap">' +
+          (ev.poster
+            ? '<img src="' + ev.poster + '" alt="' + (ev.title || '') + '" class="event-poster-img">'
+            : '<div style="height:200px;background:#f0f4f8;display:flex;align-items:center;justify-content:center;color:#94a3b8;font-size:13px">No Poster</div>') +
+        '</div>' +
+
+        '<div class="event-details-wrap">' +
+          '<span class="event-badge">' + (ev.category || 'Event') + (ev.mode ? ' &bull; ' + ev.mode : '') + '</span>' +
+          '<h3 class="event-title">\u201c' + (ev.title || 'Untitled Event') + '\u201d</h3>' +
+
+          '<div class="event-meta-grid">' +
+            '<div class="event-meta-item"><span class="meta-label">Date</span><span class="meta-val">' + displayDate + '</span></div>' +
+            '<div class="event-meta-item"><span class="meta-label">Time</span><span class="meta-val">' + displayTime + '</span></div>' +
+            (ev.mode ? '<div class="event-meta-item"><span class="meta-label">Mode</span><span class="meta-val">' + ev.mode + '</span></div>' : '') +
+            (ev.organizedBy ? '<div class="event-meta-item"><span class="meta-label">Organized by</span><span class="meta-val">' + ev.organizedBy + '</span></div>' : '') +
+            (ev.speakerName ? '<div class="event-meta-item"><span class="meta-label">Speaker</span><span class="meta-val">' + ev.speakerName + (ev.speakerDesignation ? ' (' + ev.speakerDesignation + ')' : '') + '</span></div>' : '') +
+            (ev.registrationFee ? '<div class="event-meta-item"><span class="meta-label">Registration Fee</span><span class="meta-val">' + ev.registrationFee + '</span></div>' : '') +
+          '</div>' +
+
+          (ev.shortDescription || ev.fullDescription
+            ? '<div class="event-desc-block"><p>' + (ev.shortDescription || ev.fullDescription) + '</p></div>'
+            : '') +
+
+          (regBtn ? '<div class="event-actions">' + regBtn + '</div>' : '') +
+        '</div>' +
+      '</div>';
+
+    return card;
+  }
+
+  /* Inject all approved dynamic events */
+  function injectApprovedEvents() {
+    var upcomingSection = document.getElementById('upcoming');
+    var pastSection     = document.getElementById('past');
+    if (!upcomingSection || !pastSection) return;
+
+    var approvedEvents;
+    try {
+      approvedEvents = (typeof EventDataService !== 'undefined')
+        ? EventDataService.getEvents()
+        : [];
+    } catch (e) {
+      approvedEvents = [];
+    }
+
+    if (approvedEvents.length === 0) return;
+
+    var now = Date.now();
+
+    approvedEvents.forEach(function (ev) {
+      var card     = buildEventCard(ev);
+      var endISO   = toISTiso(ev.endDate, ev.endTime);
+      var endMs    = endISO ? new Date(endISO).getTime() : NaN;
+      var isPast   = !isNaN(endMs) && now >= endMs;
+
+      if (isPast) {
+        /* Hide the "no archived events" placeholder */
+        var placeholder = pastSection.querySelector('p[style]');
+        if (placeholder) placeholder.style.display = 'none';
+        pastSection.appendChild(card);
+      } else {
+        upcomingSection.appendChild(card);
+      }
+    });
+  }
+
+  injectApprovedEvents();
+})();
+</script>
+
+<script>
+/* ──────────────────────────────────────────────────────────────────────────
+   EXISTING AUTO-MOVE LOGIC — moves hard-coded + dynamic events
+   from Upcoming → Past when their data-event-end passes.
+   Unchanged from the original implementation.
+────────────────────────────────────────────────────────────────────────── */
+(function () {
+  'use strict';
+
+  function checkEventStatuses() {
+    var upcomingSection = document.getElementById('upcoming');
+    var pastSection     = document.getElementById('past');
+    if (!upcomingSection || !pastSection) return;
+
+    var now   = Date.now(); // milliseconds since epoch — timezone-agnostic
+    var cards = upcomingSection.querySelectorAll('.event-featured-card[data-event-end]');
+
+    cards.forEach(function (card) {
+      var endAttr = card.getAttribute('data-event-end');
+      if (!endAttr) return;
+
+      var endTime = new Date(endAttr).getTime(); // ISO 8601 with offset → UTC ms
+      if (isNaN(endTime)) return;
+
+      if (now >= endTime) {
+        // Hide the "no archived events" placeholder if present
+        var placeholder = pastSection.querySelector('p[style]');
+        if (placeholder) placeholder.style.display = 'none';
+
+        // Move card to the end of the Past Events section
+        pastSection.appendChild(card);
+      }
+    });
+  }
+
+  // Run on page load
+  checkEventStatuses();
+
+  // Re-run every 60 seconds so a live page auto-moves events at the correct moment
+  setInterval(checkEventStatuses, 60000);
+})();
+</script>
+<script src="../js/app.js"></script>
+<script>
+document.addEventListener('click', function(e) {
+  var a = e.target.closest('a');
+  if (!a) return;
+  var href = a.getAttribute('href');
+  if (!href || href.startsWith('#') || href.startsWith('javascript:') || href.startsWith('mailto:') || href.startsWith('tel:')) return;
+  if (!a.getAttribute('target')) {
+    a.setAttribute('target', '_blank');
+    a.setAttribute('rel', 'noopener noreferrer');
+  }
+}, true);
+</script>
+</body>
+</html>

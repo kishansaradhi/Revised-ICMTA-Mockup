@@ -1,0 +1,28 @@
+# Python
+venv/
+.venv/
+__pycache__/
+*.py[cod]
+*$py.class
+backend/venv/
+backend/__pycache__/
+backend/**/__pycache__/
+backend/.pytest_cache/
+
+# Secrets
+.env
+.env.*
+backend/.env
+
+# Runtime uploads
+backend/uploads/*
+!backend/uploads/member_photos/.gitkeep
+!backend/uploads/event_posters/.gitkeep
+!backend/uploads/payment_proofs/.gitkeep
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/
+frontend/.vscode/
+
