@@ -23,8 +23,8 @@
 }
 .event-featured-grid {
   display: grid;
-  grid-template-columns: 320px 1fr;
-  gap: 32px;
+  grid-template-columns: 300px minmax(0, 1fr);
+  gap: 28px;
   align-items: start;
 }
 .event-poster-wrap {
@@ -37,8 +37,9 @@
 .event-poster-img {
   width: 100%;
   height: auto;
+  max-height: 430px;
   display: block;
-  object-fit: cover;
+  object-fit: contain;
   transition: transform 0.25s ease;
 }
 .event-poster-wrap:hover .event-poster-img {
@@ -660,14 +661,81 @@
       </div>
     </div>
   </div>
+  
+  
 
   <!-- 2. Past Events (Archived Conclaves) -->
   <div class="section-block" id="past">
-    <h2>Past Conclaves & Archives</h2>
-    <p style="color:#64748b;font-size:13.5px;margin:0;font-style:italic">
-      There are no archived past events at this time. Verified conclave proceedings and event archives will appear here following event completion.
-    </p>
-  </div>
+    <h2>Past Events & Archives</h2>
+    <p id="noPastEvents"
+   style="color:#64748b;font-size:13.5px;margin:0;font-style:italic">
+    There are no archived past events at this time.
+    Verified conclave proceedings and event archives will appear here
+    following event completion.
+</p>
+
+    <!-- ICMTA 3rd Foundation Day -->
+<div class="event-featured-card"
+     data-event-start="2026-09-05T19:00:00+05:30"
+     data-event-end="2026-09-05T21:00:00+05:30">
+
+    <div class="event-featured-grid">
+
+        <div class="event-poster-wrap">
+            <img
+                src="../assets/images/events/icmta-3rd-foundation-day.png"
+                alt="ICMTA 3rd Foundation Day and Inauguration of ICMTA Website"
+                class="event-poster-img">
+        </div>
+
+        <div class="event-details-wrap">
+
+            <span class="event-badge">
+                Panel Discussion &bull; Online (Zoom)
+            </span>
+
+            <h3 class="event-title">
+                “Indian Commerce And Management Teachers Association 3rd Foundation Day and Inauguration Of ICMTA Website”
+            </h3>
+
+            <div class="event-meta-grid">
+
+                <div class="event-meta-item">
+                    <span class="meta-label">Date</span>
+                    <span class="meta-val">
+                        5th September 2026
+                    </span>
+                </div>
+
+                <div class="event-meta-item">
+                    <span class="meta-label">Time</span>
+                    <span class="meta-val">
+                        7:00 PM (IST)
+                    </span>
+                </div>
+
+                <div class="event-meta-item">
+                    <span class="meta-label">Platform / Mode</span>
+                    <span class="meta-val">
+                        Zoom &bull; Online
+                    </span>
+                </div>
+
+                <div class="event-meta-item">
+                    <span class="meta-label">Organized by</span>
+                    <span class="meta-val">
+                        Indian Commerce And Management Teachers Association
+                    </span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+</div>
 
   <div class="banner-cta">
     <div class="banner-cta-text">
@@ -678,7 +746,8 @@
       <span>Explore Directory &rarr;</span>
     </a>
   </div>
-</main>
+
+
 
 <footer class="footer">
   <div class="icm-fgrid">
@@ -724,7 +793,7 @@
     <span>Disclaimer: The information provided on the ICMTA website is intended for general academic and informational purposes and may be updated or modified from time to time. ICMTA makes reasonable efforts to ensure accuracy but does not guarantee that all information is complete, current, or free from errors, and shall not be responsible for reliance placed on such information.</span>
   </div>
 </footer>
-
+ 
 <script src="../js/eventDataService.js"></script>
 
 <script>
@@ -850,8 +919,8 @@
 
       if (isPast) {
         /* Hide the "no archived events" placeholder */
-        var placeholder = pastSection.querySelector('p[style]');
-        if (placeholder) placeholder.style.display = 'none';
+       var placeholder = document.getElementById('noPastEvents');
+if (placeholder) placeholder.style.display = 'none';
         pastSection.appendChild(card);
       } else {
         upcomingSection.appendChild(card);
@@ -889,8 +958,8 @@
 
       if (now >= endTime) {
         // Hide the "no archived events" placeholder if present
-        var placeholder = pastSection.querySelector('p[style]');
-        if (placeholder) placeholder.style.display = 'none';
+        var placeholder = document.getElementById('noPastEvents');
+if (placeholder) placeholder.style.display = 'none';
 
         // Move card to the end of the Past Events section
         pastSection.appendChild(card);
