@@ -1,67 +1,46 @@
-# ICMTA Full-Stack Project
+# ICMTA — Indian Commerce and Management Teachers
 
-This folder combines the supplied ICMTA frontend and the FastAPI/MySQL backend into one working project.
+Official website and centralized academic faculty directory for the **Indian Commerce and Management Teachers (ICMTA)** platform.
 
-## Structure
+## Project Structure
 
 ```text
-ICMTA-FULLSTACK/
-├── frontend/                 # Existing HTML/CSS/JS website
-│   ├── pages/
-│   ├── js/
-│   ├── css/
-│   └── assets/
-├── backend/                  # FastAPI + SQLAlchemy + MySQL
-│   ├── app/
-│   ├── uploads/
-│   ├── requirements.txt
-│   └── .env.example
-└── docs/
-    └── INTEGRATION_AUDIT.md
+ICMTA_FACULTY_DIRECTORY/
+├── index.html              # Main ICMTA Website Homepage
+├── about-us.html           # About ICMTA, Vision, Mission & Leadership
+├── initiatives.html        # Our Key Academic & Research Initiatives
+├── events.html             # National Conferences, Seminars & Workshops
+├── resources.html          # Academic Guidelines, Teaching Repositories & Tools
+├── contact.html            # Secretariat Contact Information & Inquiry Form
+├── faculty.html            # Public Faculty Information & Mentors Page
+├── public-directory.html   # Public Faculty Directory (Search, Filter, Grid/Table & Modal)
+├── member-profile.html     # Dedicated Standalone Public Member Profile (?id=ICMTAxxx)
+├── admin.html              # Administrator Portal (Login, Dashboard, Member Management, Users, Logout)
+├── README.md               # Documentation & Navigation Architecture
+│
+├── css/
+│   └── style.css           # Central Stylesheet (Lato typography, ICMTA theme tokens & UI layout)
+│
+├── js/
+│   ├── app.js              # Admin Management & Dashboard Logic
+│   └── member-data.js      # Single Source of Truth (All 343 records + embedded portraits)
+│
+└── images/
+    └── new/                # Clean Faculty Portrait Photos
 ```
 
-## Run backend
+## Navigation Flows
 
-```powershell
-cd backend
-python -m venv venv
-.\venv\Scripts\Activate.ps1
-python -m pip install -r requirements.txt
-```
+1. **Public Flow**:
+   **Home** (`index.html`) &rarr; **Faculty** &rarr; **Faculty Information** (`faculty.html`) &rarr; **Faculty Directory** (`public-directory.html`) &rarr; **Member Profile** (`member-profile.html`)
 
-Create `backend/.env` from `.env.example`, then:
+2. **Admin Flow**:
+   **Admin Login** &rarr; **Dashboard** &rarr; **Member Management** &rarr; **User Management** &rarr; **Logout** (`admin.html`)
 
-```powershell
-uvicorn app.main:app --reload --port 5000
-```
+## Key Features & Design System
 
-Open:
-
-- `http://localhost:5000/api/health`
-- `http://localhost:5000/docs`
-
-## Run frontend
-
-Serve `frontend/` with VS Code Live Server (the existing project uses port 5500).
-
-The frontend API base URL is:
-
-```javascript
-const API_BASE_URL = "http://localhost:5000";
-```
-
-## First end-to-end test
-
-1. Start MySQL and confirm `icmt_faculty_directory` exists.
-2. Start FastAPI on port 5000.
-3. Open the frontend membership page.
-4. Submit a test membership application.
-5. In browser DevTools → Network, verify:
-   `POST http://localhost:5000/api/membership-applications`
-6. In MySQL Workbench:
-   ```sql
-   SELECT * FROM icmt_faculty_directory.membership_applications
-   ORDER BY application_id DESC;
-   ```
-
-A submitted application remains `Pending` and does not create/activate a member until admin approval.
+- **Design Reference**: Inspired by the structure and branding of ICMTA (`https://sites.google.com/view/ICMTAmembers/home`), built as a 100% native frontend implementation.
+- **Typography & Theme**: Google Font `Lato` (300, 400, 700) with deep teal (`#1e6c93`), dark navy (`#004d66`), and light accent (`#eaf5fb`).
+- **Data Integrity**: Preserves all 343 verified member records and embedded portraits without modification.
+- **Live Sync**: Edits made in the Admin Member Management workspace automatically sync to public directory pages in real time via reactive `localStorage`.
+- **GitHub Pages Ready**: Structured with root relative links for immediate zero-config deployment.
